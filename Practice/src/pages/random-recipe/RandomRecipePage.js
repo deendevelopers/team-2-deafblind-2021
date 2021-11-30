@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
+import CustomButton from "../../components/custom-button/CustomButton";
 import Header from "../../components/header/Header";
 import SelectionForm from "../../components/random-search/selection-form/SelectionForm";
 import RecipeArticle from "../../components/recipe-article/RecipeArticle";
-// import data from "../../response.json";
+import data from "../../response.json";
 import "./RandomRecipePage.scss";
 
 
@@ -25,18 +26,25 @@ const RandomRecipePage = () => {
     const [ ingredients, setIngredients ] = useState([]);
     const [ instructions, setInstructions ] = useState([]);
     const [ searchAgain, setSearchAgain ] = useState(false);
-    const [ customDietRandomSearch, setCustomDietRandomSearch ] = useState([]);
-    const [ customMealTypeRandomSearch, setCustomMealTypeRandomSearch ] = useState([]);
+    const [ customRandomSearch, setCustomRandomSearch ] = useState({});
     const [ noResults, setNoResults ] = useState(false);
 
     const handleClick = async () => {
 
-        const randomRecipeData = await fetchRandomRecipe({ isCustomSearch: false });
-        console.log(randomRecipeData);
-        // const randomRecipeData = data.recipes[0];
+        // const randomRecipeData = await fetchRandomRecipe({ isCustomSearch: false });
+        // console.log(randomRecipeData);
+        const randomRecipeData = data.recipes[0];
         setRecipeStates(randomRecipeData);
 
         setSearchAgain(true);
+    }
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setCustomRandomSearch(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
     }
 
     const setRecipeStates = (randomRecipeData ) => {
@@ -68,8 +76,7 @@ const RandomRecipePage = () => {
 
         // for each custom search state - add to tags separated by commas to endpoint
         const customEndPoint = ["&tags="];
-        customDietRandomSearch.forEach(parameterObj => customEndPoint.push(parameterObj.value + ","));
-        customMealTypeRandomSearch.forEach(parameterObj => customEndPoint.push(parameterObj.value + ","));
+        Object.values(customRandomSearch).forEach(parameter => customEndPoint.push(parameter+ ","));
         console.log(customEndPoint);
         
         // remove last comma
@@ -84,9 +91,9 @@ const RandomRecipePage = () => {
         const customEndPointString = customEndPoint.join("").toLowerCase();
         console.log(customEndPointString);
 
-        const randomRecipeData = await fetchRandomRecipe({ isCustomSearch: true, customEndPoint });
-        console.log(randomRecipeData);
-        // const randomRecipeData = data.recipes[0];
+        // const randomRecipeData = await fetchRandomRecipe({ isCustomSearch: true, customEndPoint });
+        // console.log(randomRecipeData);
+        const randomRecipeData = data.recipes[0];
 
         if(randomRecipeData){
             setRecipeStates(randomRecipeData);
@@ -95,8 +102,7 @@ const RandomRecipePage = () => {
             setNoResults(true);
         } ;
 
-        setCustomDietRandomSearch([]);
-        setCustomMealTypeRandomSearch([]);
+        setCustomRandomSearch([]);
         setSearchAgain(true);
 
     }
@@ -107,12 +113,13 @@ const RandomRecipePage = () => {
             <main>
                 { !searchAgain ?
                     <React.Fragment>
-                        <button onClick={handleClick}>Find recipe</button>
-                        <SelectionForm setCustomDietRandomSearch={setCustomDietRandomSearch} setCustomMealTypeRandomSearch={setCustomMealTypeRandomSearch} customDietRandomSearch={customDietRandomSearch} customMealTypeRandomSearch={customMealTypeRandomSearch} handleSubmit={handleCustomSearch}/>
+                        <CustomButton onClick={handleClick}>Find Random Recipe</CustomButton>
+                        <p className="custom-random-search-message">Customise your random recipe by chosing from the options below:</p>
+                        <SelectionForm handleChange={handleChange} handleSubmit={handleCustomSearch}/>
                     </React.Fragment>
                     :
                     <React.Fragment>
-                        <button onClick={() => setSearchAgain(false)}>Search Again</button>
+                        <CustomButton onClick={() => setSearchAgain(false)}>Search Again</CustomButton>
                         { noResults && <p>No results found to your custom search - please try a different custom search.</p> }
                         <RecipeArticle title={title} summary={summary} dietInfo={dietInfo} cookingTime={cookingTime} imageUrl={imageUrl} ingredients={ingredients} instructions={instructions}/>
                     </React.Fragment>
