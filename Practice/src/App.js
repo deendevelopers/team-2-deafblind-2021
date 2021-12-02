@@ -7,9 +7,10 @@ import RandomRecipePage from "./pages/random-recipe/RandomRecipePage";
 import NavBar from "./components/navbar/NavBar";
 import userDashboardPage from "./pages/user-dashboard/userDashboardPage";
 import SignInPage from "./pages/sign-in/SignInPage";
+import { useSelector } from "react-redux";
 
 const App = () => {
-  const currentUser = "";
+  const currentUser = useSelector(state => state.user.currentUser);
   return (
     <React.Fragment>
       <Router>

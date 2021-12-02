@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, createUserProfileDocument } from "../../firebase/firebaseUtils";
 import "./Register.scss";
 
 const Register = () => {
-    const [ formInputs, setFormInputs ] = useState({ username: "", email: "", password: "", confirmPassword: "" }); 
+    const initialFormInputState = { username: "", email: "", password: "", confirmPassword: "" };
+    const [ formInputs, setFormInputs ] = useState(initialFormInputState); 
 
     const handleChange = ({ target: { name, value } }) => {
         setFormInputs(prevFormInputState => ({ 
@@ -11,10 +14,23 @@ const Register = () => {
         }))
     }
     
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-
         console.log(formInputs);
+        const { username, email, password, confirmPassword } = formInputs;
+
+        if(password !== confirmPassword){
+            alert("Passwords dont match!")
+            return
+        }
+
+        try {
+            const { user } = await createUserWithEmailAndPassword(auth, email, password);
+            await createUserProfileDocument(user, { displayName: username });
+            setFormInputs(initialFormInputState);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
