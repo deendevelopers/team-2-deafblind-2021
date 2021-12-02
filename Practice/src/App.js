@@ -9,7 +9,7 @@ import userDashboardPage from "./pages/user-dashboard/userDashboardPage";
 import SignInPage from "./pages/sign-in/SignInPage";
 
 const App = () => {
-  const currentUser = "omid";
+  const currentUser = "";
   return (
     <React.Fragment>
       <Router>
@@ -18,7 +18,7 @@ const App = () => {
         {/* <Route exact path="/recipe-search" component={RecipeSearchPage} /> */}
         <Route path="/random-recipe" component={RandomRecipePage} />
         <Route path="/dashboard" component={userDashboardPage} />
-        <Route path="/sign-in" render={ () => currentUser ? <Redirect to="/" /> : <SignInPage />} />
+        <Route path="/sign-in" render={ () => currentUser ? <Redirect to="/" /> : <SignInPage /> } />
       </Router>
     </ React.Fragment>
   );

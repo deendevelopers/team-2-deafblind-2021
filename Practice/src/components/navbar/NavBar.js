@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./NavBar.scss";
 
 const NavBar = () => {
-    const currentUser = "omid";
+    const currentUser = "";
 
     return(
         <nav className="navbar">

@@ -1,13 +1,16 @@
 import React from "react";
 import Register from "../../components/register/Register";
-import Login from "../../components/log-in/Login";
+import LogIn from "../../components/log-in/LogIn";
+import "./SignInPage.scss";
 
 const SignInPage = () => (
     <React.Fragment>
         <main>
             <p>Sign In Page</p>
-            <Login />
-            <Register />
+            <article className="login-register-article">
+                <LogIn />   
+                <Register />
+            </article>
         </main>
     </React.Fragment>
 )
