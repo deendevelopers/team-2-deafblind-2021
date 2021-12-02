@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, createUserProfileDocument } from "../../firebase/firebaseUtils";
 import "./Register.scss";
+import CustomButton from "../custom-button/CustomButton";
 
 const Register = () => {
     const initialFormInputState = { username: "", email: "", password: "", confirmPassword: "" };
@@ -27,6 +28,7 @@ const Register = () => {
         try {
             const { user } = await createUserWithEmailAndPassword(auth, email, password);
             await createUserProfileDocument(user, { displayName: username });
+            console.log(user, { displayName: username });
             setFormInputs(initialFormInputState);
         } catch (error) {
             console.log(error);
@@ -50,7 +52,8 @@ const Register = () => {
                 <label htmlFor="confirmPasswordForRegister">Confirm Password: </label>
                 <input name="confirmPassword" id="confirmPasswordForRegister" type="password" value={formInputs.confirmPassword} onChange={handleChange}/>
 
-                <input type="submit" value="Submit" />
+                <CustomButton type="submit">Register</CustomButton>
+                {/* <input type="submit" value="Submit" /> */}
 
             </form>
         </section>

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./pages/home/HomePage";
 import './App.scss';
 // import RecipeSearchPage from "./pages/recipe-search/RecipeSearchPage";
 import RandomRecipePage from "./pages/random-recipe/RandomRecipePage";
 import NavBar from "./components/navbar/NavBar";
-import userDashboardPage from "./pages/user-dashboard/userDashboardPage";
+import UserDashboardPage from "./pages/user-dashboard/UserDashboardPage";
 import SignInPage from "./pages/sign-in/SignInPage";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
@@ -19,6 +19,7 @@ const App = () => {
   const currentUser = useSelector(state => state.user.currentUser);
 
   useEffect(() => {
+    console.log("Ran the USEEFFECT in App.js");
     const unsubscribeFromAuth = onAuthStateChanged(auth, async (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
@@ -47,19 +48,22 @@ const App = () => {
 
     // Below is to clean up when component unmounts, i.e. prevent memory leaks by 
     // unsubscribing from auth.
-    return unsubscribeFromAuth();
-  }, []);
+    return () => {
+      console.log("Ran Unsubscribe");
+      unsubscribeFromAuth();
+    };
+  }, [dispatch]);
   
   return (
     <React.Fragment>
-      <Router>
-        <NavBar />
+      <NavBar />
+      <Switch>
         <Route exact path="/" component={HomePage}/>
         {/* <Route exact path="/recipe-search" component={RecipeSearchPage} /> */}
         <Route path="/random-recipe" component={RandomRecipePage} />
-        <Route path="/dashboard" component={userDashboardPage} />
+        <Route path="/dashboard" render={ () => !currentUser ? <Redirect to="/" /> : <UserDashboardPage /> } />
         <Route path="/sign-in" render={ () => currentUser ? <Redirect to="/" /> : <SignInPage /> } />
-      </Router>
+      </Switch>
     </ React.Fragment>
   );
 }

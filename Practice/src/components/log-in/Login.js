@@ -1,8 +1,11 @@
+import { signInWithEmailAndPassword } from "@firebase/auth";
 import React, { useState } from "react";
+import { auth } from "../../firebase/firebaseUtils";
+import CustomButton from "../custom-button/CustomButton";
 import "./LogIn.scss";
 
 const Login = () => {
-    const [ formInputs, setFormInputs ] = useState({ username: "", password: "" }); 
+    const [ formInputs, setFormInputs ] = useState({ email: "", password: "" }); 
 
     const handleChange = ({ target: { name, value } }) => {
         setFormInputs(prevFormInputState => ({ 
@@ -11,10 +14,19 @@ const Login = () => {
         }))
     }   
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         console.log(formInputs);
+        const { email,  password } = formInputs;
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            setFormInputs({email: '', password:''})
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
@@ -23,13 +35,14 @@ const Login = () => {
             <h2>Login</h2>
             <form className="login-form" onSubmit={handleSubmit}>
 
-            <label htmlFor="usernameForLogin">Username: </label>
-            <input name="username" id="usernameForLogin" type="text" value={formInputs.username} onChange={handleChange} />
+            <label htmlFor="emailForLogin">email: </label>
+            <input name="email" id="emailForLogin" type="email" value={formInputs.email} onChange={handleChange} />
 
             <label htmlFor="passwordForLogin">Password: </label>
             <input name="password" id="passwordForLogin" type="password" value={formInputs.password} onChange={handleChange}/>
 
-            <input type="submit" value="Submit" />
+            {/* <input type="submit" value="Submit" /> */}
+            <CustomButton type="submit">Log-In</CustomButton>
 
             </form>
         </section>
