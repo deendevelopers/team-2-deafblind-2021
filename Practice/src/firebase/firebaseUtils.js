@@ -47,6 +47,60 @@ const createUserProfileDocument = async (userAuth, additionalData) => {
     return userRef;
 }
 
+const addRecipeToUserSavedRecipesInFirebase = async (userId, recipeId) => {
+    if(!userId) return;
+
+    const userRef = doc(db, "users", userId);
+    const userSnap = await getDoc(userRef);
+
+    if(userSnap.exists()){
+        console.log(userSnap.data());
+        const { createdAt, displayName, email, savedRecipes, ...remainingData } = userSnap.data();
+        console.log(createdAt, displayName, email, savedRecipes, remainingData);
+
+        if(savedRecipes){
+            if (savedRecipes.includes(recipeId)) return;
+            
+            try {
+                console.log("adding NEW recipe!");
+                await setDoc(userRef, {
+                    displayName,
+                    email,
+                    createdAt,
+                    savedRecipes: [...savedRecipes, recipeId],
+                    ...remainingData
+                });
+      
+            } catch (error) {
+                console.log('error adding user recipe', error.message)
+            }
+
+        } else {
+            console.log("Adding FIRST recipe!!!!");
+            try {
+                await setDoc(userRef, {
+                    displayName,
+                    email,
+                    createdAt,
+                    savedRecipes: [recipeId],
+                    ...remainingData
+                });
+      
+            } catch (error) {
+                console.log('error adding first user recipe', error.message)
+            }
+        }
+    }
+}
+
+// const getSavedRecipesForUserFromFirebase = async (userId) => {
+//     if(!userId) return;
+//     const userRef = doc(db, "users", userId);
+//     const userSnap = await getDoc(userRef);
+//     const { savedRecipes } = userSnap.data();
+//     return savedRecipes;
+// }
+
   // Initialise Firebase
 initializeApp(firebaseConfig);
 
@@ -58,4 +112,4 @@ const auth = getAuth();
 
 const analytics = getAnalytics();
 
-export { db, auth, createUserProfileDocument };
+export { db, auth, createUserProfileDocument, addRecipeToUserSavedRecipesInFirebase };

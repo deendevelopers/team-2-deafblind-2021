@@ -31,11 +31,11 @@ const Login = () => {
 
 
     return (
-        <section>
+        <section className="login-section">
             <h2>Login</h2>
             <form className="login-form" onSubmit={handleSubmit}>
 
-            <label htmlFor="emailForLogin">email: </label>
+            <label htmlFor="emailForLogin">Email: </label>
             <input name="email" id="emailForLogin" type="email" value={formInputs.email} onChange={handleChange} />
 
             <label htmlFor="passwordForLogin">Password: </label>
