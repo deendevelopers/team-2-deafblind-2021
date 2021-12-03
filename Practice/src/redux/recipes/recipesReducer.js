@@ -1,4 +1,5 @@
 import { ADD_RECIPE, SET_CURRENT_RECIPE } from "./recipesTypes";
+import { addRecipesToSavedRecipes } from "./recipesUtils";
 
 const initialState = {
     currentRecipe: {},
@@ -12,6 +13,11 @@ const recipesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentRecipe: action.payload
+            }
+        case ADD_RECIPE:
+            return {
+                ...state,
+                savedRecipes: addRecipesToSavedRecipes(state.savedRecipes, action.payload)
             }
         default:
             return state

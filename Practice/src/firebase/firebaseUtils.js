@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, getDoc, setDoc, addDoc, query, where, getDocs } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 
@@ -101,6 +101,35 @@ const addRecipeToUserSavedRecipesInFirebase = async (userId, recipeId) => {
 //     return savedRecipes;
 // }
 
+const addRecipeToFirebase = async (recipe) => {
+    console.log("Adding recipe to Firebase", recipe);
+    if(!recipe) return;
+
+    const reciperRef = collection(db, "recipes");
+    
+    // Checking whether recipe already exists on Firebase or not:
+    const recipeQuery = query(reciperRef, where("id", "==", recipe.id));
+    // console.log({ recipeQuery });
+    const recipeQueryDocResults = await getDocs(recipeQuery);
+    console.log({ recipeQueryDocResults });
+    console.log(recipeQueryDocResults.empty);
+
+    // if recipe already stored then just return here
+    if(!recipeQueryDocResults.empty) return;
+    // otherwise add recipe to firebase - use try-catch to catch any errors
+    try {
+        await addDoc(reciperRef, recipe);
+    } catch (error) {
+        console.log("Error adding recipe to Firebase", error.message);
+    }
+}
+
+const getSavedRecipesFromFirebase = async (savedRecipesIds) => {
+    if(!savedRecipesIds) return;
+
+    
+}
+
   // Initialise Firebase
 initializeApp(firebaseConfig);
 
@@ -112,4 +141,4 @@ const auth = getAuth();
 
 const analytics = getAnalytics();
 
-export { db, auth, createUserProfileDocument, addRecipeToUserSavedRecipesInFirebase };
+export { db, auth, createUserProfileDocument, addRecipeToUserSavedRecipesInFirebase, addRecipeToFirebase, getSavedRecipesFromFirebase };

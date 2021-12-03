@@ -8,7 +8,7 @@ import "./RandomRecipePage.scss";
 import {fetchRandomRecipe, generateCustomEndPoint } from "../../components/random-search/helperFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { addRecipeToUserSavedRecipes } from "../../redux/user/userActions";
-import { setCurrentRecipe } from "../../redux/recipes/recipesActions";
+import { addRecipe, setCurrentRecipe } from "../../redux/recipes/recipesActions";
 
 const RandomRecipePage = () => {
     const currentUser = useSelector(state => state.user.currentUser);
@@ -55,7 +55,7 @@ const RandomRecipePage = () => {
         console.log("Handle Save Recipe")
         const { id } = currentRecipe;
         // Save/add recipe to redux recipe slice 
-
+        dispatch(addRecipe(currentRecipe));
         // Save/add recipe ID to redux saved recipes array in current user slice
         dispatch(addRecipeToUserSavedRecipes({ userId: currentUser.id, recipeId: id }));
 
