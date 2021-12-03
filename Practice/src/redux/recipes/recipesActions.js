@@ -1,4 +1,4 @@
-import { addRecipeToFirebase } from "../../firebase/firebaseUtils";
+import { addRecipeToFirebase, getSavedRecipesFromFirebase } from "../../firebase/firebaseUtils";
 import { ADD_RECIPE, GET_SAVED_RECIPES_FROM_FIREBASE, SET_CURRENT_RECIPE } from "./recipesTypes";
 
 export const setCurrentRecipe = (recipe) => dispatch => {
@@ -20,8 +20,8 @@ export const addRecipe = (recipe) => async (dispatch) => {
     })
 }
 
-export const getSavedRecipesFromFirebase = (savedRecipesIds) => async (dispatch) => {
-
+export const getSavedRecipes = (savedRecipesIds) => async (dispatch) => {
+    console.log({savedRecipesIds});
     const savedRecipes = await getSavedRecipesFromFirebase(savedRecipesIds);
 
     dispatch({

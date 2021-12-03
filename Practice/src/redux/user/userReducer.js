@@ -1,5 +1,5 @@
 import { ADD_RECIPE_TO_USER_SAVED_RECIPES, SET_CURRENT_USER } from "./userTypes";
-import { addNewRecipe } from "./userUtils";
+import { addNewRecipeId } from "./userUtils";
 
 const initialState = {
     currentUser: null
@@ -18,7 +18,7 @@ const userReducer = (state = initialState, action) => {
                 ...state, 
                 currentUser: {
                     ...state.currentUser,
-                    savedRecipes: addNewRecipe(state.currentUser.savedRecipes, action.payload)
+                    savedRecipesIds: addNewRecipeId(state.currentUser.savedRecipesIds, action.payload)
                 }
             }
         default:

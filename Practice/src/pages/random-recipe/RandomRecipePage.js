@@ -7,7 +7,7 @@ import data from "../../response.json";
 import "./RandomRecipePage.scss";
 import {fetchRandomRecipe, generateCustomEndPoint } from "../../components/random-search/helperFunctions";
 import { useDispatch, useSelector } from "react-redux";
-import { addRecipeToUserSavedRecipes } from "../../redux/user/userActions";
+import { addRecipeIdToUserSavedRecipesIds } from "../../redux/user/userActions";
 import { addRecipe, setCurrentRecipe } from "../../redux/recipes/recipesActions";
 
 const RandomRecipePage = () => {
@@ -38,9 +38,9 @@ const RandomRecipePage = () => {
     const handleCustomSearch = async (e) => {
         e.preventDefault();
         const customEndPoint = generateCustomEndPoint(customRandomSearch);
-        // const randomRecipeData = await fetchRandomRecipe({ isCustomSearch: true, customEndPoint });
+        const randomRecipeData = await fetchRandomRecipe({ isCustomSearch: true, customEndPoint });
         // console.log(randomRecipeData);
-        const randomRecipeData = data.recipes[0];
+        // const randomRecipeData = data.recipes[0];
         if(randomRecipeData){
             dispatch(setCurrentRecipe(randomRecipeData));
             setNoResults(false);
@@ -57,7 +57,7 @@ const RandomRecipePage = () => {
         // Save/add recipe to redux recipe slice 
         dispatch(addRecipe(currentRecipe));
         // Save/add recipe ID to redux saved recipes array in current user slice
-        dispatch(addRecipeToUserSavedRecipes({ userId: currentUser.id, recipeId: id }));
+        dispatch(addRecipeIdToUserSavedRecipesIds({ userId: currentUser.id, recipeId: id }));
 
     }
 

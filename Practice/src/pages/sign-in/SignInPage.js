@@ -7,7 +7,7 @@ import "./SignInPage.scss";
 const SignInPage = () => (
     <React.Fragment>
         <Header title="Log in or Register for a more personalised experience" />
-        <main>
+        <main className="signinpage-main">
             <article className="login-register-article">
                 <LogIn />   
                 <Register />

@@ -1,21 +1,22 @@
 import React from "react";
 import { getUniqueIngredients } from "../../components/random-search/helperFunctions";
+import "./RecipeArticle.scss";
 
-const RecipeArticle = ({ currentRecipe: { title, summary, image, readyInMinutes, vegan, vegetarian, glutenFree, diaryFree, extendedIngredients, analyzedInstructions: [{ steps }] } }) => {
+const RecipeArticle = ({ currentRecipe: { title, summary, image, readyInMinutes, vegan, vegetarian, glutenFree, dairyFree, extendedIngredients, analyzedInstructions: [{ steps }] } }) => {
     // console.log(title, extendedIngredients);
 
     const dietInfo = {
         vegetarian: vegetarian ? "Yes": "No",
         vegan: vegan ? "Yes": "No",
         glutenFree: glutenFree ? "Yes": "No",
-        diaryFree: diaryFree ? "Yes": "No"
+        dairyFree: dairyFree ? "Yes": "No"
     }
 
     const uniqueIngredients = getUniqueIngredients(extendedIngredients);
 
     return(
         title ? 
-            <article>
+            <article className="recipe-article">
                 <header>
                     <h2>{title}</h2>
                     <aside>

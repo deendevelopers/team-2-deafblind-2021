@@ -1,4 +1,4 @@
-export const addNewRecipe = (savedRecipes, newRecipeId) => {
-    if(savedRecipes.includes(newRecipeId)) return savedRecipes;
-    return [...savedRecipes, newRecipeId];
+export const addNewRecipeId = (savedRecipesIds, newRecipeId) => {
+    if(savedRecipesIds.includes(newRecipeId)) return savedRecipesIds;
+    return [...savedRecipesIds, newRecipeId];
 }

@@ -42,24 +42,24 @@ const createUserProfileDocument = async (userAuth, additionalData) => {
         }
 
     } else {
-        console.log("Document data:", userSnap.data());
+        // console.log("Document data:", userSnap.data());
     }
     return userRef;
 }
 
-const addRecipeToUserSavedRecipesInFirebase = async (userId, recipeId) => {
+const addRecipeIdToUserSavedRecipesIdsInFirebase = async (userId, recipeId) => {
     if(!userId) return;
 
     const userRef = doc(db, "users", userId);
     const userSnap = await getDoc(userRef);
 
     if(userSnap.exists()){
-        console.log(userSnap.data());
-        const { createdAt, displayName, email, savedRecipes, ...remainingData } = userSnap.data();
-        console.log(createdAt, displayName, email, savedRecipes, remainingData);
+        // console.log(userSnap.data());
+        const { createdAt, displayName, email, savedRecipesIds, ...remainingData } = userSnap.data();
+        // console.log(createdAt, displayName, email, savedRecipesIds, remainingData);
 
-        if(savedRecipes){
-            if (savedRecipes.includes(recipeId)) return;
+        if(savedRecipesIds){
+            if (savedRecipesIds.includes(recipeId)) return;
             
             try {
                 console.log("adding NEW recipe!");
@@ -67,7 +67,7 @@ const addRecipeToUserSavedRecipesInFirebase = async (userId, recipeId) => {
                     displayName,
                     email,
                     createdAt,
-                    savedRecipes: [...savedRecipes, recipeId],
+                    savedRecipesIds: [...savedRecipesIds, recipeId],
                     ...remainingData
                 });
       
@@ -82,7 +82,7 @@ const addRecipeToUserSavedRecipesInFirebase = async (userId, recipeId) => {
                     displayName,
                     email,
                     createdAt,
-                    savedRecipes: [recipeId],
+                    savedRecipesIds: [recipeId],
                     ...remainingData
                 });
       
@@ -127,7 +127,48 @@ const addRecipeToFirebase = async (recipe) => {
 const getSavedRecipesFromFirebase = async (savedRecipesIds) => {
     if(!savedRecipesIds) return;
 
+    const reciperRef = collection(db, "recipes");
     
+    let savedRecipes = [];
+
+    // Firebase has 10 equality clause limit
+    if(savedRecipesIds.length <= 10) {
+        console.log({ savedRecipesIds });
+        const recipeQuery = query(reciperRef, where("id", "in", savedRecipesIds));
+        const recipeQueryDocResults = await getDocs(recipeQuery);
+        console.log({ recipeQueryDocResults });
+
+        recipeQueryDocResults.forEach((doc) => {
+            console.log(doc.data());
+            // What to do?
+            // .........
+            savedRecipes.push(doc.data());
+        })
+    } else {
+        let remainingRecipesIds = [...savedRecipesIds];
+
+        while(remainingRecipesIds.length > 0){
+            // Initialise an empty array to save the recipe Ids to process
+            let recipesIdsToProcess = [];
+
+            // Add a batch of 10 from the total/remaining recipes Ids array
+            recipesIdsToProcess.push(...remainingRecipesIds.splice(0, 10));
+
+
+            const recipeQuery = query(reciperRef, where("id", "in", recipesIdsToProcess));
+            const recipeQueryDocResults = await getDocs(recipeQuery);
+            console.log({ recipeQueryDocResults });
+        
+            recipeQueryDocResults.forEach((doc) => {
+                console.log(doc.data());
+                // What to do?
+                // .........
+                savedRecipes.push(doc.data());
+            })
+        }
+    }
+    console.log({savedRecipes});
+    return savedRecipes;
 }
 
   // Initialise Firebase
@@ -141,4 +182,4 @@ const auth = getAuth();
 
 const analytics = getAnalytics();
 
-export { db, auth, createUserProfileDocument, addRecipeToUserSavedRecipesInFirebase, addRecipeToFirebase, getSavedRecipesFromFirebase };
+export { db, auth, createUserProfileDocument, addRecipeIdToUserSavedRecipesIdsInFirebase, addRecipeToFirebase, getSavedRecipesFromFirebase };

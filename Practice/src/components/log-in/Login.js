@@ -17,7 +17,7 @@ const Login = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        console.log(formInputs);
+        // console.log(formInputs);
         const { email,  password } = formInputs;
 
         try {

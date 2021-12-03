@@ -12,6 +12,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, createUserProfileDocument } from "./firebase/firebaseUtils";
 import { setCurrentUser } from "./redux/user/userActions";
 import { onSnapshot } from "firebase/firestore";
+import RecipeDetailPage from "./pages/recipe-detail/RecipeDetailPage";
 
 
 const App = () => {
@@ -25,11 +26,11 @@ const App = () => {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
-        console.log("App.js, user with following uid is logged in", uid);
+        // console.log("App.js, user with following uid is logged in", uid);
         // ...
         const userRef = await createUserProfileDocument(user);
         onSnapshot(userRef, snapShot => {
-          console.log(snapShot.data())
+          // console.log(snapShot.data())
 
          
             dispatch(setCurrentUser({
@@ -63,6 +64,7 @@ const App = () => {
         <Route path="/random-recipe" component={RandomRecipePage} />
         <Route path="/dashboard" render={ () => !currentUser ? <Redirect to="/" /> : <UserDashboardPage /> } />
         <Route path="/sign-in" render={ () => currentUser ? <Redirect to="/" /> : <SignInPage /> } />
+        <Route path="/recipes/:recipeId" component={RecipeDetailPage} />
       </Switch>
     </ React.Fragment>
   );

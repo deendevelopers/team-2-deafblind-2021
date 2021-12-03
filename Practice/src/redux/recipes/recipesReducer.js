@@ -1,4 +1,4 @@
-import { ADD_RECIPE, SET_CURRENT_RECIPE } from "./recipesTypes";
+import { ADD_RECIPE, GET_SAVED_RECIPES_FROM_FIREBASE, SET_CURRENT_RECIPE } from "./recipesTypes";
 import { addRecipesToSavedRecipes } from "./recipesUtils";
 
 const initialState = {
@@ -18,6 +18,11 @@ const recipesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 savedRecipes: addRecipesToSavedRecipes(state.savedRecipes, action.payload)
+            }
+        case GET_SAVED_RECIPES_FROM_FIREBASE:
+            return {
+                ...state,
+                savedRecipes: action.payload || []
             }
         default:
             return state

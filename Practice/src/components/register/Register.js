@@ -17,7 +17,7 @@ const Register = () => {
     
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(formInputs);
+        // console.log(formInputs);
         const { username, email, password, confirmPassword } = formInputs;
 
         if(password !== confirmPassword){
@@ -28,7 +28,7 @@ const Register = () => {
         try {
             const { user } = await createUserWithEmailAndPassword(auth, email, password);
             await createUserProfileDocument(user, { displayName: username });
-            console.log(user, { displayName: username });
+            // console.log(user, { displayName: username });
             setFormInputs(initialFormInputState);
         } catch (error) {
             console.log(error);
