@@ -7,10 +7,12 @@ import data from "../../response.json";
 import "./RandomRecipePage.scss";
 import {fetchRandomRecipe, generateCustomEndPoint, getUniqueIngredients } from "../../components/random-search/helperFunctions";
 import { useDispatch, useSelector } from "react-redux";
-import { addRecipeToUserSavedRecipes } from "../../redux/user/userActions";
+import { addRecipeToUserSavedRecipes, setCurrentUser } from "../../redux/user/userActions";
+import { setCurrentRecipe } from "../../redux/recipes/recipesActions";
 
 const RandomRecipePage = () => {
     const currentUser = useSelector(state => state.user.currentUser);
+    const currentRecipe = useSelector(state => state.recipes.currentRecipe);
     const dispatch = useDispatch();
 
     // console.log(data.recipes[0]);
@@ -27,8 +29,8 @@ const RandomRecipePage = () => {
     const [ recipeId, setRecipeId ] = useState(null);
 
     const handleClick = async () => {
-        const randomRecipeData = await fetchRandomRecipe({ isCustomSearch: false });
-        // const randomRecipeData = data.recipes[0];
+        // const randomRecipeData = await fetchRandomRecipe({ isCustomSearch: false });
+        const randomRecipeData = data.recipes[0];
         console.log(randomRecipeData);
         setRecipeStates(randomRecipeData);
         setSearchAgain(true);
@@ -42,7 +44,9 @@ const RandomRecipePage = () => {
         }));
     }
 
-    const setRecipeStates = (randomRecipeData ) => {
+    const setRecipeStates = (randomRecipeData) => {
+        dispatch(setCurrentRecipe(randomRecipeData));
+
         setRecipeId(randomRecipeData.id);
         setDietInfo({
             vegetarian: randomRecipeData.vegetarian ? "Yes": "No",
@@ -83,6 +87,7 @@ const RandomRecipePage = () => {
         console.log("Handle Save Recipe")
 
         // Save/add recipe to redux recipe slice 
+
         // Save/add recipe ID to redux saved recipes array in current user slice
         dispatch(addRecipeToUserSavedRecipes({ userId: currentUser.id, recipeId }));
 
