@@ -61,7 +61,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={HomePage}/>
         {/* <Route exact path="/recipe-search" component={RecipeSearchPage} /> */}
-        <Route path="/random-recipe" component={RandomRecipePage} />
+        {/* <Route path="/random-recipe" component={RandomRecipePage} /> */}
         <Route path="/dashboard" render={ () => !currentUser ? <Redirect to="/" /> : <UserDashboardPage /> } />
         <Route path="/sign-in" render={ () => currentUser ? <Redirect to="/" /> : <SignInPage /> } />
         <Route path="/recipes/:recipeId" component={RecipeDetailPage} />
