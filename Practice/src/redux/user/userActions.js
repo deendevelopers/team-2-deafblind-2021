@@ -1,4 +1,4 @@
-import { ADD_RECIPE_TO_USER_SAVED_RECIPES, SET_CURRENT_USER } from "./userTypes";
+import { ADD_RECIPE_TO_USER_SAVED_RECIPES, SAVE_RECIPE_WITH_SIGN_IN, SET_CURRENT_USER } from "./userTypes";
 import { addRecipeIdToUserSavedRecipesIdsInFirebase } from "../../firebase/firebaseUtils";
 
 export const setCurrentUser = user => async (dispatch) => {
@@ -23,3 +23,9 @@ export const addRecipeIdToUserSavedRecipesIds = ({ userId, recipeId }) => async 
     })
 }
 
+export const saveRecipeWithSignIn = () => (dispatch) => {
+
+    return dispatch({
+        type: SAVE_RECIPE_WITH_SIGN_IN
+    })
+}

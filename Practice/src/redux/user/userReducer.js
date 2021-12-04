@@ -1,8 +1,9 @@
-import { ADD_RECIPE_TO_USER_SAVED_RECIPES, SET_CURRENT_USER } from "./userTypes";
+import { ADD_RECIPE_TO_USER_SAVED_RECIPES, SAVE_RECIPE_WITH_SIGN_IN, SET_CURRENT_USER } from "./userTypes";
 import { addNewRecipeId } from "./userUtils";
 
 const initialState = {
-    currentUser: null
+    currentUser: null,
+    saveRecipeWithSignIn: false
 }
 
 const userReducer = (state = initialState, action) => {
@@ -19,7 +20,13 @@ const userReducer = (state = initialState, action) => {
                 currentUser: {
                     ...state.currentUser,
                     savedRecipesIds: addNewRecipeId(state.currentUser.savedRecipesIds, action.payload)
-                }
+                },
+                saveRecipeWithSignIn: false
+            }
+        case SAVE_RECIPE_WITH_SIGN_IN:
+            return {
+                ...state,
+                saveRecipeWithSignIn: true
             }
         default:
             return state
