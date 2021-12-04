@@ -42,11 +42,10 @@ const RecipeArticle = ({ currentRecipe: { title, summary, image, readyInMinutes,
                 <section>
                     <h3>Cooking instructions:</h3>
                     <ol>
-                        {steps.map(instruction => <li key={instruction.number}>{ instruction.step }</li>)}
+                        {steps && steps.map(instruction => <li key={instruction.number}>{ instruction.step }</li>)}
                     </ol>
                 </section>
              </article> : <h2 className="starting-instruction">Please click on the button to find yourself a random recipe to make today!</h2>
-        
     )
 };
 

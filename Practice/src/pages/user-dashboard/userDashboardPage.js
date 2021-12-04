@@ -36,7 +36,7 @@ const UserDashboardPage = () => {
             <main className="user-dashboard-page-main">
                 {/* <p>Welcome back {userName}! We are very happy to see you!</p> */}
                 <CustomButton onClick={handleSignOut}>Sign-Out</CustomButton>
-                { savedRecipesIds && savedRecipesIds.map( recipeId => <p key={recipeId}>{recipeId}</p>) }
+                {/* { savedRecipesIds && savedRecipesIds.map( recipeId => <p key={recipeId}>{recipeId}</p>) } */}
                 <section className="recipe-cards-section">
                     <h2>Your Saved Recipes</h2>
                     <div className="recipe-cards-container">

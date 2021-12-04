@@ -22,7 +22,7 @@ const RandomRecipePage = () => {
     const handleClick = async () => {
         const randomRecipeData = await fetchRandomRecipe({ isCustomSearch: false });
         // const randomRecipeData = data.recipes[0];
-        console.log(randomRecipeData);
+        // console.log(randomRecipeData.analyzedInstructions);
         dispatch(setCurrentRecipe(randomRecipeData));
         setSearchAgain(true);
     }
@@ -60,7 +60,7 @@ const RandomRecipePage = () => {
         dispatch(addRecipeIdToUserSavedRecipesIds({ userId: currentUser.id, recipeId: id }));
 
     }
-
+    // console.log({currentRecipe});
     return (
         <React.Fragment>
             <Header title="You are on the Random Recipe generator page" message="Here you can generate a random recipe and have a fun adventure cooking it!" />
