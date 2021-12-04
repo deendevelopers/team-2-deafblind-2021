@@ -14,7 +14,7 @@ const NavBar = () => {
             </div>
             <ul>
                 <li><Link to="/">Home</Link></li>
-                <li><Link to="/random-recipe">Random Recipe</Link></li>
+                {/* <li><Link to="/random-recipe">Random Recipe</Link></li> */}
                 { currentUser ? 
                 <li><Link to="/dashboard">Account</Link></li>
                     :

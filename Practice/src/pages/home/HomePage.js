@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../../components/header/Header";
 import CustomButton from "../../components/custom-button/CustomButton";
 import "./HomePage.scss";
+import RandomRecipePage from "../random-recipe/RandomRecipePage";
 
 const HomePage = ({ history }) => (
     <React.Fragment>
@@ -12,7 +13,8 @@ const HomePage = ({ history }) => (
         </div> */}
         <section className="homepage-section">
             <h2>Click here to go to be a bit adventurous and search for a random recipe!</h2>
-            <CustomButton onClick={() => history.push("./random-recipe")} >Random Recipe Generator</CustomButton>
+            <RandomRecipePage />
+            {/* <CustomButton onClick={() => history.push("./random-recipe")} >Random Recipe Generator</CustomButton> */}
         </section>
     </ React.Fragment>
 )
