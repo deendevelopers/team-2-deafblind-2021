@@ -13,7 +13,8 @@ const NavBar = () => {
                 <p>Recipe Mate</p>
             </div>
             <ul>
-                <li><Link to="/">Home</Link></li>
+                {/* <li><Link to="/">Home</Link></li> */}
+                <li><a href="/">Home</a></li>
                 {/* <li><Link to="/random-recipe">Random Recipe</Link></li> */}
                 { currentUser ? 
                 <li><Link to="/dashboard">Account</Link></li>

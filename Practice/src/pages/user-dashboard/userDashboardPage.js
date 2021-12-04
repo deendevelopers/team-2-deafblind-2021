@@ -7,9 +7,13 @@ import Header from "../../components/header/Header";
 import { getSavedRecipes } from "../../redux/recipes/recipesActions";
 import RecipeCard from "../../components/recipe-card/RecipeCard";
 import "./UserDashboardPage.scss";
+import { useHistory } from "react-router";
+
+const adminIds = ["pdov9C9v0MO7y8GnGtJdf1SMjy42"];
 
 const UserDashboardPage = () => {
-
+    const history = useHistory();
+    const currentUserId = useSelector(state => state.user.currentUser.id);
     const savedRecipesData = useSelector(state => state.recipes.savedRecipes);
     const dispatch = useDispatch();
 
@@ -19,7 +23,7 @@ const UserDashboardPage = () => {
     
     useEffect(() => {
         dispatch(getSavedRecipes(savedRecipesIds));
-    }, [savedRecipesIds.length])
+    }, [dispatch, savedRecipesIds.length])
 
     const handleSignOut = async () => {
         try {
@@ -43,6 +47,7 @@ const UserDashboardPage = () => {
                         { savedRecipesData && savedRecipesData.map(recipe => <RecipeCard id={recipe.id} title={recipe.title} imageUrl={recipe.image} vegan={recipe.vegan} vegetarian={recipe.vegetarian} glutenFree={recipe.glutenFree} diaryFree={recipe.diaryFree}/>) }
                     </div>
                 </section>
+                { adminIds.includes(currentUserId) && <CustomButton onClick={() => history.push("/add-recipe")}>Add Custom Recipe</CustomButton> }
             </main>
         </React.Fragment>
     )

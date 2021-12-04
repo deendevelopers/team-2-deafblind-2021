@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addRecipeIdToUserSavedRecipesIds } from "../../redux/user/userActions";
 import { addRecipe, setCurrentRecipe } from "../../redux/recipes/recipesActions";
 import SignInAndSave from "../../components/sign-in-and-save/SignInAndSave";
+import SaveRecipeButton from "../../components/save-recipe-button/SaveRecipeButton";
 
 const RandomRecipePage = () => {
     const currentUser = useSelector(state => state.user.currentUser);
@@ -77,7 +78,7 @@ const RandomRecipePage = () => {
                         <CustomButton onClick={() => setSearchAgain(false)}>Search Again</CustomButton>
                         { noResults && <p>No results found to your custom search - please try a different custom search.</p> }
                         <RecipeArticle currentRecipe={currentRecipe} />                        
-                        { currentUser ? <CustomButton id="save-recipe-button" onClick={handleSaveRecipe}>Save Recipe</CustomButton> : <SignInAndSave />}
+                        { currentUser ? <SaveRecipeButton savedRecipesIds={currentUser.savedRecipesIds} currentRecipeId={currentRecipe.id} handleSaveRecipe={handleSaveRecipe} /> : <SignInAndSave />}
                     </React.Fragment>
                 }
             </main>

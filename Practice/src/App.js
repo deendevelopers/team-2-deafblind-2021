@@ -13,6 +13,7 @@ import { auth, createUserProfileDocument } from "./firebase/firebaseUtils";
 import { setCurrentUser } from "./redux/user/userActions";
 import { onSnapshot } from "firebase/firestore";
 import RecipeDetailPage from "./pages/recipe-detail/RecipeDetailPage";
+import AddRecipePage from "./pages/add-recipe/AddRecipePage";
 
 
 const App = () => {
@@ -65,6 +66,7 @@ const App = () => {
         <Route path="/dashboard" render={ () => !currentUser ? <Redirect to="/" /> : <UserDashboardPage /> } />
         <Route path="/sign-in" render={ () => currentUser ? <Redirect to="/" /> : <SignInPage /> } />
         <Route path="/recipes/:recipeId" component={RecipeDetailPage} />
+        <Route path="/add-recipe" component={AddRecipePage} />
       </Switch>
     </ React.Fragment>
   );

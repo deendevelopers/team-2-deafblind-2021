@@ -3,8 +3,16 @@ import React, { useState } from "react";
 import { auth } from "../../firebase/firebaseUtils";
 import CustomButton from "../custom-button/CustomButton";
 import "./LogIn.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { addRecipe } from "../../redux/recipes/recipesActions";
+import { addRecipeIdToUserSavedRecipesIds } from "../../redux/user/userActions";
 
 const Login = () => {
+
+    const saveRecipeWithSignIn = useSelector(state => state.user.saveRecipeWithSignIn);
+    const currentRecipe = useSelector(state => state.recipes.currentRecipe);
+    const dispatch = useDispatch();
+
     const [ formInputs, setFormInputs ] = useState({ email: "", password: "" }); 
 
     const handleChange = ({ target: { name, value } }) => {
@@ -21,7 +29,19 @@ const Login = () => {
         const { email,  password } = formInputs;
 
         try {
-            await signInWithEmailAndPassword(auth, email, password);
+            const { user } =  await signInWithEmailAndPassword(auth, email, password);
+
+            const { id } = currentRecipe;
+            // Saving recipe for new user
+            if(saveRecipeWithSignIn){
+                console.log("Handle Save Recipe")
+                // Save/add recipe to redux recipe slice 
+                dispatch(addRecipe(currentRecipe));
+                // console.log(user);
+                // Save/add recipe ID to redux saved recipes array in current user slice
+                dispatch(addRecipeIdToUserSavedRecipesIds({ userId: user.uid, recipeId: id }));
+            }
+
             setFormInputs({email: '', password:''})
 
         } catch (error) {
