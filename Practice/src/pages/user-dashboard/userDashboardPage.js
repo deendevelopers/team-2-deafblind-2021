@@ -19,7 +19,7 @@ const UserDashboardPage = () => {
     
     useEffect(() => {
         dispatch(getSavedRecipes(savedRecipesIds));
-    }, [])
+    }, [savedRecipesIds.length])
 
     const handleSignOut = async () => {
         try {

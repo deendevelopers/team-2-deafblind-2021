@@ -93,6 +93,35 @@ const addRecipeIdToUserSavedRecipesIdsInFirebase = async (userId, recipeId) => {
     }
 }
 
+const deleteRecipeIdToUserSavedRecipesIdsInFirebase = async (userId, recipeId) => {
+    if(!userId) return;
+
+    const userRef = doc(db, "users", userId);
+    const userSnap = await getDoc(userRef);
+
+    if(userSnap.exists()){
+        // console.log(userSnap.data());
+        const { savedRecipesIds, ...remainingData } = userSnap.data();
+        // console.log(savedRecipesIds, remainingData);
+
+        // If recipe does not exist in savedRecipesIds in firebase - then nothing to delete 
+        if (!savedRecipesIds.includes(recipeId)) return;
+
+        const updatedSavedRecipesIds = savedRecipesIds.filter(savedRecipeId => savedRecipeId !== recipeId);
+
+        try {
+            console.log("DELETING recipe!");
+            await setDoc(userRef, {
+                savedRecipesIds: updatedSavedRecipesIds,
+                ...remainingData
+            });
+    
+        } catch (error) {
+            console.log('error adding user recipe', error.message)
+        }
+    }
+}
+
 // const getSavedRecipesForUserFromFirebase = async (userId) => {
 //     if(!userId) return;
 //     const userRef = doc(db, "users", userId);
@@ -182,4 +211,4 @@ const auth = getAuth();
 
 const analytics = getAnalytics();
 
-export { db, auth, createUserProfileDocument, addRecipeIdToUserSavedRecipesIdsInFirebase, addRecipeToFirebase, getSavedRecipesFromFirebase };
+export { db, auth, createUserProfileDocument, addRecipeIdToUserSavedRecipesIdsInFirebase, addRecipeToFirebase, getSavedRecipesFromFirebase, deleteRecipeIdToUserSavedRecipesIdsInFirebase };
