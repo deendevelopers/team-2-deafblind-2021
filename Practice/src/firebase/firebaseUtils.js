@@ -200,6 +200,29 @@ const getSavedRecipesFromFirebase = async (savedRecipesIds) => {
     return savedRecipes;
 }
 
+const addCustomRecipeToFirebaseCustomRecipes = async (recipe) => {
+    console.log("Adding CUSTOM recipe to Firebase", recipe);
+    if(!recipe) return;
+
+    const reciperRef = collection(db, "customRecipes");
+    
+    // Checking whether recipe already exists on Firebase or not:
+    const recipeQuery = query(reciperRef, where("id", "==", recipe.id));
+    // console.log({ recipeQuery });
+    const recipeQueryDocResults = await getDocs(recipeQuery);
+    console.log({ recipeQueryDocResults });
+    console.log(recipeQueryDocResults.empty);
+
+    // if recipe already stored then just return here
+    if(!recipeQueryDocResults.empty) return;
+    // otherwise add recipe to firebase - use try-catch to catch any errors
+    try {
+        await addDoc(reciperRef, recipe);
+    } catch (error) {
+        console.log("Error adding CUSTOM recipe to Firebase", error.message);
+    }
+}
+
   // Initialise Firebase
 initializeApp(firebaseConfig);
 
@@ -211,4 +234,4 @@ const auth = getAuth();
 
 const analytics = getAnalytics();
 
-export { db, auth, createUserProfileDocument, addRecipeIdToUserSavedRecipesIdsInFirebase, addRecipeToFirebase, getSavedRecipesFromFirebase, deleteRecipeIdToUserSavedRecipesIdsInFirebase };
+export { db, auth, createUserProfileDocument, addRecipeIdToUserSavedRecipesIdsInFirebase, addRecipeToFirebase, getSavedRecipesFromFirebase, deleteRecipeIdToUserSavedRecipesIdsInFirebase, addCustomRecipeToFirebaseCustomRecipes };
