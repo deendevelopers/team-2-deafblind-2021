@@ -1,13 +1,5 @@
 import { Step, Steps, useSteps } from "chakra-ui-steps";
-import {
-  Box,
-  Center,
-  Heading,
-  Button,
- 
-  Flex,
- 
-} from "@chakra-ui/react";
+import { Box, Center, Heading, Button, Flex } from "@chakra-ui/react";
 
 export const Vertical = ({ steps }) => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
@@ -30,7 +22,7 @@ export const Vertical = ({ steps }) => {
           {allSteps.map(({ label, content, equipment }, index) => (
             <Step width="100%" label={label} key={label}>
               <Box my={1} index={index} bg="#6562">
-                <Box display="flex" justifyContent="center" mb={2}>
+                {/* <Box display="flex" justifyContent="center" mb={2}>
                   <ol>
                     Equipment:
                     {equipment.map((x, index) => (
@@ -42,7 +34,7 @@ export const Vertical = ({ steps }) => {
                       </>
                     ))}
                   </ol>
-                </Box>
+                </Box> */}
 
                 <Box> {content}</Box>
               </Box>
