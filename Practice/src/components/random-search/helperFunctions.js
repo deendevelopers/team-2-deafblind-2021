@@ -2,7 +2,8 @@ import axios from "axios";
 
 export const fetchRandomRecipe = async ( { isCustomSearch, customEndPoint } ) => {
 
-    const API_KEY = "1fae167ef83a4a56b244effeb1a158ec";
+    // const API_KEY = "1fae167ef83a4a56b244effeb1a158ec";
+    const API_KEY = "bba9229204a74ae79374bfc68ef3117f";
 
     const fetchRandomRecipeFromSpoonacular = async ({ randomCustomEndPoint }) => {
         let randomRecipeData;
@@ -12,15 +13,18 @@ export const fetchRandomRecipe = async ( { isCustomSearch, customEndPoint } ) =>
             validRecipeWithInstructions = false;
 
             const response =  await axios.get("https://api.spoonacular.com/recipes/random?apiKey=" + API_KEY + randomCustomEndPoint);
-            console.log("Ran Custom fetch")
+            console.log("Ran Custom fetch Once")
             console.log(response);
             const { recipes } = await response.data;
             randomRecipeData = recipes[0];
             console.log(randomRecipeData);
 
-            console.log("Valid recipes", randomRecipeData.analyzedInstructions.length !==0 );
+            //return here if no results found to prevent infinite loop
+            if(!randomRecipeData) return randomRecipeData;
 
-            if(randomRecipeData.analyzedInstructions.length !==0 ){
+            // console.log("Valid recipes", randomRecipeData.analyzedInstructions.length !==0 );
+
+            if(randomRecipeData && randomRecipeData.analyzedInstructions.length !==0 ){
                 validRecipeWithInstructions = true;
             }
         }
@@ -30,21 +34,10 @@ export const fetchRandomRecipe = async ( { isCustomSearch, customEndPoint } ) =>
     }
 
     if(!isCustomSearch){
-        // const response = await axios.get("https://api.spoonacular.com/recipes/random?apiKey=" + API_KEY);
-        // console.log("Ran fetch")
-        // console.log(response);
-        // const { recipes } = await response.data;
-        // const randomRecipeData = recipes[0];
-        // return randomRecipeData
         const randomRecipeData = await fetchRandomRecipeFromSpoonacular({ randomCustomEndPoint: "" });
         return randomRecipeData;
     } else {
-        // const response = await axios.get("https://api.spoonacular.com/recipes/random?apiKey=" + API_KEY + customEndPoint);
         console.log("Ran Custom fetch")
-        // console.log(response);
-        // const { recipes } = await response.data;
-        // const randomRecipeData = recipes[0];
-        // return randomRecipeData
        const randomRecipeData = await fetchRandomRecipeFromSpoonacular({ randomCustomEndPoint: customEndPoint });
        return randomRecipeData;
     }
@@ -72,7 +65,7 @@ export function generateCustomEndPoint (customRandomSearch) {
 
 export function getUniqueIngredients (extendedIngredients) {
     const ingredientsNames = extendedIngredients.map(ingredient => ingredient.name);
-        //Remove duplicates:
+    //Remove duplicates:
     const uniqueIngredients = [...new Set(ingredientsNames)];
     return uniqueIngredients;
 }

@@ -3,26 +3,8 @@
     flex-direction: column;
     margin-top: 1vh;
     align-items: center;
+    width: 100%;
 
-    label{
-        display: flex;
-        width: 50vw;
-        align-items: baseline;
-        justify-content: space-between;
-        font-size: 1.1rem;
-
-        .label-text{
-            text-transform: capitalize;
-        }
-        
-        select{
-            padding: 1vh;
-            margin-top: 2vh;
-            width: 80%;
-            font-size: 1.1rem;
-            border: 2px solid navy;
-        }
-    }
 
     button{
         margin-top: 2vh;

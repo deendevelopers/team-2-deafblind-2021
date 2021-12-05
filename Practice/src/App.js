@@ -3,7 +3,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./pages/home/HomePage";
 import './App.scss';
 // import RecipeSearchPage from "./pages/recipe-search/RecipeSearchPage";
-import RandomRecipePage from "./pages/random-recipe/RandomRecipePage";
 import NavBar from "./components/navbar/NavBar";
 import UserDashboardPage from "./pages/user-dashboard/UserDashboardPage";
 import SignInPage from "./pages/sign-in/SignInPage";
@@ -13,6 +12,7 @@ import { auth, createUserProfileDocument } from "./firebase/firebaseUtils";
 import { setCurrentUser } from "./redux/user/userActions";
 import { onSnapshot } from "firebase/firestore";
 import RecipeDetailPage from "./pages/recipe-detail/RecipeDetailPage";
+import AddRecipePage from "./pages/add-recipe/AddRecipePage";
 
 
 const App = () => {
@@ -60,11 +60,10 @@ const App = () => {
       <NavBar />
       <Switch>
         <Route exact path="/" component={HomePage}/>
-        {/* <Route exact path="/recipe-search" component={RecipeSearchPage} /> */}
-        {/* <Route path="/random-recipe" component={RandomRecipePage} /> */}
         <Route path="/dashboard" render={ () => !currentUser ? <Redirect to="/" /> : <UserDashboardPage /> } />
         <Route path="/sign-in" render={ () => currentUser ? <Redirect to="/" /> : <SignInPage /> } />
         <Route path="/recipes/:recipeId" component={RecipeDetailPage} />
+        <Route path="/add-recipe" component={AddRecipePage} />
       </Switch>
     </ React.Fragment>
   );

@@ -8,13 +8,12 @@ const NavBar = () => {
 
     return(
         <nav className="navbar">
-            <div className="logo-container">
+            <a href="/" className="logo-container">
                 <p>&#127812;</p>
                 <p>Recipe Mate</p>
-            </div>
+            </a>
             <ul>
                 <li><Link to="/">Home</Link></li>
-                {/* <li><Link to="/random-recipe">Random Recipe</Link></li> */}
                 { currentUser ? 
                 <li><Link to="/dashboard">Account</Link></li>
                     :

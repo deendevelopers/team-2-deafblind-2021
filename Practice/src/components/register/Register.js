@@ -3,8 +3,15 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, createUserProfileDocument } from "../../firebase/firebaseUtils";
 import "./Register.scss";
 import CustomButton from "../custom-button/CustomButton";
+import { useDispatch, useSelector } from "react-redux";
+import { addRecipe } from "../../redux/recipes/recipesActions";
+import { addRecipeIdToUserSavedRecipesIds } from "../../redux/user/userActions";
 
 const Register = () => {
+    const saveRecipeWithSignIn = useSelector(state => state.user.saveRecipeWithSignIn);
+    const currentRecipe = useSelector(state => state.recipes.currentRecipe);
+    const dispatch = useDispatch();
+
     const initialFormInputState = { username: "", email: "", password: "", confirmPassword: "" };
     const [ formInputs, setFormInputs ] = useState(initialFormInputState); 
 
@@ -29,6 +36,17 @@ const Register = () => {
             const { user } = await createUserWithEmailAndPassword(auth, email, password);
             await createUserProfileDocument(user, { displayName: username });
             // console.log(user, { displayName: username });
+
+            const { id } = currentRecipe;
+            // Saving recipe for new user
+            if(saveRecipeWithSignIn){
+                console.log("Handle Save Recipe")
+                // Save/add recipe to redux recipe slice 
+                dispatch(addRecipe(currentRecipe));
+                // console.log(user);
+                // Save/add recipe ID to redux saved recipes array in current user slice
+                dispatch(addRecipeIdToUserSavedRecipesIds({ userId: user.uid, recipeId: id }));
+            }
             setFormInputs(initialFormInputState);
         } catch (error) {
             console.log(error);
@@ -53,8 +71,6 @@ const Register = () => {
                 <input name="confirmPassword" id="confirmPasswordForRegister" type="password" value={formInputs.confirmPassword} onChange={handleChange}/>
 
                 <CustomButton type="submit">Register</CustomButton>
-                {/* <input type="submit" value="Submit" /> */}
-
             </form>
         </section>
     )
