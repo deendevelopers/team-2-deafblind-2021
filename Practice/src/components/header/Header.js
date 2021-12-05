@@ -6,7 +6,7 @@ const Header = ({ title, message, userName }) => (
     <Heading as="h1" size="xl">
       {title} {userName}
     </Heading>
-    <Heading as="h2" size="md">
+    <Heading as="h2" size="md" fontWeight="normal">
       {message}
     </Heading>
   </header>

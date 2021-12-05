@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./NavBar.scss";
 import { useSelector } from "react-redux";
 import { AiOutlineUser } from "react-icons/ai";
-import { Box, Flex, Spacer, Button, Text, Icon } from "@chakra-ui/react";
+import { Box, Flex, Button, Text, Icon } from "@chakra-ui/react";
 
 export default function NavBar() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -56,7 +56,6 @@ export default function NavBar() {
       </Box>
     </>
   );
-
 }
 
 // const NavBar = () => {

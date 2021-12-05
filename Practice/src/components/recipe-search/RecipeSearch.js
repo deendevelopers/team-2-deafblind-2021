@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CustomButton from "../custom-button/CustomButton";
+
 import "./RecipeSearch.scss";
 import { useDispatch } from "react-redux";
 import { searchForRecipes } from "../../redux/recipes/recipesActions";
@@ -16,7 +16,7 @@ const RecipeSearch = () => {
   };
 
   return (
-    <InputGroup>
+    <InputGroup mt={4}>
       <Input
         size="lg"
         placeholder="Find a Recipe"
@@ -26,7 +26,6 @@ const RecipeSearch = () => {
       {/* <input id="recipe-search-input" type="text" name="recipe-search" placeholder="Click here to search for a recipe of your liking"  /> */}
       <InputRightElement width="4.5rem" h="100%">
         <Button
-          bg="#fe0d"
           size="lg"
           borderLeftRadius="0"
           bg="#285E61"
