@@ -1,18 +1,19 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./NavBar.scss";
 import { useSelector } from "react-redux";
 import {
   Box,
   Flex,
+  Spacer,
   Avatar,
   HStack,
-  Link,
   IconButton,
   Button,
   Menu,
   MenuButton,
   MenuList,
+  Heading,
   MenuItem,
   MenuDivider,
   useDisclosure,
@@ -26,11 +27,17 @@ const Links = ["Dashboard", "Projects", "Team"];
 export default function NavBar() {
   return (
     <>
-      <Box w="100%" bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box w="100%" bg={useColorModeValue("gray.100", "gray.900")} px={2}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <HStack spacing={8} alignItems={"center"}>
-            <Box>Logo</Box>
-          </HStack>
+          {/* <HStack spacing={9} alignItems={"center"}> */}
+          <Link to="/">
+            <Flex justifyContent={"space-between"}>
+              <Box pr="4">&#127812; </Box>
+              <Spacer />
+              <Heading size="md">Recipe Mate</Heading>
+            </Flex>
+          </Link>
+          {/* </HStack> */}
           <Flex alignItems={"center"}>
             <Button
               variant={"solid"}
