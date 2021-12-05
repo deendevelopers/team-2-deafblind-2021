@@ -23,7 +23,7 @@ const UserDashboardPage = () => {
     
     useEffect(() => {
         dispatch(getSavedRecipes(savedRecipesIds));
-    }, [dispatch, savedRecipesIds.length])
+    }, [dispatch, savedRecipesIds , savedRecipesIds.length])
 
     const handleSignOut = async () => {
         try {
@@ -32,7 +32,6 @@ const UserDashboardPage = () => {
             console.log(error);
         }
     }
-
 
     return (
         <React.Fragment>

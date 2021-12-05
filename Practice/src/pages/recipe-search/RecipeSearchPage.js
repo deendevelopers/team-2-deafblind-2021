@@ -4,7 +4,6 @@ import "./RecipeSearchPage.scss";
 import { useSelector } from "react-redux";
 import RecipeCard from "../../components/recipe-card/RecipeCard";
 
-
 const RecipeSearchPage = () => {
     const searchResults = useSelector(state => state.recipes.searchResults);
 

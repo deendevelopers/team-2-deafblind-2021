@@ -41,14 +41,12 @@ const Login = () => {
                 // Save/add recipe ID to redux saved recipes array in current user slice
                 dispatch(addRecipeIdToUserSavedRecipesIds({ userId: user.uid, recipeId: id }));
             }
-
             setFormInputs({email: '', password:''})
 
         } catch (error) {
             console.log(error)
         }
     }
-
 
     return (
         <section className="login-section">

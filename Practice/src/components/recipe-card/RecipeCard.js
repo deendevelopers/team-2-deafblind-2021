@@ -4,7 +4,7 @@ import { deleteRecipeIdToUserSavedRecipesIds } from "../../redux/user/userAction
 import CustomButton from "../custom-button/CustomButton";
 import "./RecipeCard.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentRecipe, setCurrentRecipeWithId } from "../../redux/recipes/recipesActions";
+import { setCurrentRecipeWithId } from "../../redux/recipes/recipesActions";
 
 const RecipeCard = ({ recipe, isDashboard }) => {
     const { id, title, image, vegetarian, vegan, glutenFree, dairyFree } = recipe;
