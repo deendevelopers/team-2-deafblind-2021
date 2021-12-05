@@ -3,24 +3,41 @@ import CustomButton from "../custom-button/CustomButton";
 import "./RecipeSearch.scss";
 import { useDispatch } from "react-redux";
 import { searchForRecipes } from "../../redux/recipes/recipesActions";
+import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
 
 const RecipeSearch = () => {
+  const [searchTerm, setSearchTerm] = useState("");
 
-    const [ searchTerm, setSearchTerm ] = useState("");
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
+  const handleSearch = () => {
+    console.log(searchTerm);
+    dispatch(searchForRecipes(searchTerm));
+  };
 
-    const handleSearch = () => {
-        console.log(searchTerm);
-        dispatch(searchForRecipes(searchTerm))
-    }
-
-    return (
-        <React.Fragment>
-            <input id="recipe-search-input" type="text" name="recipe-search" placeholder="Click here to search for a recipe of your liking" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
-            <CustomButton onClick={handleSearch}>Search Recipe</ CustomButton>
-        </React.Fragment>
-    )
-}
+  return (
+    <InputGroup>
+      <Input
+        size="lg"
+        placeholder="Find a Recipe"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      {/* <input id="recipe-search-input" type="text" name="recipe-search" placeholder="Click here to search for a recipe of your liking"  /> */}
+      <InputRightElement width="4.5rem" h="100%">
+        <Button
+          bg="#fe0d"
+          size="lg"
+          borderLeftRadius="0"
+          h="100%"
+          onClick={handleSearch}
+        >
+          Search
+        </Button>
+      </InputRightElement>
+      {/* <CustomButton onClick={handleSearch}>Search Recipe</CustomButton> */}
+    </InputGroup>
+  );
+};
 
 export default RecipeSearch;

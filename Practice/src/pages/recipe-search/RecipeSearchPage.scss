@@ -1,26 +1,20 @@
-.recipesearchpage-section{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
+.recipesearchpage-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
 
-    button{
-        margin-top: 2vh;
+  .search-results-section {
+    .section-heading {
+      text-align: center;
     }
-
-    .search-results-section{
-        .section-heading{
-            text-align: center;
-        }
-        .recipe-search-articles-container{
-            display: flex;
-            // justify-content: space-around;
-            flex-wrap: wrap;
-            grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-            grid-gap: 3rem;
-            margin: 3vh 2vw;
-    
-        }
+    .recipe-search-articles-container {
+      display: flex;
+      // justify-content: space-around;
+      flex-wrap: wrap;
+      grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+      grid-gap: 3rem;
+      margin: 3vh 2vw;
     }
+  }
 }
-
