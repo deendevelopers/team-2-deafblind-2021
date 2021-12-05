@@ -107,7 +107,7 @@ const RecipeArticle = ({
     "Dairy Free": dairyFree ? "Yes" : "No",
   };
 
-  //   const uniqueIngredients = getUniqueIngredients(extendedIngredients);
+  const uniqueIngredients = getUniqueIngredients(extendedIngredients);
   return (
     <Center py={6} px={4}>
       <Box
@@ -148,6 +148,15 @@ const RecipeArticle = ({
               }
             })}
           </Stack>
+        </section>
+        <section>
+          <h3>List of ingredients:</h3>
+          <ul>
+            {extendedIngredients &&
+              uniqueIngredients.map((ingredient) => (
+                <li key={ingredient}>{ingredient}</li>
+              ))}
+          </ul>
         </section>
         {/* <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
           <Avatar
