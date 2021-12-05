@@ -8,6 +8,7 @@ import {
   Text,
   Stack,
   Avatar,
+  Flex,
   useColorModeValue,
 } from "@chakra-ui/react";
 // const RecipeArticle = ({
@@ -118,13 +119,14 @@ const RecipeArticle = ({
         rounded={"md"}
         p={6}
         overflow={"hidden"}
+        color="#111"
       >
         <Box
           h={"210px"}
           //   bg={"gray.100"}
           mt={-6}
           mx={-6}
-          mb={6}
+          mb={4}
           pos={"relative"}
         >
           <img src={image} alt={`The ${title} dish shown on a plate cooked`} />
@@ -137,26 +139,34 @@ const RecipeArticle = ({
           >
             {title}
           </Heading>
-          <Text color={"gray.500"}>{summary.replace(/(<([^>]+)>)/gi, "")}</Text>
+          <Text>{summary.replace(/(<([^>]+)>)/gi, "")}</Text>
         </Stack>
         <section>
-          <Stack>
-            <h3>Dietary details:</h3>
-            {Object.keys(dietInfo).map((dietMetric) => {
-              if (dietInfo[dietMetric] === "Yes") {
-                return <p key={dietMetric}>{dietMetric}</p>;
-              }
-            })}
+          <Stack my={2}>
+            <Heading as="h3" fontSize={"lg"}>
+              Dietary details:
+            </Heading>
+            <Flex justifyContent="space-between">
+              {Object.keys(dietInfo).map((dietMetric) => {
+                if (dietInfo[dietMetric] === "Yes") {
+                  return <p key={dietMetric}>{dietMetric}</p>;
+                }
+              })}
+            </Flex>
           </Stack>
         </section>
         <section>
-          <h3>List of ingredients:</h3>
-          <ul>
-            {extendedIngredients &&
-              uniqueIngredients.map((ingredient) => (
-                <li key={ingredient}>{ingredient}</li>
-              ))}
-          </ul>
+          <Stack my={2}>
+            <Heading as="h3" fontSize={"lg"}>
+              List of ingredients:
+            </Heading>
+            <ul>
+              {extendedIngredients &&
+                uniqueIngredients.map((ingredient) => (
+                  <li key={ingredient}>{ingredient}</li>
+                ))}
+            </ul>
+          </Stack>
         </section>
         {/* <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
           <Avatar
