@@ -30,7 +30,7 @@ export default function NavBar() {
   const UserIcon = (props) => <Icon as={AiOutlineUser} />;
   return (
     <>
-      <Box w="100%" bg={useColorModeValue("gray.100", "gray.900")} px={2}>
+      <Box w="100%" bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           {/* <HStack spacing={9} alignItems={"center"}> */}
           <Link to="/">
@@ -45,7 +45,7 @@ export default function NavBar() {
             <Button
               variant={"solid"}
               colorScheme={"teal"}
-              size={"sm"}
+              size={"md"}
               mr={4}
               rightIcon={<UserIcon />}
             >
