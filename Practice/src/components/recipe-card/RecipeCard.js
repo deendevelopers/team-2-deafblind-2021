@@ -84,6 +84,10 @@ export default function RecipeCard({ recipe, isDashboard }) {
   const { id, title, image, vegetarian, vegan, glutenFree, dairyFree } = recipe;
   const history = useHistory();
   const currentUser = useSelector((state) => state.user.currentUser);
+  const { summary } = useSelector((state) =>
+    state.recipes.savedRecipes.find((recipe) => recipe.id === id)
+  );
+
   const dispatch = useDispatch();
   const handleDelete = () => {
     console.log({ recipeIdToDelete: id });
@@ -134,7 +138,9 @@ export default function RecipeCard({ recipe, isDashboard }) {
           >
             {title}
           </Heading>
-          {/* <Text color={"gray.500"}>{summary}</Text> */}
+          <Text color={"gray.500"} noOfLines={3}>
+            {summary.replace(/(<([^>]+)>)/gi, "")}
+          </Text>
         </Stack>
         <Stack>
           <div className="button-container">
