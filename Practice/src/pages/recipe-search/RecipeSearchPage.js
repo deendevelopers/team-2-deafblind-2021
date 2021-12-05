@@ -5,19 +5,22 @@ import { useSelector } from "react-redux";
 import RecipeCard from "../../components/recipe-card/RecipeCard";
 
 const RecipeSearchPage = () => {
-    const searchResults = useSelector(state => state.recipes.searchResults);
+  const searchResults = useSelector((state) => state.recipes.searchResults);
 
-    return (
-        <section className="recipesearchpage-section">
-            <RecipeSearch />
-            <section className="search-results-section">
-                <h2 className="section-heading">Search Results</h2>
-                <div className="recipe-search-articles-container">
-                    { searchResults && searchResults.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />) }
-                </div>
-            </section>
-        </section>
-    )
-}
+  return (
+    <section>
+      <RecipeSearch />
+      <section className="search-results-section">
+        <h2 className="section-heading">Search Results</h2>
+        <div className="recipe-search-articles-container">
+          {searchResults &&
+            searchResults.map((recipe) => (
+              <RecipeCard key={recipe.id} recipe={recipe} />
+            ))}
+        </div>
+      </section>
+    </section>
+  );
+};
 
 export default RecipeSearchPage;
