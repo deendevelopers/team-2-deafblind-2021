@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.scss";
 import { useSelector } from "react-redux";
+import { AiOutlineUser } from "react-icons/ai";
 import {
   Box,
   Flex,
@@ -19,12 +20,14 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
+  Icon,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, AddIcon } from "@chakra-ui/icons";
 
 const Links = ["Dashboard", "Projects", "Team"];
 
 export default function NavBar() {
+  const UserIcon = (props) => <Icon as={AiOutlineUser} />;
   return (
     <>
       <Box w="100%" bg={useColorModeValue("gray.100", "gray.900")} px={2}>
@@ -44,9 +47,9 @@ export default function NavBar() {
               colorScheme={"teal"}
               size={"sm"}
               mr={4}
-              leftIcon={<AddIcon />}
+              rightIcon={<UserIcon />}
             >
-              Action
+              Profile
             </Button>
           </Flex>
         </Flex>
