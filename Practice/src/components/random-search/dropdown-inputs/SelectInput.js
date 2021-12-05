@@ -1,16 +1,17 @@
 import React from "react";
+import "./SelectInput.scss";
 
-const SelectInput = ({ name, handleChange, options }) => (
-    <label htmlFor={name+"Input"}><span className="label-text">{name}:</span>
+const SelectInput = ({ name, handleChange, options, defaultSelect }) => (
         <select
-            id={name+"Input"} 
+            className="select-input"
             onChange={handleChange}
             name={name} 
             type='text'
+            aria-label={defaultSelect}
         >
+            <option value="" disabled selected>{defaultSelect}</option>
             {options.map((option, index) => <option key={option+index} value={option}>{option ? option : "Please chose"}</option>)}
         </select>
-    </label>
 )
 
 export default SelectInput; 

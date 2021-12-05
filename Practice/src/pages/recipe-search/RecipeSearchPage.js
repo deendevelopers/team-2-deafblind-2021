@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import RecipeSearch from "../../components/recipe-search/RecipeSearch";
-import "./RecipeSearchPage";
-import axios from "axios";
+import "./RecipeSearchPage.scss";
+import { useSelector } from "react-redux";
+import RecipeCard from "../../components/recipe-card/RecipeCard";
 
-const API_KEY = "1fae167ef83a4a56b244effeb1a158ec";
 
 const RecipeSearchPage = () => {
-    const [ searchTerm, setSearchTerm ] = useState("");
-
-    useEffect(() => {
-        const fetchRecipes = async (ingredient) => {
-            const response = await axios.get(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${API_KEY}&ingredients=apples`);
-            const jsonResponse = await response.json();
-            console.log(jsonResponse);
-        }
-        fetchRecipes(searchTerm);
-    }, [searchTerm]);
+    const searchResults = useSelector(state => state.recipes.searchResults);
 
     return (
-        <section>
-            <RecipeSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-            <article></article>
+        <section className="recipesearchpage-section">
+            {/* <h2>Click here to search for a recipe of your liking</h2> */}
+            <RecipeSearch />
+            <section className="search-results-section">
+                <h2 className="section-heading">Search Results</h2>
+                <div className="recipe-search-articles-container">
+                    { searchResults && searchResults.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />) }
+                </div>
+            </section>
         </section>
     )
 }

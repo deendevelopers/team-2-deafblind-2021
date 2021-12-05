@@ -7,6 +7,7 @@ const RecipeDetailPage = () => {
     const { recipeId } = useParams();
     const savedRecipes = useSelector(state => state.recipes.savedRecipes);
     const recipeInfo = savedRecipes.find(recipe => recipe.id == recipeId)
+    // const currentRecipe = useSelector(state => state.recipes.currentRecipe);
 
     return (
         <React.Fragment>

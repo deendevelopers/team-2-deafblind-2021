@@ -1,6 +1,9 @@
 .user-dashboard-page-main {
     width: 100%;
     margin-bottom: 5vh;
+    #add-custom-recipe-button{
+        margin-top: 2vh;
+    }
     .recipe-cards-section{
         display: flex;
         flex-direction: column;
