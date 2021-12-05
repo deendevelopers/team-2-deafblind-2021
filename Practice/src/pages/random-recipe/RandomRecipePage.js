@@ -7,6 +7,7 @@ import {fetchRandomRecipe, generateCustomEndPoint } from "../../components/rando
 import { useDispatch } from "react-redux";
 import { setCurrentRecipe } from "../../redux/recipes/recipesActions";
 import { useHistory } from "react-router";
+import RandomChoicesSearch from "../../components/random-search/random-choices-search/RandomChoicesSearch";
 
 const RandomRecipePage = () => {
     const history = useHistory();
@@ -46,7 +47,8 @@ const RandomRecipePage = () => {
     return (
         <main>
             <React.Fragment>
-                <CustomButton onClick={handleClick}>Find Random Recipe</CustomButton>
+                {/* <CustomButton onClick={handleClick}>Find Random Recipe</CustomButton> */}
+                <RandomChoicesSearch />
                 <p className="custom-random-search-message">Customise your random recipe by chosing from the options below:</p>
                 <SelectionForm handleChange={handleChange} handleSubmit={handleCustomSearch}/>
             </React.Fragment>
