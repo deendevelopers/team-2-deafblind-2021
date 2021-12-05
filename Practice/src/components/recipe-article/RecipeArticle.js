@@ -100,12 +100,12 @@ const RecipeArticle = ({
 }) => {
   // console.log(title, extendedIngredients);
 
-  //   const dietInfo = {
-  //     vegetarian: vegetarian ? "Yes" : "No",
-  //     vegan: vegan ? "Yes" : "No",
-  //     glutenFree: glutenFree ? "Yes" : "No",
-  //     dairyFree: dairyFree ? "Yes" : "No",
-  //   };
+  const dietInfo = {
+    Vegetarian: vegetarian ? "Yes" : "No",
+    Vegan: vegan ? "Yes" : "No",
+    " Gluten Free": glutenFree ? "Yes" : "No",
+    "Dairy Free": dairyFree ? "Yes" : "No",
+  };
 
   //   const uniqueIngredients = getUniqueIngredients(extendedIngredients);
   return (
@@ -137,10 +137,18 @@ const RecipeArticle = ({
           >
             {title}
           </Heading>
-          <Text color={"gray.500"}>
-            <p>{summary.replace(/(<([^>]+)>)/gi, "")}</p>
-          </Text>
+          <Text color={"gray.500"}>{summary.replace(/(<([^>]+)>)/gi, "")}</Text>
         </Stack>
+        <section>
+          <Stack>
+            <h3>Dietary details:</h3>
+            {Object.keys(dietInfo).map((dietMetric) => {
+              if (dietInfo[dietMetric] === "Yes") {
+                return <p key={dietMetric}>{dietMetric}</p>;
+              }
+            })}
+          </Stack>
+        </section>
         {/* <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
           <Avatar
             src={"https://avatars0.githubusercontent.com/u/1164541?v=4"}
