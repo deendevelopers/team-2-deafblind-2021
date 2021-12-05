@@ -29,6 +29,8 @@ const RecipeSearch = () => {
           bg="#fe0d"
           size="lg"
           borderLeftRadius="0"
+          bg="#285E61"
+          color="#fff"
           h="100%"
           onClick={handleSearch}
         >
