@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const API_KEY = "1fae167ef83a4a56b244effeb1a158ec";
-
+// const API_KEY = "1fae167ef83a4a56b244effeb1a158ec";
+// const API_KEY = "bba9229204a74ae79374bfc68ef3117f";
+const API_KEY = "f90bff5221f04569b84f29fa3e7f4c17";
 
 export const addRecipesToSavedRecipes = (savedRecipes, newRecipe) => {
     if(savedRecipes.includes(newRecipe)) return savedRecipes;

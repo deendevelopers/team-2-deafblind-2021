@@ -10,12 +10,15 @@ const RecipeSearchPage = () => {
     return (
         <section className="recipesearchpage-section">
             <RecipeSearch />
-            <section className="search-results-section">
-                <h2 className="section-heading">Search Results</h2>
-                <div className="recipe-search-articles-container">
-                    { searchResults && searchResults.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />) }
-                </div>
-            </section>
+            { searchResults.length!==0 && (
+                <section className="search-results-section">
+                    <h2 className="section-heading">Search Results</h2>
+                    <div className="recipe-search-articles-container">
+                        {searchResults.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} />)} 
+                    </div> 
+                </section>
+                ) 
+            }
         </section>
     )
 }
