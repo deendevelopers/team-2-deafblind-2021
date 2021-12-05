@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../../components/header/Header";
+
 import "./HomePage.scss";
 import RandomRecipePage from "../random-recipe/RandomRecipePage";
 import RecipeSearchPage from "../recipe-search/RecipeSearchPage";
@@ -14,5 +15,6 @@ const HomePage = ({ history }) => (
         </section>
     </ React.Fragment>
 )
+
 
 export default HomePage;

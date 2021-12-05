@@ -6,6 +6,7 @@ import RecipeCard from "../../components/recipe-card/RecipeCard";
 
 
 const RecipeSearchPage = () => {
+
     const searchResults = useSelector(state => state.recipes.searchResults);
 
     return (
@@ -20,5 +21,6 @@ const RecipeSearchPage = () => {
         </section>
     )
 }
+
 
 export default RecipeSearchPage;
