@@ -4,11 +4,9 @@ import {
   Center,
   Heading,
   Button,
-  Text,
-  Stack,
-  Avatar,
+ 
   Flex,
-  useColorModeValue,
+ 
 } from "@chakra-ui/react";
 
 export const Vertical = ({ steps }) => {
