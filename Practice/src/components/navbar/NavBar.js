@@ -56,6 +56,7 @@ export default function NavBar() {
       </Box>
     </>
   );
+
 }
 
 // const NavBar = () => {

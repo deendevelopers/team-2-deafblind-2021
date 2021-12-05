@@ -122,14 +122,6 @@ const deleteRecipeIdToUserSavedRecipesIdsInFirebase = async (userId, recipeId) =
     }
 }
 
-// const getSavedRecipesForUserFromFirebase = async (userId) => {
-//     if(!userId) return;
-//     const userRef = doc(db, "users", userId);
-//     const userSnap = await getDoc(userRef);
-//     const { savedRecipes } = userSnap.data();
-//     return savedRecipes;
-// }
-
 const addRecipeToFirebase = async (recipe) => {
     console.log("Adding recipe to Firebase", recipe);
     if(!recipe) return;

@@ -71,8 +71,6 @@ const Register = () => {
                 <input name="confirmPassword" id="confirmPasswordForRegister" type="password" value={formInputs.confirmPassword} onChange={handleChange}/>
 
                 <CustomButton type="submit">Register</CustomButton>
-                {/* <input type="submit" value="Submit" /> */}
-
             </form>
         </section>
     )

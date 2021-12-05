@@ -65,7 +65,6 @@ const RandomRecipePage = () => {
     // console.log({currentRecipe});
     return (
         <React.Fragment>
-            {/* <Header title="You are on the Random Recipe generator page" message="Here you can generate a random recipe and have a fun adventure cooking it!" /> */}
             <main>
                 { !searchAgain ?
                     <React.Fragment>

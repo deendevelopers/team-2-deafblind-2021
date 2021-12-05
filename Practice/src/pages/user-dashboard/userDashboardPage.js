@@ -38,16 +38,14 @@ const UserDashboardPage = () => {
         <React.Fragment>
             <Header title="Welcome to your dashboard" userName={displayName} />
             <main className="user-dashboard-page-main">
-                {/* <p>Welcome back {userName}! We are very happy to see you!</p> */}
                 <CustomButton onClick={handleSignOut}>Sign-Out</CustomButton>
-                {/* { savedRecipesIds && savedRecipesIds.map( recipeId => <p key={recipeId}>{recipeId}</p>) } */}
                 <section className="recipe-cards-section">
                     <h2>Your Saved Recipes</h2>
                     <div className="recipe-cards-container">
-                        { savedRecipesData && savedRecipesData.map(recipe => <RecipeCard id={recipe.id} title={recipe.title} imageUrl={recipe.image} vegan={recipe.vegan} vegetarian={recipe.vegetarian} glutenFree={recipe.glutenFree} diaryFree={recipe.diaryFree}/>) }
+                        { savedRecipesData && savedRecipesData.map(recipe => <RecipeCard key={recipe.id} recipe={recipe} isDashboard />) }
                     </div>
                 </section>
-                { adminIds.includes(currentUserId) && <CustomButton onClick={() => history.push("/add-recipe")}>Add Custom Recipe</CustomButton> }
+                { adminIds.includes(currentUserId) && <CustomButton id="add-custom-recipe-button" onClick={() => history.push("/add-recipe")}>Add Custom Recipe</CustomButton> }
             </main>
         </React.Fragment>
     )
