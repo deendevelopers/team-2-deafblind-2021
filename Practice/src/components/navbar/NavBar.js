@@ -3,16 +3,7 @@ import { Link } from "react-router-dom";
 import "./NavBar.scss";
 import { useSelector } from "react-redux";
 import { AiOutlineUser } from "react-icons/ai";
-import {
-  Box,
-  Flex,
-  Spacer,
-  Button,
-  Text,
-  Heading,
-  useColorModeValue,
-  Icon,
-} from "@chakra-ui/react";
+import { Box, Flex, Spacer, Button, Text, Icon } from "@chakra-ui/react";
 
 export default function NavBar() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -26,7 +17,7 @@ export default function NavBar() {
           <Link to="/">
             <Flex justifyContent={"space-between"} alignItems={"center"}>
               <Box pr="4" fontSize="lg">
-                &#127812;{" "}
+                &#127812;
               </Box>
               <Spacer />
               <Box>
@@ -36,7 +27,7 @@ export default function NavBar() {
               </Box>
             </Flex>
           </Link>
-          {/* </HStack> */}
+
           <Flex alignItems={"center"}>
             {currentUser ? (
               <Button
