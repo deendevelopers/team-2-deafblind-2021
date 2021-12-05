@@ -30,52 +30,36 @@ export default function NavBar() {
 
           <Flex alignItems={"center"}>
             {currentUser ? (
-              <Button
-                variant={"solid"}
-                bg="#fff"
-                color="#2D3748"
-                size={"lg"}
-                mr={4}
-                rightIcon={<UserIcon />}
-              >
-                Profile
-              </Button>
+              <Link to="/dashboard">
+                <Button
+                  variant={"solid"}
+                  bg="#fff"
+                  color="#2D3748"
+                  size={"lg"}
+                  mr={4}
+                  rightIcon={<UserIcon />}
+                >
+                  Profile
+                </Button>
+              </Link>
             ) : (
-              <Button
-                variant={"solid"}
-                bg="#fff"
-                color="#2D3748"
-                size={"lg"}
-                rightIcon={<UserIcon />}
-              >
-                Sign-In
-              </Button>
+              <Link to="/sign-in">
+                <Button
+                  variant={"solid"}
+                  bg="#fff"
+                  color="#2D3748"
+                  size={"lg"}
+                  rightIcon={<UserIcon />}
+                >
+                  Sign-In
+                </Button>
+              </Link>
             )}
           </Flex>
         </Flex>
       </Box>
     </>
   );
+
 }
 
-// const NavBar = () => {
-//     const currentUser = useSelector(state => state.user.currentUser);
-
-//     return(
-//         <nav className="navbar">
-//
-//             <ul>
-//                 {/* <li><Link to="/">Home</Link></li> */}
-//                 <li><a href="/">Home</a></li>
-//                 {/* <li><Link to="/random-recipe">Random Recipe</Link></li> */}
-//                 { currentUser ?
-//                 <li><Link to="/dashboard">Account</Link></li>
-//                     :
-//                 <li><Link to="/sign-in">Sign-In</Link></li>
-//                 }
-//             </ ul>
-//         </nav>
-//     )
-// }
-
-// export default NavBar;

@@ -5,7 +5,6 @@ import "./App.scss";
 import { ChakraProvider } from "@chakra-ui/react";
 
 // import RecipeSearchPage from "./pages/recipe-search/RecipeSearchPage";
-import RandomRecipePage from "./pages/random-recipe/RandomRecipePage";
 import NavBar from "./components/navbar/NavBar";
 import UserDashboardPage from "./pages/user-dashboard/userDashboardPage";
 import SignInPage from "./pages/sign-in/SignInPage";
@@ -59,28 +58,20 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <ChakraProvider>
-      <React.Fragment>
-        <NavBar />
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          {/* <Route exact path="/recipe-search" component={RecipeSearchPage} /> */}
-          {/* <Route path="/random-recipe" component={RandomRecipePage} /> */}
-          <Route
-            path="/dashboard"
-            render={() =>
-              !currentUser ? <Redirect to="/" /> : <UserDashboardPage />
-            }
-          />
-          <Route
-            path="/sign-in"
-            render={() => (currentUser ? <Redirect to="/" /> : <SignInPage />)}
-          />
-          <Route path="/recipes/:recipeId" component={RecipeDetailPage} />
-          <Route path="/add-recipe" component={AddRecipePage} />
-        </Switch>
-      </React.Fragment>
-    </ChakraProvider>
+
+             <ChakraProvider>
+    <React.Fragment>
+      <NavBar />
+      <Switch>
+        <Route exact path="/" component={HomePage}/>
+        <Route path="/dashboard" render={ () => !currentUser ? <Redirect to="/" /> : <UserDashboardPage /> } />
+        <Route path="/sign-in" render={ () => currentUser ? <Redirect to="/" /> : <SignInPage /> } />
+        <Route path="/recipes/:recipeId" component={RecipeDetailPage} />
+        <Route path="/add-recipe" component={AddRecipePage} />
+      </Switch>
+    </ React.Fragment>
+</ChakraProvider>
+
   );
 };
 
