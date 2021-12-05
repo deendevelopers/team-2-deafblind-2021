@@ -16,7 +16,7 @@ const RecipeSearch = () => {
   };
 
   return (
-    <InputGroup mt={4}>
+    <InputGroup mt={4} bg="#fffgit">
       <Input
         size="lg"
         placeholder="Find a Recipe"

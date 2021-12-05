@@ -7,7 +7,7 @@ import RandomRecipePage from "../random-recipe/RandomRecipePage";
 import RecipeSearchPage from "../recipe-search/RecipeSearchPage";
 
 const HomePage = ({ history }) => (
-  <Box p={4} w="100%">
+  <Box p={4} w="100%" bg="green.100">
     <Flex direction="column">
       <Header
         title="Search it, dish it, plate it"
