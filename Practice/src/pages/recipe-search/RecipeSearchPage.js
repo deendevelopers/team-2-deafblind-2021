@@ -5,8 +5,7 @@ import { useSelector } from "react-redux";
 import RecipeCard from "../../components/recipe-card/RecipeCard";
 
 const RecipeSearchPage = () => {
-    const searchResults = useSelector(state => state.recipes.searchResults);
-
+  const searchResults = useSelector((state) => state.recipes.searchResults);
     return (
         <section className="recipesearchpage-section">
             <RecipeSearch />
@@ -22,5 +21,6 @@ const RecipeSearchPage = () => {
         </section>
     )
 }
+
 
 export default RecipeSearchPage;

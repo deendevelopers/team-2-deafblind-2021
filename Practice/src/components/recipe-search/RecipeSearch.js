@@ -1,34 +1,51 @@
 import React, { useState } from "react";
-import CustomButton from "../custom-button/CustomButton";
+
 import "./RecipeSearch.scss";
 import { useDispatch } from "react-redux";
 import { searchForRecipes } from "../../redux/recipes/recipesActions";
+import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
 
 const diets = ["vegetarian", "vegan", "gluten free", "ketogenic", "pescetarian"];
 const allergies = ["dairy", "shellfish", "peanut"];
 const mealTypes = ["main course", "dessert", "appetizer", "salad", "breakfast", "soup", "snack"];
 
 const RecipeSearch = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [ dietTerm, setDietTerm ] = useState("");
+  const [ allergiesTerm, setAllergiesTerm ] = useState("");
+  const [ mealTypesTerm, setMealTypesTerm ] = useState("");
 
-    const [ searchTerm, setSearchTerm ] = useState("");
-    const [ dietTerm, setDietTerm ] = useState("");
-    const [ allergiesTerm, setAllergiesTerm ] = useState("");
-    const [ mealTypesTerm, setMealTypesTerm ] = useState("");
+  const [ showAdvancedSearch, setShowAdvancedSearch ] = useState(false);
+  const dispatch = useDispatch();
 
-    const [ showAdvancedSearch, setShowAdvancedSearch ] = useState(false);
-    const dispatch = useDispatch();
-
-    const handleSearch = () => {
-        console.log(searchTerm);
-        dispatch(searchForRecipes({ searchQuery: searchTerm, dietTerm, allergiesTerm, mealTypesTerm }))
-
-
-    }
+  const handleSearch = () => {
+      console.log(searchTerm);
+      dispatch(searchForRecipes({ searchQuery: searchTerm, dietTerm, allergiesTerm, mealTypesTerm }))
+  }
 
     return (
         <React.Fragment>
-            <input id="recipe-search-input" type="text" name="recipe-search" placeholder="Click here to search for a recipe of your liking" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
-            <CustomButton onClick={handleSearch}>Search Recipe</ CustomButton>
+          <InputGroup mt={4} bg="#fffgit">
+            <Input
+              size="lg"
+              type="text"
+              placeholder="Click here to search for a recipe of your liking"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <InputRightElement width="4.5rem" h="100%">
+              <Button
+                size="lg"
+                borderLeftRadius="0"
+                bg="#285E61"
+                color="#fff"
+                h="100%"
+                onClick={handleSearch}
+              >
+                Search
+              </Button>
+            </InputRightElement>
+            </InputGroup>
             { !showAdvancedSearch && <CustomButton onClick={() => setShowAdvancedSearch(true)}>Advanced Search</CustomButton>}
             {showAdvancedSearch && (
                 <div>
