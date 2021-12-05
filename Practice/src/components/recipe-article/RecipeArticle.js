@@ -173,9 +173,8 @@ const RecipeArticle = ({
         </section>
         <Center>
           <Button>Start Cooking</Button>
-          <Vertical steps={steps} />
         </Center>
-
+        {/* <Vertical steps={steps} /> */}
         {/* <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
           <Avatar
             src={"https://avatars0.githubusercontent.com/u/1164541?v=4"}
