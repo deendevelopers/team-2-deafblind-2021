@@ -1,6 +1,6 @@
 import React from "react";
 import Register from "../../components/register/Register";
-import LogIn from "../../components/log-in/LogIn";
+import LogIn from "../../components/log-in/Login";
 import Header from "../../components/header/Header";
 import "./SignInPage.scss";
 

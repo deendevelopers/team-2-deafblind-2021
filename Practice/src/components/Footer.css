@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.footer {
+    background-color:  #564A40;
+    padding: 40px 0px;
+    color: #F3F0D7;
+  }
+  
+  .footertext {
+    font-size:12px;
+    font-family: Bebas, sans-serif;
+    font-weight: bold;
+    display: flex;
+    justify-content: right;
+    margin-right: 50px;
+  }
+  

@@ -13,12 +13,17 @@ const NavBar = () => {
                 <p>Recipe Mate</p>
             </div>
             <ul>
-                <li><Link to="/">Home</Link></li>
+                <li><Link to="/">HOME</Link></li>
+
+                <li><Link to="/chatforum">CHATFORUM</Link></li>
+
                 {/* <li><Link to="/random-recipe">Random Recipe</Link></li> */}
                 { currentUser ? 
-                <li><Link to="/dashboard">Account</Link></li>
+                <li><Link to="/dashboard">ACCOUNT</Link></li>
                     :
-                <li><Link to="/sign-in">Sign-In</Link></li>
+                <li><Link to="/sign-in">SIGN-IN</Link></li>
+
+
                 }
             </ ul>
         </nav>

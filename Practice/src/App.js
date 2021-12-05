@@ -5,7 +5,9 @@ import './App.scss';
 // import RecipeSearchPage from "./pages/recipe-search/RecipeSearchPage";
 import RandomRecipePage from "./pages/random-recipe/RandomRecipePage";
 import NavBar from "./components/navbar/NavBar";
+import Footer from "./components/Footer";
 import UserDashboardPage from "./pages/user-dashboard/UserDashboardPage";
+import ChatForum from "./pages/Chatforum";
 import SignInPage from "./pages/sign-in/SignInPage";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
@@ -58,6 +60,7 @@ const App = () => {
   return (
     <React.Fragment>
       <NavBar />
+      <Footer />
       <Switch>
         <Route exact path="/" component={HomePage}/>
         {/* <Route exact path="/recipe-search" component={RecipeSearchPage} /> */}
@@ -65,6 +68,7 @@ const App = () => {
         <Route path="/dashboard" render={ () => !currentUser ? <Redirect to="/" /> : <UserDashboardPage /> } />
         <Route path="/sign-in" render={ () => currentUser ? <Redirect to="/" /> : <SignInPage /> } />
         <Route path="/recipes/:recipeId" component={RecipeDetailPage} />
+        <Route path="/chatforum" component={ChatForum} />
       </Switch>
     </ React.Fragment>
   );

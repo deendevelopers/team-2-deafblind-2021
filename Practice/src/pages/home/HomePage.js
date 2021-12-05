@@ -5,8 +5,13 @@ import "./HomePage.scss";
 import RandomRecipePage from "../random-recipe/RandomRecipePage";
 
 const HomePage = ({ history }) => (
+    <div className="background">
     <React.Fragment>
-        <Header title="Welcome to the Recipe Mate" message="We hope you have an amazing cooking experience together!" />
+    {/* <div className="background"> */}
+        <Header title="WECLOME TO RECIPE MATE"/> 
+
+        <h1 className="slogan">Search it, dish it, plate it! Everyone needs a Recipe Mate</h1>
+
         {/* <div>
             Click here to go to the recipe search page where you can search for recipes with your desired ingredients list
             <button onClick={() => history.push("./recipe-search")} >Recipe Search</button>
@@ -17,6 +22,7 @@ const HomePage = ({ history }) => (
             {/* <CustomButton onClick={() => history.push("./random-recipe")} >Random Recipe Generator</CustomButton> */}
         </section>
     </ React.Fragment>
+    </div>
 )
 
 export default HomePage;
