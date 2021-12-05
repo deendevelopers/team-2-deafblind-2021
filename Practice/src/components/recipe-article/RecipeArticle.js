@@ -84,7 +84,30 @@ import {
 // };
 
 // export default RecipeArticle;
-export default function RecipeArticle() {
+const RecipeArticle = ({
+  currentRecipe: {
+    title,
+    summary,
+    image,
+    readyInMinutes,
+    vegan,
+    vegetarian,
+    glutenFree,
+    dairyFree,
+    extendedIngredients,
+    // analyzedInstructions: [{ steps }],
+  },
+}) => {
+  // console.log(title, extendedIngredients);
+
+  //   const dietInfo = {
+  //     vegetarian: vegetarian ? "Yes" : "No",
+  //     vegan: vegan ? "Yes" : "No",
+  //     glutenFree: glutenFree ? "Yes" : "No",
+  //     dairyFree: dairyFree ? "Yes" : "No",
+  //   };
+
+  //   const uniqueIngredients = getUniqueIngredients(extendedIngredients);
   return (
     <Center py={6} px={4}>
       <Box
@@ -104,12 +127,7 @@ export default function RecipeArticle() {
           mb={6}
           pos={"relative"}
         >
-          <img
-            src={
-              "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-            }
-            // layout={"fill"}
-          />
+          <img src={image} alt={`The ${title} dish shown on a plate cooked`} />
         </Box>
         <Stack>
           <Heading
@@ -139,4 +157,5 @@ export default function RecipeArticle() {
       </Box>
     </Center>
   );
-}
+};
+export default RecipeArticle;
