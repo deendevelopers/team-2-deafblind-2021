@@ -1,6 +1,8 @@
 import React from "react";
 import { getUniqueIngredients } from "../../components/random-search/helperFunctions";
 import "./RecipeArticle.scss";
+import Vertical from "../../components/stepper/Stepper";
+import { Button } from "@chakra-ui/button";
 import {
   Box,
   Center,
@@ -96,11 +98,9 @@ const RecipeArticle = ({
     glutenFree,
     dairyFree,
     extendedIngredients,
-    // analyzedInstructions: [{ steps }],
+    analyzedInstructions,
   },
 }) => {
-  // console.log(title, extendedIngredients);
-
   const dietInfo = {
     Vegetarian: vegetarian ? "Yes" : "No",
     Vegan: vegan ? "Yes" : "No",
@@ -109,6 +109,9 @@ const RecipeArticle = ({
   };
 
   const uniqueIngredients = getUniqueIngredients(extendedIngredients);
+  const steps = analyzedInstructions[0].steps;
+  console.log(analyzedInstructions[0].steps);
+
   return (
     <Center py={6} px={4}>
       <Box
@@ -126,7 +129,7 @@ const RecipeArticle = ({
           //   bg={"gray.100"}
           mt={-6}
           mx={-6}
-          mb={4}
+          mb={6}
           pos={"relative"}
         >
           <img src={image} alt={`The ${title} dish shown on a plate cooked`} />
@@ -168,6 +171,11 @@ const RecipeArticle = ({
             </ul>
           </Stack>
         </section>
+        <Center>
+          <Button>Start Cooking</Button>
+          <Vertical steps={steps} />
+        </Center>
+
         {/* <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
           <Avatar
             src={"https://avatars0.githubusercontent.com/u/1164541?v=4"}

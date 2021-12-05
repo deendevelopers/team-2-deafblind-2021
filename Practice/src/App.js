@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./pages/home/HomePage";
 import "./App.scss";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { StepsStyleConfig as Steps } from "chakra-ui-steps";
 
 // import RecipeSearchPage from "./pages/recipe-search/RecipeSearchPage";
 import NavBar from "./components/navbar/NavBar";
@@ -19,7 +20,11 @@ import AddRecipePage from "./pages/add-recipe/AddRecipePage";
 const App = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user.currentUser);
-
+  const theme = extendTheme({
+    components: {
+      Steps,
+    },
+  });
   useEffect(() => {
     console.log("Ran the USEEFFECT in App.js");
     const unsubscribeFromAuth = onAuthStateChanged(auth, async (user) => {
@@ -58,20 +63,26 @@ const App = () => {
   }, [dispatch]);
 
   return (
-
-             <ChakraProvider>
-    <React.Fragment>
-      <NavBar />
-      <Switch>
-        <Route exact path="/" component={HomePage}/>
-        <Route path="/dashboard" render={ () => !currentUser ? <Redirect to="/" /> : <UserDashboardPage /> } />
-        <Route path="/sign-in" render={ () => currentUser ? <Redirect to="/" /> : <SignInPage /> } />
-        <Route path="/recipes/:recipeId" component={RecipeDetailPage} />
-        <Route path="/add-recipe" component={AddRecipePage} />
-      </Switch>
-    </ React.Fragment>
-</ChakraProvider>
-
+    <ChakraProvider theme={theme}>
+      <React.Fragment>
+        <NavBar />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route
+            path="/dashboard"
+            render={() =>
+              !currentUser ? <Redirect to="/" /> : <UserDashboardPage />
+            }
+          />
+          <Route
+            path="/sign-in"
+            render={() => (currentUser ? <Redirect to="/" /> : <SignInPage />)}
+          />
+          <Route path="/recipes/:recipeId" component={RecipeDetailPage} />
+          <Route path="/add-recipe" component={AddRecipePage} />
+        </Switch>
+      </React.Fragment>
+    </ChakraProvider>
   );
 };
 
