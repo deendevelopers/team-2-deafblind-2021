@@ -21,6 +21,7 @@ const RecipeSearch = () => {
         size="lg"
         placeholder="Find a Recipe"
         value={searchTerm}
+        bg="#fff"
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       {/* <input id="recipe-search-input" type="text" name="recipe-search" placeholder="Click here to search for a recipe of your liking"  /> */}
@@ -32,6 +33,16 @@ const RecipeSearch = () => {
           color="#fff"
           h="100%"
           onClick={handleSearch}
+          _active={{
+            bg: "teal.700",
+            transform: "scale(0.98)",
+            borderColor: "#bec3c9",
+          }}
+          _hover={{
+            bg: "teal.600",
+            transform: "scale(0.98)",
+            borderColor: "#bec3c9",
+          }}
         >
           Search
         </Button>
