@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-
 import "./RecipeSearch.scss";
 import { useDispatch } from "react-redux";
 import { searchForRecipes } from "../../redux/recipes/recipesActions";
 import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
+import CustomButton from "../custom-button/CustomButton";
 
 const diets = ["vegetarian", "vegan", "gluten free", "ketogenic", "pescetarian"];
 const allergies = ["dairy", "shellfish", "peanut"];
@@ -28,34 +28,34 @@ const RecipeSearch = () => {
         <React.Fragment>
           <InputGroup mt={4} bg="#fffgit">
             <Input
-              size="lg"
-              type="text"
-  bg="#fff"
-              placeholder="Click here to search for a recipe of your liking"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+                size="lg"
+                type="text"
+                bg="#fff"
+                placeholder="Click here to search for a recipe of your liking"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
             />
             <InputRightElement width="4.5rem" h="100%">
               <Button
-          size="lg"
-          borderLeftRadius="0"
-          bg="#285E61"
-          color="#fff"
-          h="100%"
-          onClick={handleSearch}
-          _active={{
-            bg: "teal.700",
-            transform: "scale(0.98)",
-            borderColor: "#bec3c9",
-          }}
-          _hover={{
-            bg: "teal.600",
-            transform: "scale(0.98)",
-            borderColor: "#bec3c9",
-          }}
-        >
-          Search
-        </Button>
+                size="lg"
+                borderLeftRadius="0"
+                bg="#285E61"
+                color="#fff"
+                h="100%"
+                onClick={handleSearch}
+                _active={{
+                    bg: "teal.700",
+                    transform: "scale(0.98)",
+                    borderColor: "#bec3c9",
+                }}
+                _hover={{
+                    bg: "teal.600",
+                    transform: "scale(0.98)",
+                    borderColor: "#bec3c9",
+                }}
+                >
+                    Search
+                </Button>
             </InputRightElement>
             </InputGroup>
             { !showAdvancedSearch && <CustomButton onClick={() => setShowAdvancedSearch(true)}>Advanced Search</CustomButton>}

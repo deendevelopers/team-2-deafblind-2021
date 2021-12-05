@@ -10,6 +10,8 @@ const RecipeCard = ({ recipe, isDashboard }) => {
     const { id, title, image, vegetarian, vegan, glutenFree, dairyFree } = recipe;
     const history = useHistory();
     const currentUser = useSelector(state => state.user.currentUser);
+    const fullRecipeData = useSelector(state => state.recipes.savedRecipes.find(recipe => recipe.id == id));
+    console.log({fullRecipeData});
     const dispatch = useDispatch();
 
     const dietInfo = {
