@@ -4,6 +4,7 @@ import "./RecipeSearch.scss";
 import { useDispatch } from "react-redux";
 import { searchForRecipes } from "../../redux/recipes/recipesActions";
 import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
+import CustomButton from "../custom-button/CustomButton";
 
 const diets = ["vegetarian", "vegan", "gluten free", "ketogenic", "pescetarian"];
 const allergies = ["dairy", "shellfish", "peanut"];
