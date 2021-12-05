@@ -7,50 +7,57 @@ import {
   Box,
   Flex,
   Spacer,
-  Avatar,
-  HStack,
-  IconButton,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
   Heading,
-  MenuItem,
-  MenuDivider,
-  useDisclosure,
   useColorModeValue,
-  Stack,
   Icon,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon, AddIcon } from "@chakra-ui/icons";
-
-const Links = ["Dashboard", "Projects", "Team"];
 
 export default function NavBar() {
+  const currentUser = useSelector((state) => state.user.currentUser);
+
   const UserIcon = (props) => <Icon as={AiOutlineUser} />;
   return (
     <>
-      <Box w="100%" bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box w="100%" bg="green.100" px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           {/* <HStack spacing={9} alignItems={"center"}> */}
           <Link to="/">
-            <Flex justifyContent={"space-between"}>
-              <Box pr="4">&#127812; </Box>
+            <Flex justifyContent={"space-between"} alignItems={"center"}>
+              <Box pr="4" fontSize="lg">
+                &#127812;{" "}
+              </Box>
               <Spacer />
-              <Heading size="md">Recipe Mate</Heading>
+              <Heading size="lg" color="green.900">
+                Recipe Mate
+              </Heading>
             </Flex>
           </Link>
           {/* </HStack> */}
           <Flex alignItems={"center"}>
-            <Button
-              variant={"solid"}
-              colorScheme={"teal"}
-              size={"md"}
-              mr={4}
-              rightIcon={<UserIcon />}
-            >
-              Profile
-            </Button>
+            {currentUser ? (
+              <Button
+                variant={"solid"}
+                bg="#fff"
+                color="#2D3748"
+                size={"lg"}
+                mr={4}
+                rightIcon={<UserIcon />}
+              >
+                Profile
+              </Button>
+            ) : (
+              <Button
+                variant={"solid"}
+                bg="#fff"
+                color="#2D3748"
+                size={"lg"}
+                mr={4}
+                rightIcon={<UserIcon />}
+              >
+                Sign-In
+              </Button>
+            )}
           </Flex>
         </Flex>
       </Box>
@@ -63,10 +70,7 @@ export default function NavBar() {
 
 //     return(
 //         <nav className="navbar">
-//             <div className="logo-container">
-//                 <p>&#127812;</p>
-//                 <p>Recipe Mate</p>
-//             </div>
+//
 //             <ul>
 //                 {/* <li><Link to="/">Home</Link></li> */}
 //                 <li><a href="/">Home</a></li>

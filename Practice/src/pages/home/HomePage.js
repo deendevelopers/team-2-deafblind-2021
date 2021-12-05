@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "../../components/header/Header";
-import CustomButton from "../../components/custom-button/CustomButton";
+// import CustomButton from "../../components/custom-button/CustomButton";
 import "./HomePage.scss";
-import RandomRecipePage from "../random-recipe/RandomRecipePage";
+// import RandomRecipePage from "../random-recipe/RandomRecipePage";
 import RecipeSearchPage from "../recipe-search/RecipeSearchPage";
 
 const HomePage = ({ history }) => (
