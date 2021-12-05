@@ -8,6 +8,7 @@ import {
   Flex,
   Spacer,
   Button,
+  Text,
   Heading,
   useColorModeValue,
   Icon,
@@ -28,9 +29,11 @@ export default function NavBar() {
                 &#127812;{" "}
               </Box>
               <Spacer />
-              <Heading size="lg" color="green.900">
-                Recipe Mate
-              </Heading>
+              <Box>
+                <Text fontSize="2xl" fontWeight="bold" color="green.900">
+                  Recipe Mate
+                </Text>
+              </Box>
             </Flex>
           </Link>
           {/* </HStack> */}
