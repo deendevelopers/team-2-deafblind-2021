@@ -15,7 +15,7 @@ const RecipeSearchPage = () => {
       <section>
         {searchResults.length !== 0 && (
           <Box>
-            <Heading as="h3">Search Results</Heading>
+            <Heading as="h3" textAlign="center" fontSize={"2xl"}>Search Results</Heading>
             <Flex direction="column">
               {searchResults.map((recipe) => (
                 <RecipeCard key={recipe.id} recipe={recipe} />
