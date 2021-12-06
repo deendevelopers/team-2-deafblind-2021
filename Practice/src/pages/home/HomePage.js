@@ -3,7 +3,6 @@ import Header from "../../components/header/Header";
 import { Box, Flex } from "@chakra-ui/layout";
 
 import "./HomePage.scss";
-import RandomRecipePage from "../random-recipe/RandomRecipePage";
 import RecipeSearchPage from "../recipe-search/RecipeSearchPage";
 import RecipeSearch from "../../components/recipe-search/RecipeSearch";
 

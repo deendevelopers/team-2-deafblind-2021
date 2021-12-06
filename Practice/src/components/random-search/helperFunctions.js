@@ -128,7 +128,10 @@ export function generateCustomEndPoint(customRandomSearch) {
 
 export function getUniqueIngredients(extendedIngredients) {
   const ingredientsNames = extendedIngredients.map(
-    (ingredient) => ingredient.name
+    (ingredient) =>
+      ingredient.measures.metric.amount +
+      ` ${ingredient.measures.metric.unitShort}` +
+      ` ${ingredient.originalName}`
   );
   //Remove duplicates:
   const uniqueIngredients = [...new Set(ingredientsNames)];

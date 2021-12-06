@@ -10,7 +10,6 @@ import {
   Button,
   Center,
 } from "@chakra-ui/react";
-import CustomButton from "../custom-button/CustomButton";
 
 const diets = [
   "vegetarian",

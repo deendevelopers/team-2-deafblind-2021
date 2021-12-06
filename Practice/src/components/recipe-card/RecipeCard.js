@@ -1,7 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
 import { deleteRecipeIdToUserSavedRecipesIds } from "../../redux/user/userActions";
-import CustomButton from "../custom-button/CustomButton";
 import "./RecipeCard.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentRecipeWithId } from "../../redux/recipes/recipesActions";
@@ -13,7 +12,6 @@ import {
   Text,
   Stack,
   Button,
-  Avatar,
   useColorModeValue,
 } from "@chakra-ui/react";
 // const RecipeCard = ({ recipe, isDashboard }) => {
@@ -81,11 +79,11 @@ import {
 
 // export default RecipeCard;
 export default function RecipeCard({ recipe, isDashboard }) {
-  const { id, title, image, vegetarian, vegan, glutenFree, dairyFree } = recipe;
+  const { id, title, image } = recipe;
   const history = useHistory();
   const currentUser = useSelector((state) => state.user.currentUser);
   const fullRecipeData = useSelector((state) =>
-    state.recipes.savedRecipes.find((recipe) => recipe.id == id)
+    state.recipes.savedRecipes.find((recipe) => recipe.id === id)
   );
   console.log({ fullRecipeData });
 

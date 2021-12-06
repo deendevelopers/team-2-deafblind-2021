@@ -8,7 +8,7 @@ import { getSavedRecipes } from "../../redux/recipes/recipesActions";
 import RecipeCard from "../../components/recipe-card/RecipeCard";
 import "./UserDashboardPage.scss";
 import { useHistory } from "react-router";
-import { Heading, Center, Box, Flex } from "@chakra-ui/layout";
+import { Heading, Box, Flex } from "@chakra-ui/layout";
 const adminIds = ["pdov9C9v0MO7y8GnGtJdf1SMjy42"];
 
 const UserDashboardPage = () => {
