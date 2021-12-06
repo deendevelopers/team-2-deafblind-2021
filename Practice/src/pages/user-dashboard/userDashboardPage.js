@@ -8,7 +8,7 @@ import { getSavedRecipes } from "../../redux/recipes/recipesActions";
 import RecipeCard from "../../components/recipe-card/RecipeCard";
 import "./UserDashboardPage.scss";
 import { useHistory } from "react-router";
-import { Heading, Center, Box } from "@chakra-ui/layout";
+import { Heading, Center, Box, Flex } from "@chakra-ui/layout";
 const adminIds = ["pdov9C9v0MO7y8GnGtJdf1SMjy42"];
 
 const UserDashboardPage = () => {
@@ -40,15 +40,15 @@ const UserDashboardPage = () => {
       <Header title="Welcome to your dashboard" userName={displayName} />
       <main className="user-dashboard-page-main">
         <CustomButton onClick={handleSignOut}>Sign-Out</CustomButton>
-        <section className="recipe-cards-section">
-          <Box>
+        <section>
+          <Box px={4}>
             <Heading as="h3">Your Saved Recipes</Heading>
-            <Center>
+            <Flex direction="column">
               {savedRecipesData &&
                 savedRecipesData.map((recipe) => (
                   <RecipeCard key={recipe.id} recipe={recipe} isDashboard />
                 ))}
-            </Center>
+            </Flex>
           </Box>
         </section>
         {adminIds.includes(currentUserId) && (
