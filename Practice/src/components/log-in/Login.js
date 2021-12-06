@@ -2,10 +2,18 @@ import { signInWithEmailAndPassword } from "@firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../../firebase/firebaseUtils";
 import CustomButton from "../custom-button/CustomButton";
-import "./LogIn.scss";
+// import "./LogIn.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { addRecipe } from "../../redux/recipes/recipesActions";
 import { addRecipeIdToUserSavedRecipesIds } from "../../redux/user/userActions";
+import {
+    FormControl,
+    FormLabel,
+    FormErrorMessage,
+    FormHelperText,
+    Input,
+    Button
+  } from '@chakra-ui/react'
 
 const Login = () => {
 
@@ -53,16 +61,37 @@ const Login = () => {
             <h2>Login</h2>
             <form className="login-form" onSubmit={handleSubmit}>
 
-            <label htmlFor="emailForLogin">Email: </label>
-            <input name="email" id="emailForLogin" type="email" value={formInputs.email} onChange={handleChange} />
+            <FormControl id='email'>
+                <FormLabel>Email address</FormLabel>
+                <Input name="email" id="emailForLogin" type="email" value={formInputs.email} onChange={handleChange}/>
+            </FormControl>
 
-            <label htmlFor="passwordForLogin">Password: </label>
-            <input name="password" id="passwordForLogin" type="password" value={formInputs.password} onChange={handleChange}/>
+            <FormControl id='password'>
+                <FormLabel>Password</FormLabel>
+                <Input name="password" id="passwordForLogin" type="password" value={formInputs.password} onChange={handleChange}/>
+            </FormControl>
 
-            {/* <input type="submit" value="Submit" /> */}
-            <CustomButton type="submit">Log-In</CustomButton>
-
-            </form>
+            <Button
+                type="submit"
+                size="lg"
+                borderLeftRadius="0"
+                bg="#285E61"
+                color="#fff"
+                h="100%"
+                _active={{
+                    bg: "teal.700",
+                    transform: "scale(0.98)",
+                    borderColor: "#bec3c9",
+                }}
+                _hover={{
+                    bg: "teal.600",
+                    transform: "scale(0.98)",
+                    borderColor: "#bec3c9",
+                }}
+                >
+                    Log-In
+                </Button>
+            </ form>
         </section>
     )
 }

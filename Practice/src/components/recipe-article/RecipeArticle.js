@@ -13,7 +13,6 @@ import {
   Image,
   useColorModeValue,
 } from "@chakra-ui/react";
-import VerticalLinearStepper from "../mui-vertical-stepper/MUIVerticalStepper";
 
 const RecipeArticle = ({
   currentRecipe: {
@@ -107,7 +106,6 @@ const RecipeArticle = ({
           <Button>Start Cooking</Button>
         </Center>
         <Vertical steps={steps} />
-
       </Box>
     </Center>
   );
