@@ -9,75 +9,13 @@ import {
   Center,
   Heading,
   Image,
+  Flex,
   Text,
   Stack,
   Button,
   useColorModeValue,
 } from "@chakra-ui/react";
-// const RecipeCard = ({ recipe, isDashboard }) => {
-//   const { id, title, image, vegetarian, vegan, glutenFree, dairyFree } = recipe;
-//   const history = useHistory();
-//   const currentUser = useSelector((state) => state.user.currentUser);
-//   const dispatch = useDispatch();
 
-//   const dietInfo = {
-//     vegetarian: vegetarian ? "Yes" : "No",
-//     vegan: vegan ? "Yes" : "No",
-//     glutenFree: glutenFree ? "Yes" : "No",
-//     dairyFree: dairyFree ? "Yes" : "No",
-//   };
-
-//   const handleDelete = () => {
-//     console.log({ recipeIdToDelete: id });
-//     dispatch(
-//       deleteRecipeIdToUserSavedRecipesIds({
-//         userId: currentUser.id,
-//         recipeId: id,
-//       })
-//     );
-//   };
-
-//   const handleMoreDetailsClick = () => {
-//     dispatch(setCurrentRecipeWithId(id));
-//     history.push(`/recipes/${id}`);
-//   };
-
-//   return (
-//     <article className="recipe-card-article">
-//       <h3>{title}</h3>
-//       <img src={image} alt={`${title} Dish`} />
-//       {/* <ul>
-//         {Object.keys(dietInfo).map((dietMetric) => (
-//           <li key={dietMetric}>
-//             {dietMetric}: {dietInfo[dietMetric]}
-//           </li>
-//         ))}
-//       </ul> */}
-//       <div className="button-container">
-//         <CustomButton onClick={handleMoreDetailsClick}>
-//           More Details
-//         </CustomButton>
-//         {isDashboard && (
-//           <CustomButton
-//             onClick={handleDelete}
-//             style={{ backgroundColor: "red" }}
-//           >
-//             Delete
-//           </CustomButton>
-//         )}
-//       </div>
-//     </article>
-//   );
-// };
-// //  <Flex justifyContent="space-between">
-// //               {Object.keys(dietInfo).map((dietMetric) => {
-// //                 if (dietInfo[dietMetric] === "Yes") {
-// //                   return <p key={dietMetric}>{dietMetric}</p>;
-// //                 }
-// //               })}
-// //             </Flex>
-
-// export default RecipeCard;
 export default function RecipeCard({ recipe, isDashboard }) {
   const { id, title, image } = recipe;
   const history = useHistory();
@@ -144,14 +82,14 @@ export default function RecipeCard({ recipe, isDashboard }) {
           </Text>
         </Stack>
         <Stack>
-          <div className="button-container">
+          <Flex pt={3} justifyContent="space-between">
             <Button onClick={handleMoreDetailsClick}>More Details</Button>
             {isDashboard && (
               <Button onClick={handleDelete} style={{ backgroundColor: "red" }}>
                 Delete
               </Button>
-            )}{" "}
-          </div>
+            )}
+          </Flex>
         </Stack>
       </Box>
     </Center>

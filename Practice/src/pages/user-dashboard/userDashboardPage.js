@@ -1,14 +1,13 @@
 import { signOut } from "@firebase/auth";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CustomButton from "../../components/custom-button/CustomButton";
 import { auth } from "../../firebase/firebaseUtils";
 import Header from "../../components/header/Header";
 import { getSavedRecipes } from "../../redux/recipes/recipesActions";
 import RecipeCard from "../../components/recipe-card/RecipeCard";
 import "./UserDashboardPage.scss";
 import { useHistory } from "react-router";
-import { Heading, Box, Flex } from "@chakra-ui/layout";
+import { Heading, Box, Flex, Button, Center } from "@chakra-ui/react";
 const adminIds = ["pdov9C9v0MO7y8GnGtJdf1SMjy42"];
 
 const UserDashboardPage = () => {
@@ -37,9 +36,11 @@ const UserDashboardPage = () => {
 
   return (
     <React.Fragment>
-      <Header title="Welcome to your dashboard" userName={displayName} />
+      <Header title="Welcome to your dashboard, " userName={displayName} />
       <main className="user-dashboard-page-main">
-        <CustomButton onClick={handleSignOut}>Sign-Out</CustomButton>
+        <Center mb={3}>
+          <Button onClick={handleSignOut}>Sign-Out</Button>
+        </Center>
         <section>
           <Box px={4}>
             <Heading as="h3">Your Saved Recipes</Heading>
@@ -52,12 +53,12 @@ const UserDashboardPage = () => {
           </Box>
         </section>
         {adminIds.includes(currentUserId) && (
-          <CustomButton
+          <Button
             id="add-custom-recipe-button"
             onClick={() => history.push("/add-recipe")}
           >
             Add Custom Recipe
-          </CustomButton>
+          </Button>
         )}
       </main>
     </React.Fragment>
