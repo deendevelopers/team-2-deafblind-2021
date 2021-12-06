@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, createUserProfileDocument } from "../../firebase/firebaseUtils";
-import "./Register.scss";
+// import "./Register.scss";
 import CustomButton from "../custom-button/CustomButton";
 import { useDispatch, useSelector } from "react-redux";
 import { addRecipe } from "../../redux/recipes/recipesActions";
 import { addRecipeIdToUserSavedRecipesIds } from "../../redux/user/userActions";
-
+import {
+    Center,
+    Box,
+    Heading,
+    FormControl,
+    FormLabel,
+    FormErrorMessage,
+    FormHelperText,
+    Input,
+    Button
+  } from '@chakra-ui/react';
+  
 const Register = () => {
     const saveRecipeWithSignIn = useSelector(state => state.user.saveRecipeWithSignIn);
     const currentRecipe = useSelector(state => state.recipes.currentRecipe);
@@ -55,22 +66,53 @@ const Register = () => {
 
     return (
         <section className="register-section">
-            <h2>Register</h2>
+            <Center>
+                <Heading as='h2'>
+                    Register
+                </Heading>
+            </Center>
             <form className="register-form" onSubmit={handleSubmit}>
 
-                <label htmlFor="usernameForRegister">Username: </label>
-                <input name="username" id="usernameForRegister" type="text" value={formInputs.username} onChange={handleChange}/>
+                <FormControl id='username'>
+                    <FormLabel>Choose a username</FormLabel>
+                    <Input name="username" id="usernameForRegister" type="text" value={formInputs.username} onChange={handleChange}/>
+                </FormControl>
 
-                <label htmlFor="emailForRegister">Email: </label>
-                <input name="email" id="emailForRegister" type="email" value={formInputs.email} onChange={handleChange}/>
+                <FormControl id='email'>
+                    <FormLabel>Enter email address</FormLabel>
+                    <Input name="email" id="emailForRegister" type="email" value={formInputs.email} onChange={handleChange}/>
+                </FormControl>
 
-                <label htmlFor="passwordForRegister">Password: </label>
-                <input name="password" id="passwordForRegister" type="password" value={formInputs.password} onChange={handleChange}/>
-
-                <label htmlFor="confirmPasswordForRegister">Confirm Password: </label>
-                <input name="confirmPassword" id="confirmPasswordForRegister" type="password" value={formInputs.confirmPassword} onChange={handleChange}/>
-
-                <CustomButton type="submit">Register</CustomButton>
+                <FormControl id='password'>
+                    <FormLabel>Choose a password</FormLabel>
+                    <Input name="password" id="passwordForRegister" type="password" value={formInputs.password} onChange={handleChange}/>
+                </FormControl>
+ 
+                <FormControl id='confirmPassword'>
+                    <FormLabel>Confirm password</FormLabel>
+                    <Input name="confirmPassword" id="confirmPasswordForRegister" type="password" value={formInputs.confirmPassword} onChange={handleChange}/>
+                </FormControl>
+                
+                <Button
+                    type="submit"
+                    size="lg"
+                    borderLeftRadius="0"
+                    bg="#285E61"
+                    color="#fff"
+                    h="100%"
+                    _active={{
+                        bg: "teal.700",
+                        transform: "scale(0.98)",
+                        borderColor: "#bec3c9",
+                    }}
+                    _hover={{
+                        bg: "teal.600",
+                        transform: "scale(0.98)",
+                        borderColor: "#bec3c9",
+                    }}
+                >
+                    Register
+                </Button>            
             </form>
         </section>
     )
