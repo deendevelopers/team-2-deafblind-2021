@@ -5,6 +5,7 @@ import { Box, Flex } from "@chakra-ui/layout";
 import "./HomePage.scss";
 import RecipeSearchPage from "../recipe-search/RecipeSearchPage";
 import RecipeSearch from "../../components/recipe-search/RecipeSearch";
+import RandomChoicesSearch from "../../components/random-search/random-choices-search/RandomChoicesSearch";
 
 const HomePage = ({ history }) => (
   <>
@@ -19,6 +20,7 @@ const HomePage = ({ history }) => (
         </Box>
       </Box>
     </Flex>
+    <RandomChoicesSearch />
     <Box bg="#fff" p={4}>
       <RecipeSearchPage />
     </Box>
