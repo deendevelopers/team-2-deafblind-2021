@@ -79,7 +79,7 @@ export default function RecipeCard({ recipe, isDashboard }) {
           <Flex m={2} justifyContent="space-between">
             <Button onClick={handleMoreDetailsClick}>More Details</Button>
             {isDashboard && (
-              <Button onClick={handleDelete} style={{ backgroundColor: "red" }}>
+              <Button onClick={handleDelete} style={{ backgroundColor: "red", color: "white" }}>
                 Delete
               </Button>
             )}

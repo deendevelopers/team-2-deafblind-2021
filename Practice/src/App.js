@@ -88,8 +88,8 @@ const App = () => {
           />
           <Route path="/recipes/:recipeId" component={RecipeDetailPage} />
           <Route path="/add-recipe" component={AddRecipePage} />
-          <Route path="/register" component={Register} />
-          <Route path="/login" component={Login} />
+          <Route path="/register" render={() => (currentUser ? <Redirect to="/" /> : <Register />)} />
+          <Route path="/login" render={() => (currentUser ? <Redirect to="/" /> : <Login />)} />
         </Switch>
       </React.Fragment>
     </ChakraProvider>

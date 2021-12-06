@@ -14,9 +14,11 @@ import {
     Heading
   } from '@chakra-ui/react'
 import ChakraCustomButton from "../chakra-custom-button/ChakraCustomButton";
+import { useHistory } from "react-router";
 
 const Login = () => {
 
+    const history = useHistory();
     const saveRecipeWithSignIn = useSelector(state => state.user.saveRecipeWithSignIn);
     const currentRecipe = useSelector(state => state.recipes.currentRecipe);
     const dispatch = useDispatch();
@@ -54,6 +56,7 @@ const Login = () => {
         } catch (error) {
             console.log(error)
         }
+        history.push("/dashboard");
     }
 
     return (
