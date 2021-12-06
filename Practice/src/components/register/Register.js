@@ -17,6 +17,7 @@ import {
     Input,
     Button
   } from '@chakra-ui/react';
+import ChakraCustomButton from "../chakra-custom-button/ChakraCustomButton";
   
 const Register = () => {
     const saveRecipeWithSignIn = useSelector(state => state.user.saveRecipeWithSignIn);
@@ -67,7 +68,7 @@ const Register = () => {
     return (
         <section className="register-section">
             <Center>
-                <Heading as='h2'>
+                <Heading as='h2' fontSize="2xl" m={[6, 0]}>
                     Register
                 </Heading>
             </Center>
@@ -93,26 +94,10 @@ const Register = () => {
                     <Input name="confirmPassword" id="confirmPasswordForRegister" type="password" value={formInputs.confirmPassword} onChange={handleChange}/>
                 </FormControl>
                 
-                <Button
-                    type="submit"
-                    size="lg"
-                    borderLeftRadius="0"
-                    bg="#285E61"
-                    color="#fff"
-                    h="100%"
-                    _active={{
-                        bg: "teal.700",
-                        transform: "scale(0.98)",
-                        borderColor: "#bec3c9",
-                    }}
-                    _hover={{
-                        bg: "teal.600",
-                        transform: "scale(0.98)",
-                        borderColor: "#bec3c9",
-                    }}
-                >
+                <ChakraCustomButton type="submit" bg="#285E61" color="#fff">
                     Register
-                </Button>            
+                </ChakraCustomButton>
+
             </form>
         </section>
     )

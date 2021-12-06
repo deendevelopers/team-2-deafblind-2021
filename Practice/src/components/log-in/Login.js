@@ -9,11 +9,11 @@ import { addRecipeIdToUserSavedRecipesIds } from "../../redux/user/userActions";
 import {
     FormControl,
     FormLabel,
-    FormErrorMessage,
-    FormHelperText,
     Input,
-    Button
+    Center,
+    Heading
   } from '@chakra-ui/react'
+import ChakraCustomButton from "../chakra-custom-button/ChakraCustomButton";
 
 const Login = () => {
 
@@ -58,39 +58,29 @@ const Login = () => {
 
     return (
         <section className="login-section">
-            <h2>Login</h2>
+            <Center>
+                <Heading as='h2' fontSize="2xl" m={[10, 0]}>
+                    Log in
+                </Heading>
+            </Center>            
+            
             <form className="login-form" onSubmit={handleSubmit}>
 
-            <FormControl id='email'>
-                <FormLabel>Email address</FormLabel>
-                <Input name="email" id="emailForLogin" type="email" value={formInputs.email} onChange={handleChange}/>
-            </FormControl>
+                <FormControl id='email'>
+                    <FormLabel>Email address</FormLabel>
+                    <Input name="email" id="emailForLogin" type="email" value={formInputs.email} onChange={handleChange}/>
+                </FormControl>
 
-            <FormControl id='password'>
-                <FormLabel>Password</FormLabel>
-                <Input name="password" id="passwordForLogin" type="password" value={formInputs.password} onChange={handleChange}/>
-            </FormControl>
+                <FormControl id='password'>
+                    <FormLabel>Password</FormLabel>
+                    <Input name="password" id="passwordForLogin" type="password" value={formInputs.password} onChange={handleChange}/>
+                </FormControl>
 
-            <Button
-                type="submit"
-                size="lg"
-                borderLeftRadius="0"
-                bg="#285E61"
-                color="#fff"
-                h="100%"
-                _active={{
-                    bg: "teal.700",
-                    transform: "scale(0.98)",
-                    borderColor: "#bec3c9",
-                }}
-                _hover={{
-                    bg: "teal.600",
-                    transform: "scale(0.98)",
-                    borderColor: "#bec3c9",
-                }}
-                >
+    
+                <ChakraCustomButton type="submit" bg="#285E61" color="#fff">
                     Log-In
-                </Button>
+                </ChakraCustomButton>
+            
             </ form>
         </section>
     )
