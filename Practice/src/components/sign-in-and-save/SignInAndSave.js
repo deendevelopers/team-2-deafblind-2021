@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { saveRecipeWithSignIn } from "../../redux/user/userActions";
-import CustomButton from "../custom-button/CustomButton";
+import ChakraCustomButton from "../chakra-custom-button/ChakraCustomButton";
 
 const SignInAndSave = () => {
     const history = useHistory();
@@ -15,8 +15,8 @@ const SignInAndSave = () => {
 
     return (
         <article>
-            <h4>Sign-in and save your recipe</h4>
-            <CustomButton onClick={handleSignInAndSave}>Sign-in and save</CustomButton>
+            <h4>Sign-in and save this recipe</h4>
+            <ChakraCustomButton onClick={handleSignInAndSave}>Sign-in and save</ChakraCustomButton>
         </article>
     )
 }

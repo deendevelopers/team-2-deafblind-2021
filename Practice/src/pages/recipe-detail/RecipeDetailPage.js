@@ -7,6 +7,7 @@ import { addRecipeIdToUserSavedRecipesIds } from "../../redux/user/userActions";
 import { addRecipe } from "../../redux/recipes/recipesActions";
 import SignInAndSave from "../../components/sign-in-and-save/SignInAndSave";
 import CustomButton from "../../components/custom-button/CustomButton";
+import ChakraCustomButton from "../../components/chakra-custom-button/ChakraCustomButton";
 
 const RecipeDetailPage = () => {
     const { recipeId } = useParams();
@@ -33,7 +34,7 @@ const RecipeDetailPage = () => {
         <React.Fragment>
             <RecipeArticle currentRecipe={currentRecipe} />
             { currentUser ? <SaveRecipeButton savedRecipesIds={currentUser.savedRecipesIds} currentRecipeId={currentRecipe.id} handleSaveRecipe={handleSaveRecipe} /> : <SignInAndSave />}
-            <CustomButton onClick={() => history.push("/")}>Search For New Recipe</CustomButton>
+            <ChakraCustomButton bg="#285E61" color="#fff" onClick={() => history.push("/")}>Search New Recipe</ChakraCustomButton>
         </React.Fragment>
     )
 }
