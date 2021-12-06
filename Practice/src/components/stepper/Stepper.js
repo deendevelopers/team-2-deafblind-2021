@@ -1,7 +1,7 @@
 import { Step, Steps, useSteps } from "chakra-ui-steps";
 import { Box, Center, Heading, Button, Flex } from "@chakra-ui/react";
 
-export const Vertical = ({ steps }) => {
+const VerticalStepper = ({ steps }) => {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
@@ -69,4 +69,4 @@ export const Vertical = ({ steps }) => {
   );
 };
 
-export default Vertical;
+export default VerticalStepper;

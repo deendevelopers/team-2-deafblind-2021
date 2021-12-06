@@ -1,7 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
 import { deleteRecipeIdToUserSavedRecipesIds } from "../../redux/user/userActions";
-// import "./RecipeCard.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentRecipeWithId } from "../../redux/recipes/recipesActions";
 import {

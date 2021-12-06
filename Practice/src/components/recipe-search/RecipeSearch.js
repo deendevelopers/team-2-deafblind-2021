@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-// import "./RecipeSearch.scss";
 import { useDispatch } from "react-redux";
 import { searchForRecipes } from "../../redux/recipes/recipesActions";
-
 import {
   Input,
   InputGroup,

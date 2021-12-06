@@ -1,9 +1,7 @@
-import { Text, Box } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import React from "react";
 import { useHistory } from "react-router";
 import ChakraCustomButton from "../chakra-custom-button/ChakraCustomButton";
-import CustomButton from "../custom-button/CustomButton";
-// import "./SaveRecipeButton.scss";
 
 const SaveRecipeButton = ({ handleSaveRecipe, savedRecipesIds, currentRecipeId }) => {
     const history = useHistory();

@@ -5,7 +5,6 @@ import { auth } from "../../firebase/firebaseUtils";
 import Header from "../../components/header/Header";
 import { getSavedRecipes } from "../../redux/recipes/recipesActions";
 import RecipeCard from "../../components/recipe-card/RecipeCard";
-import "./UserDashboardPage.scss";
 import { useHistory } from "react-router";
 import { Heading, Box, Flex, Button, Center } from "@chakra-ui/react";
 const adminIds = ["pdov9C9v0MO7y8GnGtJdf1SMjy42"];

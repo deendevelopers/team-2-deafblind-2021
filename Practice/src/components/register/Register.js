@@ -1,21 +1,15 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, createUserProfileDocument } from "../../firebase/firebaseUtils";
-// import "./Register.scss";
-import CustomButton from "../custom-button/CustomButton";
 import { useDispatch, useSelector } from "react-redux";
 import { addRecipe } from "../../redux/recipes/recipesActions";
 import { addRecipeIdToUserSavedRecipesIds } from "../../redux/user/userActions";
 import {
     Center,
-    Box,
     Heading,
     FormControl,
     FormLabel,
-    FormErrorMessage,
-    FormHelperText,
     Input,
-    Button
   } from '@chakra-ui/react';
 import ChakraCustomButton from "../chakra-custom-button/ChakraCustomButton";
   

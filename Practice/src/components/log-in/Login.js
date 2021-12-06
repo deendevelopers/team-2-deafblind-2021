@@ -1,8 +1,6 @@
 import { signInWithEmailAndPassword } from "@firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../../firebase/firebaseUtils";
-import CustomButton from "../custom-button/CustomButton";
-// import "./LogIn.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { addRecipe } from "../../redux/recipes/recipesActions";
 import { addRecipeIdToUserSavedRecipesIds } from "../../redux/user/userActions";

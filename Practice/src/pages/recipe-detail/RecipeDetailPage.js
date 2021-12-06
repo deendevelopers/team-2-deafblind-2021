@@ -6,7 +6,6 @@ import SaveRecipeButton from "../../components/save-recipe-button/SaveRecipeButt
 import { addRecipeIdToUserSavedRecipesIds } from "../../redux/user/userActions";
 import { addRecipe } from "../../redux/recipes/recipesActions";
 import SignInAndSave from "../../components/sign-in-and-save/SignInAndSave";
-import CustomButton from "../../components/custom-button/CustomButton";
 import ChakraCustomButton from "../../components/chakra-custom-button/ChakraCustomButton";
 
 const RecipeDetailPage = () => {

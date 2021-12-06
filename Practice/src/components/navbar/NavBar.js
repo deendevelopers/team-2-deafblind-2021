@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./NavBar.scss";
 import { useSelector } from "react-redux";
 import { AiOutlineUser } from "react-icons/ai";
 import { Box, Flex, Button, Text, Icon } from "@chakra-ui/react";

@@ -1,7 +1,6 @@
 import React from "react";
 import { getUniqueIngredients } from "../../components/random-search/helperFunctions";
-import "./RecipeArticle.scss";
-import Vertical from "../../components/stepper/Stepper";
+import VerticalStepper from "../../components/stepper/Stepper";
 import { Button } from "@chakra-ui/button";
 import {
   Box,
@@ -105,7 +104,7 @@ const RecipeArticle = ({
         <Center>
           <Button>Start Cooking</Button>
         </Center>
-        <Vertical steps={steps} />
+        <VerticalStepper steps={steps} />
       </Box>
     </Center>
   );

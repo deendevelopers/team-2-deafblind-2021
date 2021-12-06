@@ -1,8 +1,6 @@
 import React from "react";
 import Header from "../../components/header/Header";
 import { Box, Flex } from "@chakra-ui/layout";
-
-import "./HomePage.scss";
 import RecipeSearchPage from "../recipe-search/RecipeSearchPage";
 import RecipeSearch from "../../components/recipe-search/RecipeSearch";
 import RandomChoicesSearch from "../../components/random-search/random-choices-search/RandomChoicesSearch";

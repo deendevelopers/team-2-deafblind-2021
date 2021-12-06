@@ -1,13 +1,8 @@
-import React, {useState, useEffect} from "react";
-import Register from "../../components/register/Register";
-import LogIn from "../../components/log-in/Login";
+import React from "react";
 import Header from "../../components/header/Header";
-// import "./SignInPage.scss";
 import {
   Box,
   Flex,
-  Center,
-  Button,
   Image
 } from '@chakra-ui/react';
 import { useHistory } from "react-router";
@@ -16,8 +11,7 @@ const SignInPage = () => {
   const history = useHistory();
 
   return (
-    <React.Fragment>
-      <main className="signinpage-main">
+      <main>
         <Box m={10} maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
           <Header title="Welcome to the Recipe Mate" />
           <Flex direction="column">
@@ -34,7 +28,6 @@ const SignInPage = () => {
           </Flex>
           </Box>
       </main>
-    </React.Fragment>
   )
 };
 
