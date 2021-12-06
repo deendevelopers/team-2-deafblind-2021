@@ -16,6 +16,8 @@ import { setCurrentUser } from "./redux/user/userActions";
 import { onSnapshot } from "firebase/firestore";
 import RecipeDetailPage from "./pages/recipe-detail/RecipeDetailPage";
 import AddRecipePage from "./pages/add-recipe/AddRecipePage";
+import Register from "./components/register/Register";
+import Login from "./components/log-in/Login";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -80,6 +82,8 @@ const App = () => {
           />
           <Route path="/recipes/:recipeId" component={RecipeDetailPage} />
           <Route path="/add-recipe" component={AddRecipePage} />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
         </Switch>
       </React.Fragment>
     </ChakraProvider>
