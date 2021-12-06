@@ -62,7 +62,7 @@ const RecipeArticle = ({
           <Image
             src={image}
             alt={`The ${title} dish shown on a plate cooked`}
-            // layout={"fill"}
+            sx={{ objectFit: "none" }}
           />
         </Box>
         <Stack>
