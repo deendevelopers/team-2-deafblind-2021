@@ -4,15 +4,18 @@ import './index.scss';
 import App from './App';
 import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
+import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
-import { store } from "./redux/store.js";
+import { store, persistor } from "./redux/store.js";
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter >
+      <PersistGate persistor={persistor}>
         <App />
+      </PersistGate>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
