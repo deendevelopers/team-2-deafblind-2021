@@ -126,7 +126,8 @@ export default function RecipeCard({ recipe, isDashboard }) {
           <Image
             src={image}
             alt={`The ${title} dish shown on a plate cooked`}
-            layout={"fill"}
+            // layout={"fill"}
+            sx={{ objectFit: "none" }}
           />
         </Box>
         <Stack>
