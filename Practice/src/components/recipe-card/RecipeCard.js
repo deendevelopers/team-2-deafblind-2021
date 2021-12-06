@@ -25,6 +25,7 @@ export default function RecipeCard({ recipe, isDashboard }) {
   );
   console.log({ fullRecipeData });
 
+
   const dispatch = useDispatch();
   const handleDelete = () => {
     console.log({ recipeIdToDelete: id });
