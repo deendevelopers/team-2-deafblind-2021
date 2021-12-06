@@ -10,6 +10,7 @@ import {
   Text,
   Stack,
   Flex,
+  Image,
   useColorModeValue,
 } from "@chakra-ui/react";
 
@@ -58,7 +59,11 @@ const RecipeArticle = ({
           mb={6}
           pos={"relative"}
         >
-          <img src={image} alt={`The ${title} dish shown on a plate cooked`} />
+          <Image
+            src={image}
+            alt={`The ${title} dish shown on a plate cooked`}
+            sx={{ objectFit: "none" }}
+          />
         </Box>
         <Stack>
           <Heading

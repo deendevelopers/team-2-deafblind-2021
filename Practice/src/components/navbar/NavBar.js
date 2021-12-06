@@ -16,10 +16,6 @@ export default function NavBar() {
           {/* <HStack spacing={9} alignItems={"center"}> */}
           <Link to="/">
             <Flex justifyContent={"space-between"} alignItems={"center"}>
-              {/* <Box pr="4" fontSize="lg">
-                &#127812;
-              </Box>
-              <Spacer /> */}
               <Box>
                 <Text fontSize="2xl" fontWeight="bold" color="green.900">
                   Recipe Mate
@@ -36,7 +32,6 @@ export default function NavBar() {
                   bg="#fff"
                   color="#2D3748"
                   size={"lg"}
-                  mr={4}
                   rightIcon={<UserIcon />}
                 >
                   Profile
@@ -60,6 +55,4 @@ export default function NavBar() {
       </Box>
     </>
   );
-
 }
-

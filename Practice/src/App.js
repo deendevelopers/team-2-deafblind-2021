@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./pages/home/HomePage";
 import "./App.scss";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme, Box } from "@chakra-ui/react";
 import { StepsStyleConfig as Steps } from "chakra-ui-steps";
 
 // import RecipeSearchPage from "./pages/recipe-search/RecipeSearchPage";
@@ -73,7 +73,13 @@ const App = () => {
           <Route
             path="/dashboard"
             render={() =>
-              !currentUser ? <Redirect to="/" /> : <UserDashboardPage />
+              !currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <Box px={2}>
+                  <UserDashboardPage />
+                </Box>
+              )
             }
           />
           <Route
