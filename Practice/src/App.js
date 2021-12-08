@@ -71,7 +71,7 @@ const App = () => {
         <NavBar />
       </Box>
         <Switch>
-        <Box style={{ position: "relative", zIndex: 1 }} p={0}>
+        <Box style={{ position: "relative", zIndex: 1, width: "100vw" }} >
           <Route exact path="/" component={HomePage} />
           <Route
             path="/dashboard"

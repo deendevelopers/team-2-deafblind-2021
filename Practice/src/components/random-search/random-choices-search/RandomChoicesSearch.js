@@ -25,8 +25,7 @@ const RandomChoicesSearch = () => {
     }
 
     return (
-        <Grid templateColumns='repeat(3, 1fr)' gap={1} marginTop={5}>
-
+        <Grid templateColumns='repeat(3, 1fr)' gap={3} marginTop={5} p={8}>
             <RandomChoiceButtonContainer 
                 name={"indian"} title={"Indian"} boxBg={"orange.200"} handleClick={handleClick}
                 imageUrl={`/assets/random-choices-images/IndianCuisineOption.svg`} 

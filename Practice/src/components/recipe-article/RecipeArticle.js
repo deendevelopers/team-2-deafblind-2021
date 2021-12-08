@@ -11,7 +11,11 @@ import {
   Flex,
   Image,
   useColorModeValue,
+  UnorderedList,
+  ListItem,
+  ListIcon
 } from "@chakra-ui/react";
+import { MdCheckCircle } from "react-icons/md"
 
 const RecipeArticle = ({
   currentRecipe: {
@@ -41,70 +45,64 @@ const RecipeArticle = ({
   return (
     <Center py={6} px={4}>
       <Box
-        maxW={"445px"}
-        w={"full"}
+        as="article"
+        maxW={{ base: "100vw", md: "50vw" }}
         bg={useColorModeValue("white", "gray.900")}
         boxShadow={"2xl"}
         rounded={"md"}
-        p={6}
-        overflow={"hidden"}
         color="#111"
       >
-        <Box
-          h={"210px"}
-          //   bg={"gray.100"}
-          mt={-6}
-          mx={-6}
-          mb={6}
-          pos={"relative"}
-        >
+        <Box overflow={"hidden"}>
           <Image
+            transform={"scale(1.25)"}
+            w={"100%"}
             src={image}
             alt={`The ${title} dish shown on a plate cooked`}
-            sx={{ objectFit: "none" }}
           />
         </Box>
-        <Stack>
+        <Stack as="section" mt={2} p={5}>
           <Heading
+            as="h2"
             color={useColorModeValue("gray.700", "white")}
             fontSize={"2xl"}
             fontFamily={"body"}
+            textAlign={"center"}
           >
             {title}
           </Heading>
-          <Text>{summary.replace(/(<([^>]+)>)/gi, "")}</Text>
+          <Text textAlign={"justify"}>{summary.replace(/(<([^>]+)>)/gi, "")}</Text>
         </Stack>
-        <section>
-          <Stack my={2}>
-            <Heading as="h3" fontSize={"lg"}>
-              Dietary details:
-            </Heading>
-            <Flex justifyContent="space-between">
-              {Object.keys(dietInfo).map((dietMetric) => {
-                if (dietInfo[dietMetric] === "Yes") {
-                  return <p key={dietMetric}>{dietMetric}</p>;
-                }
-              })}
-            </Flex>
-          </Stack>
-        </section>
-        <section>
-          <Stack my={2}>
-            <Heading as="h3" fontSize={"lg"}>
-              List of ingredients:
-            </Heading>
-            <ul>
-              {extendedIngredients &&
-                uniqueIngredients.map((ingredient) => (
-                  <li key={ingredient}>{ingredient}</li>
-                ))}
-            </ul>
-          </Stack>
-        </section>
-        <Center>
-          <Button>Start Cooking</Button>
-        </Center>
-        <VerticalStepper steps={steps} />
+        <Stack as="section" my={2} p={4}>
+          <Heading as="h3" fontSize={"lg"} textAlign="center">
+            Dietary details:
+          </Heading>
+          <Flex justifyContent="space-between">
+            <UnorderedList>
+            {Object.keys(dietInfo).map((dietMetric) => {
+              if (dietInfo[dietMetric] === "Yes") {
+                return <ListItem key={dietMetric} listStyleType="none"><ListIcon as={MdCheckCircle} color='green.500' />{dietMetric}</ListItem>;
+              }
+            })}
+          </UnorderedList>
+          </Flex>
+        </Stack>
+        <Stack as="section" my={2} p={2}>
+          <Heading as="h3" fontSize={"lg"} textAlign="center">
+            List of ingredients:
+          </Heading>
+          <UnorderedList stylePosition="inside">
+            {extendedIngredients &&
+              uniqueIngredients.map((ingredient) => (
+                <ListItem pl={10} py={2} key={ingredient}>{ingredient}</ListItem>
+              ))}
+          </UnorderedList>
+        </Stack>
+        {/* <Center> */}
+          <Flex direction={{ base:"column", md: "row"}} justifyContent="space-between" px={10} py={2}>
+          {/* <Button>Start Cooking</Button> */}
+            <VerticalStepper steps={steps} />
+          </Flex>
+        {/* </Center> */}
       </Box>
     </Center>
   );

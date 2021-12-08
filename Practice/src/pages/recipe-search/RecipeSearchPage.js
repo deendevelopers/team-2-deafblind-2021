@@ -12,7 +12,7 @@ const RecipeSearchPage = () => {
         {searchResults.length !== 0 && (
           <Box>
             <Heading as="h3" textAlign="center" fontSize={"2xl"}>Search Results</Heading>
-            <Flex direction="column">
+            <Flex direction={{ base: 'column', md: 'row' }} flexWrap={"wrap"} justifyContent={"space-evenly"}>
               {searchResults.map((recipe) => (
                 <RecipeCard key={recipe.id} recipe={recipe} />
               ))}
