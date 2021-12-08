@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./pages/home/HomePage";
 import "./App.scss";
-import { ChakraProvider, extendTheme, Box } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme, Box, Container } from "@chakra-ui/react";
 import { StepsStyleConfig as Steps } from "chakra-ui-steps";
 
 // import RecipeSearchPage from "./pages/recipe-search/RecipeSearchPage";
@@ -67,8 +67,11 @@ const App = () => {
   return (
     <ChakraProvider theme={theme}>
       <React.Fragment>
+      <Box style={{ position: "sticky", top: 0, zIndex: 10, width: "100vw" }} bg="green.100">
         <NavBar />
+      </Box>
         <Switch>
+        <Box style={{ position: "relative", zIndex: 1 }} p={0}>
           <Route exact path="/" component={HomePage} />
           <Route
             path="/dashboard"
@@ -90,6 +93,7 @@ const App = () => {
           <Route path="/add-recipe" component={AddRecipePage} />
           <Route path="/register" render={() => (currentUser ? <Redirect to="/" /> : <Register />)} />
           <Route path="/login" render={() => (currentUser ? <Redirect to="/" /> : <Login />)} />
+          </Box>
         </Switch>
       </React.Fragment>
     </ChakraProvider>

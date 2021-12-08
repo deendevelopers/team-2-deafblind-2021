@@ -5,7 +5,7 @@ import RecipeSearchPage from "../recipe-search/RecipeSearchPage";
 import RecipeSearch from "../../components/recipe-search/RecipeSearch";
 import RandomChoicesSearch from "../../components/random-search/random-choices-search/RandomChoicesSearch";
 
-const HomePage = ({ history }) => (
+const HomePage = () => (
   <>
     <Flex direction="column" bg="green.100">
       <Box p={4} w="100%">
@@ -22,7 +22,7 @@ const HomePage = ({ history }) => (
     <Box bg="#fff" p={4}>
       <RecipeSearchPage />
     </Box>
-  </>
+    </>
 );
 
 export default HomePage;

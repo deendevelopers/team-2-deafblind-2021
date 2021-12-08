@@ -10,9 +10,7 @@ export default function NavBar() {
   const UserIcon = (props) => <Icon as={AiOutlineUser} />;
   return (
     <>
-      <Box w="100%" bg="green.100" px={4} position={"sticky"} top={"0"} z-index={4}>
-        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          {/* <HStack spacing={9} alignItems={"center"}> */}
+        <Flex bg="green.100" w="100%" alignItems={"center"} justifyContent={"space-between"} p={[5, 3]} >
           <Link to="/">
             <Flex justifyContent={"space-between"} alignItems={"center"}>
               <Box>
@@ -51,7 +49,6 @@ export default function NavBar() {
             )}
           </Flex>
         </Flex>
-      </Box>
     </>
   );
 }
