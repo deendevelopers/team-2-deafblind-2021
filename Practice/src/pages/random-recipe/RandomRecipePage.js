@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import CustomButton from "../../components/custom-button/CustomButton";
 import SelectionForm from "../../components/random-search/selection-form/SelectionForm";
 import data from "../../response.json";
 import "./RandomRecipePage.scss";
@@ -47,7 +46,6 @@ const RandomRecipePage = () => {
     return (
         <main>
             <React.Fragment>
-                {/* <CustomButton onClick={handleClick}>Find Random Recipe</CustomButton> */}
                 <RandomChoicesSearch />
                 <p className="custom-random-search-message">Customise your random recipe by chosing from the options below:</p>
                 <SelectionForm handleChange={handleChange} handleSubmit={handleCustomSearch}/>
