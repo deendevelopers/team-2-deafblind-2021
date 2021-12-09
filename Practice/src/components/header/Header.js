@@ -1,4 +1,3 @@
-import "./Header.scss";
 import { Heading } from "@chakra-ui/layout";
 
 const Header = ({ title, message, userName }) => (

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import SelectionForm from "../../components/random-search/selection-form/SelectionForm";
 import data from "../../response.json";
-import "./RandomRecipePage.scss";
 import {fetchRandomRecipe, generateCustomEndPoint } from "../../components/random-search/helperFunctions";
 import { useDispatch } from "react-redux";
 import { setCurrentRecipe } from "../../redux/recipes/recipesActions";

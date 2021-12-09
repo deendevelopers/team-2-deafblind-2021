@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./pages/home/HomePage";
-import "./App.scss";
 import { ChakraProvider, extendTheme, Box, Container } from "@chakra-ui/react";
 import { StepsStyleConfig as Steps } from "chakra-ui-steps";
 

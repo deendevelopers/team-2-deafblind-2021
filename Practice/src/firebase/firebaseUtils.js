@@ -228,21 +228,6 @@ const addImageFileToFirebaseStorage = async (id, imageFile) => {
     const url = await getDownloadURL(ref(storage, imageSnapshot.metadata.fullPath))
            
     console.log("url", url);
-                // setUrl(url);
-
-
-    // const imageSnapshot = await uploadBytes(storageRef, imageFile).then((snapshot) => {
-    //     console.log("snapshot", snapshot);
-    //     console.log("snapshot.metadata.fullPath", snapshot.metadata.fullPath);
-    //     console.log('uploaded successful');
-
-    //     getDownloadURL(ref(storage, snapshot.metadata.fullPath))
-    //         .then((url) => {
-    //             console.log("url", url);
-    //             // setUrl(url);
-
-    //         })
-    // })
 
     const recipeCollectionRef = collection(db, "customRecipes");
     

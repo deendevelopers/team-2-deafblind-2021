@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { setCurrentRecipe } from "../../../redux/recipes/recipesActions";
-import CustomButton from "../../custom-button/CustomButton";
 import { fetchRandomChoicesRecipes } from "../helperFunctions";
 import { Grid, GridItem, Center, Box, Button, Image } from '@chakra-ui/react'
 import RandomChoiceButtonContainer from "./RandomChoiceButtonContainer";

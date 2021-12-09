@@ -8,12 +8,12 @@ const SaveRecipeButton = ({ handleSaveRecipe, savedRecipesIds, currentRecipeId }
     const showButton = !savedRecipesIds.includes(currentRecipeId);
 
     return (
-            showButton ? <ChakraCustomButton id="save-recipe-button" onClick={handleSaveRecipe}>Save Recipe</ChakraCustomButton>
-                :
-            (<aside className="save-recipe-button-container">
-                <Text fontSize={"md"} textAlign={"center"}>This recipe has been saved - please go to your dashboard to view</Text>
-                <ChakraCustomButton onClick={() => history.push("/dashboard")}>Dashboard</ChakraCustomButton>
-            </aside>)
+        showButton ? <ChakraCustomButton id="save-recipe-button" onClick={handleSaveRecipe}>Save Recipe</ChakraCustomButton>
+            :
+        (<aside className="save-recipe-button-container">
+            <Text fontSize={"md"} textAlign={"center"}>This recipe has been saved - please go to your dashboard to view</Text>
+            <ChakraCustomButton onClick={() => history.push("/dashboard")}>Dashboard</ChakraCustomButton>
+        </aside>)
     )
 }
 
