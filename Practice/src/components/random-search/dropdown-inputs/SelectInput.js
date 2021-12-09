@@ -1,5 +1,4 @@
 import React from "react";
-import "./SelectInput.scss";
 
 const SelectInput = ({ name, handleChange, options, defaultSelect }) => (
         <select

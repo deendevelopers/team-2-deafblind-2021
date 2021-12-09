@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, FormControl, FormLabel, Input, Center, Heading, Radio, RadioGroup, UnorderedList, OrderedList, ListItem, Flex } from '@chakra-ui/react';
 import ChakraCustomButton from "../chakra-custom-button/ChakraCustomButton"
+import AddInputContainer from "./AddInputContainer";
 
 const diets = ["halal", "vegetarian", "vegan", "glutenFree", "dairyFree"];
 const dietMetric = ["false", "true"];
@@ -53,49 +54,9 @@ const AddRecipeForm = ({ recipeDetails, handleChange, handleFileChange, handleSu
                 {dietsRadios}
             </ FormControl>
 
-            <Box>
-                <Flex direction="row">
-                    <FormControl id='ingredient'>
-                        <FormLabel>Add Ingredient</FormLabel>
-                        <Input name="ingredient" type="text" value={recipeDetails.ingredient} onChange={handleChange}/>
-                    </FormControl>
-                    <ChakraCustomButton onClick={addIngedient}>Add</ChakraCustomButton>
-                </ Flex>
-                <UnorderedList>
-                    { ingredients.map(ingredient => {
-                        return (
-                            <Flex direction="row" alignItems="center">
-                                <ListItem fontSize="2xl" key={ingredient}>{ingredient}</ListItem>
-                                <ChakraCustomButton bg="red" color="white" onClick={(event) => deleteIngredient(event, ingredient)}>Delete</ChakraCustomButton>
-                            </Flex>
+            <AddInputContainer inputName="ingredient" savedInputNames={ingredients} recipeDetails={recipeDetails} handleChange={handleChange} addMethod={addIngedient} deleteMethod={deleteIngredient} />
 
-                        )
-                        }) 
-                    }
-                </UnorderedList>
-            </Box>
-
-            <Box>
-                <Flex direction="row">
-                    <FormControl id='instruction'>
-                        <FormLabel>Add Instruction</FormLabel>
-                        <Input name="instruction" type="text" value={recipeDetails.instruction} onChange={handleChange}/>
-                    </FormControl>
-                    <ChakraCustomButton onClick={addInstruction}>Add</ChakraCustomButton>
-                </ Flex>
-                <OrderedList>
-                    { instructions.map(instruction => {
-                        return (
-                            <Flex direction="row" alignItems="center">
-                                <ListItem fontSize="2xl" key={instruction}>{instruction}</ListItem>
-                                <ChakraCustomButton bg="red" color="white" onClick={(event) => deleteInstruction(event, instruction)}>Delete</ChakraCustomButton>
-                            </Flex>
-
-                        )
-                        }) 
-                    }
-                </OrderedList>
-            </Box>            
+            <AddInputContainer inputName="instruction" savedInputNames={instructions} recipeDetails={recipeDetails} handleChange={handleChange} addMethod={addInstruction} deleteMethod={deleteInstruction} />
 
             <ChakraCustomButton type="submit">Submit</ChakraCustomButton>
 
