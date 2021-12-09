@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, doc, getDoc, setDoc, addDoc, query, where, getDocs } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 
@@ -215,15 +216,78 @@ const addCustomRecipeToFirebaseCustomRecipes = async (recipe) => {
     }
 }
 
+const addImageFileToFirebaseStorage = async (id, imageFile) => {
+    const storageRef = ref(storage, `recipes/images/${id}.jpg`);
+    
+    const imageSnapshot = await uploadBytes(storageRef, imageFile);
+
+    console.log("snapshot", imageSnapshot);
+    console.log("snapshot.metadata.fullPath", imageSnapshot.metadata.fullPath);
+    console.log('uploaded successful');
+
+    const url = await getDownloadURL(ref(storage, imageSnapshot.metadata.fullPath))
+           
+    console.log("url", url);
+                // setUrl(url);
+
+
+    // const imageSnapshot = await uploadBytes(storageRef, imageFile).then((snapshot) => {
+    //     console.log("snapshot", snapshot);
+    //     console.log("snapshot.metadata.fullPath", snapshot.metadata.fullPath);
+    //     console.log('uploaded successful');
+
+    //     getDownloadURL(ref(storage, snapshot.metadata.fullPath))
+    //         .then((url) => {
+    //             console.log("url", url);
+    //             // setUrl(url);
+
+    //         })
+    // })
+
+    const recipeCollectionRef = collection(db, "customRecipes");
+    
+    // Checking whether recipe already exists on Firebase or not:
+    const recipeQuery = query(recipeCollectionRef, where("id", "==", id));
+    // console.log({ recipeQuery });
+    const recipeQueryDocResults = await getDocs(recipeQuery);
+    const recipeId = recipeQueryDocResults.docs[0].id;
+    console.log({ recipeId });
+    console.log(recipeQueryDocResults.empty);
+
+
+    const recipeRef = doc(db, "customRecipes", recipeId);
+    const recipeSnap = await getDoc(recipeRef);
+
+    if(recipeSnap.exists()){
+        // console.log(userSnap.data());
+        const { imageUrl, ...remainingData } = recipeSnap.data();
+        // console.log(savedRecipesIds, remainingData);
+
+        try {
+            console.log("Adding IMAGEURL to custom recipe!");
+            await setDoc(recipeRef, {
+                imageUrl: url,
+                ...remainingData
+            });
+    
+        } catch (error) {
+            console.log('error adding IMAGE URL to custom recipe', error.message)
+        }
+    }
+}
+
   // Initialise Firebase
 initializeApp(firebaseConfig);
 
 // Initialise firestore
 const db = getFirestore();
 
+// Initialise firebase storage
+const storage = getStorage();
+
 // Initialise Auth
 const auth = getAuth();
 
 const analytics = getAnalytics();
 
-export { db, auth, createUserProfileDocument, addRecipeIdToUserSavedRecipesIdsInFirebase, addRecipeToFirebase, getSavedRecipesFromFirebase, deleteRecipeIdToUserSavedRecipesIdsInFirebase, addCustomRecipeToFirebaseCustomRecipes };
+export { db, auth, storage, createUserProfileDocument, addRecipeIdToUserSavedRecipesIdsInFirebase, addRecipeToFirebase, getSavedRecipesFromFirebase, deleteRecipeIdToUserSavedRecipesIdsInFirebase, addCustomRecipeToFirebaseCustomRecipes, addImageFileToFirebaseStorage };

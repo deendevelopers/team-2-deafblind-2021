@@ -70,7 +70,7 @@ const AdvancedSearch = ({ dietTerm, allergiesTerm, mealTypesTerm, setDietTerm, s
                         id={mealType}
                         name={mealType}
                         value={mealType}
-                        checked={mealTypesTerm === mealType}
+                        isChecked={mealTypesTerm === mealType}
                         onChange={() => setMealTypesTerm(mealType)}
                     >
                         {mealType}

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addCustomRecipeToFirebase } from "../../redux/recipes/recipesActions";
-
-const diets = ["halal", "vegetarian", "vegan", "glutenFree", "dairyFree"];
-const dietMetric = ["false", "true"];
+import AddRecipeForm from "../../components/add-recipe-form/AddRecipeForm";
+import { addImageFileToFirebaseStorage } from "../../firebase/firebaseUtils";
+import {Center, Box} from '@chakra-ui/react';
 
 const AddRecipePage = () => {
 
     const dispatch = useDispatch();
 
-    const [ recipeDetails, setRecipeDetails ] = useState({
+    const initialRecipeDetails = {
         title: "",
         summary: "",
         cookingTime: "",
@@ -21,10 +21,12 @@ const AddRecipePage = () => {
         dairyFree: "false",
         ingredient: "",
         instruction: ""
-    });
+    };
+    const [ recipeDetails, setRecipeDetails ] = useState(initialRecipeDetails);
     const [ ingredients, setIngredients ] = useState([]);
     const [ instructions, setInstructions ] = useState([]);
-
+    const [ imageFile, setImageFile ] = useState({});
+    const [ imageUrl, setImageUrl ] = useState("");
 
     const handleChange = ({ target: { name, value } }) => {
         setRecipeDetails(exisitingDetails => ({
@@ -50,122 +52,66 @@ const AddRecipePage = () => {
         setRecipeDetails(exisitingDetails => ({ ...exisitingDetails, instruction: "" }))
     }
 
-    const deleteinstruction = (event, instructionToDelete) => {
+    const deleteInstruction = (event, instructionToDelete) => {
         event.preventDefault();
         setInstructions(exisitingInstructions => exisitingInstructions.filter(instruction => instruction !== instructionToDelete));
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleFileChange = (event) => {
+        console.log(event.target.files);
+        const file = event.target.files[0]
 
-        console.log("Submitted");
-        
+        if (!file) {
+            console.log("No file uploaded")
+        } else {
+            console.log("Some file uploaded")
+            setImageFile(file)
+        }
+
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log("Submitting");
+
+        // generate random unique id using timestamp 
+        const id = new Date().valueOf();
+        console.log({id});
         const instructionsModified = instructions.map((step, index) => ({ step, number: index+1 }))
 
-        const newRecipe = { 
+        const newRecipe = {
+            id,
+            imageUrl: "", 
             ...recipeDetails,
             ingredients,
             instructionsModified
         };
 
-        // generate random unique id using timestamp 
-        const id = new Date().valueOf();
-        newRecipe.id = id;
-
         dispatch(addCustomRecipeToFirebase(newRecipe))
         
+        // upload file to firebase storage and update recipe in firestore to include imageUrl
+        console.log({imageFile})
+        if(imageFile){
+            const imageUrlFirebase = await addImageFileToFirebaseStorage(id, imageFile)
+        }
         // reset states
-        setRecipeDetails({
-            title: "",
-            summary: "",
-            cookingTime: "",
-            imageUrl: "",
-            halal: "false",
-            vegetarian: "false",
-            vegan: "false",
-            glutenFree: "false",
-            dairyFree: "false",
-            ingredient: "",
-            instruction: ""
-        });
+        setRecipeDetails(initialRecipeDetails);
         setIngredients([]);
         setInstructions([]);
+        console.log("Submitted!")
     }
 
-    const dietsRadios = diets.map(diet => (
-            <fieldset key={diet}>
-                <legend>{diet}</legend>
-                { dietMetric.map((metric) => (
-                    <React.Fragment>
-                        <label htmlFor={metric}>{metric}</label>
-                        <input key={String(metric)} id={metric} type="radio" value={metric} name={diet} onChange={handleChange} checked={recipeDetails[diet] === metric}/>
-                    </React.Fragment>
-                    ))
-                }
-            </fieldset>
-        )
-    )
-
-
     return (
-        <form onSubmit={handleSubmit}>
-
-            <label htmlFor="title">Title: </label>
-            <input name="title" id="title" type="text" value={recipeDetails.title} onChange={handleChange}/>
-
-            <label htmlFor="summary">Summary: </label>
-            <textarea name="summary" id="summary" type="text" value={recipeDetails.summary} onChange={handleChange}/>
-
-            <label htmlFor="cookingTime">Cooking Time: </label>
-            <input name="cookingTime" id="cookingTime" type="text" value={recipeDetails.cookingTime} onChange={handleChange}/>
-
-            <label htmlFor="imageUrl">Image Url: </label>
-            <input name="imageUrl" id="imageUrl" type="text" value={recipeDetails.imageUrl} onChange={handleChange}/>
-
-            <fieldset>
-                <legend>Diets</legend>
-                {dietsRadios}
-            </fieldset>
-
-            <div className="ingredients-container">
-                <label htmlFor="ingredient">ingredient: </label>
-                <input name="ingredient" id="ingredient" type="text" value={recipeDetails.ingredient} onChange={handleChange} />
-                <button onClick={addIngedient}>Add</button>
-                <ul>
-                    { ingredients.map(ingredient => {
-                        return (
-                            <React.Fragment>
-                                <li key={ingredient}>{ingredient}</li>
-                                <button onClick={(event) => deleteIngredient(event, ingredient)}>Delete</button>
-                            </React.Fragment>
-
-                        )
-                        }) 
-                    }
-                </ul>
-            </div>
-
-            <div className="instructions-container">
-                <label htmlFor="instruction">instruction: </label>
-                <input name="instruction" id="instruction" type="text" value={recipeDetails.instruction} onChange={handleChange} />
-                <button onClick={addInstruction}>Add</button>
-                <ol>
-                    { instructions.map(instruction => {
-                        return (
-                            <React.Fragment>
-                                <li key={instruction}>{instruction}</li>
-                                <button onClick={(event) => deleteinstruction(event, instruction)}>Delete</button>
-                            </React.Fragment>
-
-                        )
-                        }) 
-                    }
-                </ol>
-            </div>
-            
-            <input type="submit" value="Submit"/>
-
-        </form>
+        <Center>
+            <Box w="80vw">
+                <AddRecipeForm 
+                    handleChange={handleChange} handleFileChange={handleFileChange} handleSubmit={handleSubmit} 
+                    addInstruction={addInstruction} addIngedient={addIngedient} deleteIngredient={deleteIngredient} deleteInstruction={deleteInstruction}
+                    recipeDetails={recipeDetails} ingredients={ingredients} instructions={instructions}
+                    setImageFile={setImageFile} setImageUrl={setImageUrl}
+                />
+            </Box>
+        </ Center>
     )
 }
 
