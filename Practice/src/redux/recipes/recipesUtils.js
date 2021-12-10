@@ -1,6 +1,6 @@
 import axios from "axios";
 import { db } from "../../firebase/firebaseUtils";
-import { getFirestore, collection, doc, getDoc, setDoc, addDoc, query, where, getDocs } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 
 export const addRecipesToSavedRecipes = (savedRecipes, newRecipe) => {
   if (savedRecipes.includes(newRecipe)) return savedRecipes;
@@ -24,7 +24,7 @@ export const fetchRecipeSearchResultsFromSpoonacular = async ({
 }) => {
   const recipeSearchQuery = searchQuery.split(" ").join(",");
   console.log(recipeSearchQuery);
-  let endpoint = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${recipeSearchQuery}`;
+  let endpoint = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&query=${recipeSearchQuery}`;
 
   if (dietTerm) endpoint = endpoint + "&diet=" + dietTerm;
   console.log(endpoint);

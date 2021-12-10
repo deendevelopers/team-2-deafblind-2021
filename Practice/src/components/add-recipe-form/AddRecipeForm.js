@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, FormControl, FormLabel, Input, Center, Heading, Radio, RadioGroup, UnorderedList, OrderedList, ListItem, Flex } from '@chakra-ui/react';
+import { FormControl, FormLabel, Input, Radio } from '@chakra-ui/react';
 import ChakraCustomButton from "../chakra-custom-button/ChakraCustomButton"
 import AddInputContainer from "./AddInputContainer";
 

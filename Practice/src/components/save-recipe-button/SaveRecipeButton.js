@@ -1,19 +1,23 @@
-import { Text } from "@chakra-ui/react";
 import React from "react";
 import { useHistory } from "react-router";
 import ChakraCustomButton from "../chakra-custom-button/ChakraCustomButton";
-
-const SaveRecipeButton = ({ handleSaveRecipe, savedRecipesIds, currentRecipeId }) => {
+import { CheckIcon } from '@chakra-ui/icons'
+import { Flex, Text } from "@chakra-ui/react";
+const SaveRecipeButton = ({ handleSaveRecipe, savedRecipesIds, currentRecipeId, isCard }) => {
     const history = useHistory();
     const showButton = !savedRecipesIds.includes(currentRecipeId);
 
     return (
         showButton ? <ChakraCustomButton id="save-recipe-button" onClick={handleSaveRecipe}>Save Recipe</ChakraCustomButton>
             :
-        (<aside className="save-recipe-button-container">
-            <Text fontSize={"md"} textAlign={"center"}>This recipe has been saved - please go to your dashboard to view</Text>
-            <ChakraCustomButton onClick={() => history.push("/dashboard")}>Dashboard</ChakraCustomButton>
-        </aside>)
+        (isCard ? <Flex alignItems="center"><CheckIcon color="green" /><Text color="green">Already saved</Text></Flex>
+            : (
+            <aside className="save-recipe-button-container">
+                <Text fontSize={"md"} textAlign={"center"}>This recipe has been saved - please go to your dashboard to view</Text>
+                <ChakraCustomButton onClick={() => history.push("/dashboard")}>Dashboard</ChakraCustomButton>
+            </aside>
+            )
+        )
     )
 }
 

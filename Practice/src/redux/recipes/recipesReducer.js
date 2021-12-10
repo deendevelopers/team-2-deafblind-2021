@@ -33,8 +33,7 @@ const recipesReducer = (state = initialState, action) => {
         case SEARCH_FOR_RECIPES:
             return {
                 ...state,
-                searchResults: action.payload.searchResults,
-                savedRecipes: action.payload.savedRecipes
+                searchResults: action.payload.searchResults
             }
         default:
             return state

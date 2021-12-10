@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./pages/home/HomePage";
-import { ChakraProvider, extendTheme, Box, Container } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme, Box } from "@chakra-ui/react";
 import { StepsStyleConfig as Steps } from "chakra-ui-steps";
 import NavBar from "./components/navbar/NavBar";
 import UserDashboardPage from "./pages/user-dashboard/userDashboardPage";

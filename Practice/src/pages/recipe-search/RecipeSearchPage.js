@@ -7,7 +7,6 @@ import { Flex } from "@chakra-ui/react";
 const RecipeSearchPage = () => {
   const searchResults = useSelector((state) => state.recipes.searchResults);
   return (
-    <>
       <section>
         {searchResults.length !== 0 && (
           <Box>
@@ -20,7 +19,6 @@ const RecipeSearchPage = () => {
           </Box>
         )}
       </section>
-    </>
   );
 };
 

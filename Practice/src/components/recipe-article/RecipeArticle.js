@@ -69,6 +69,7 @@ const RecipeArticle = ({
               if (dietInfo[dietMetric] === "Yes") {
                 return <ListItem key={dietMetric} listStyleType="none"><ListIcon as={MdCheckCircle} color='green.500' />{dietMetric}</ListItem>;
               }
+              return "";
             })}
           </UnorderedList>
           </Flex>

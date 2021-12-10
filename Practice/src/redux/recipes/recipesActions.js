@@ -47,18 +47,10 @@ export const addCustomRecipeToFirebase = (newRecipe) => async (dispatch) => {
 export const searchForRecipes = ({ searchQuery, dietTerm, allergiesTerm, mealTypesTerm }) => async (dispatch) => {
     console.log({ searchQuery, dietTerm, allergiesTerm, mealTypesTerm });
     const results = await fetchRecipeSearchResultsFromSpoonacular({ searchQuery, dietTerm, allergiesTerm, mealTypesTerm });
-    
-    //Get full recipe info
-    const fullRecipesData = await getFullRecipeInfoFromSpoonacular(results);
-
-    // Add recipes to firebase
-    // fullRecipes.forEach(recipe => dispatch(addRecipe(recipe)))
-
     dispatch({
         type: SEARCH_FOR_RECIPES,
         payload: {
             searchResults: results,
-            savedRecipes: fullRecipesData
         }
     })
 }

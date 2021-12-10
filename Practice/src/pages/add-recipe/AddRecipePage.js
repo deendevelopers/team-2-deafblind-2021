@@ -26,7 +26,6 @@ const AddRecipePage = () => {
     const [ ingredients, setIngredients ] = useState([]);
     const [ instructions, setInstructions ] = useState([]);
     const [ imageFile, setImageFile ] = useState({});
-    const [ imageUrl, setImageUrl ] = useState("");
 
     const handleChange = ({ target: { name, value } }) => {
         setRecipeDetails(exisitingDetails => ({
@@ -92,7 +91,7 @@ const AddRecipePage = () => {
         // upload file to firebase storage and update recipe in firestore to include imageUrl
         console.log({imageFile})
         if(imageFile){
-            const imageUrlFirebase = await addImageFileToFirebaseStorage(id, imageFile)
+            await addImageFileToFirebaseStorage(id, imageFile)
         }
         // reset states
         setRecipeDetails(initialRecipeDetails);
@@ -108,7 +107,6 @@ const AddRecipePage = () => {
                     handleChange={handleChange} handleFileChange={handleFileChange} handleSubmit={handleSubmit} 
                     addInstruction={addInstruction} addIngedient={addIngedient} deleteIngredient={deleteIngredient} deleteInstruction={deleteInstruction}
                     recipeDetails={recipeDetails} ingredients={ingredients} instructions={instructions}
-                    setImageFile={setImageFile} setImageUrl={setImageUrl}
                 />
             </Box>
         </ Center>
