@@ -18,7 +18,7 @@ const recipesReducer = (state = initialState, action) => {
         case SET_CURRENT_RECIPE_WITH_ID:
             return{
                 ...state,
-                currentRecipe: state.savedRecipes.find(recipe => recipe.id == action.payload)
+                currentRecipe: action.payload
             }
         case ADD_RECIPE:
             return {

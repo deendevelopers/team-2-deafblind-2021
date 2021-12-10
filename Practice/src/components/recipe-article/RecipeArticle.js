@@ -1,20 +1,7 @@
 import React from "react";
 import { getUniqueIngredients } from "../../components/random-search/helperFunctions";
 import VerticalStepper from "../../components/stepper/Stepper";
-import { Button } from "@chakra-ui/button";
-import {
-  Box,
-  Center,
-  Heading,
-  Text,
-  Stack,
-  Flex,
-  Image,
-  useColorModeValue,
-  UnorderedList,
-  ListItem,
-  ListIcon
-} from "@chakra-ui/react";
+import { Box, Center, Heading, Text, Stack, Flex, Image, useColorModeValue, UnorderedList, ListItem, ListIcon } from "@chakra-ui/react";
 import { MdCheckCircle } from "react-icons/md"
 
 const RecipeArticle = ({

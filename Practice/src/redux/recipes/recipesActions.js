@@ -1,6 +1,5 @@
-import { addCustomRecipeToFirebaseCustomRecipes, addRecipeToFirebase, getSavedRecipesFromFirebase } from "../../firebase/firebaseUtils";
 import { ADD_CUSTOM_RECIPE_TO_FIREBASE, ADD_RECIPE, GET_SAVED_RECIPES_FROM_FIREBASE, SEARCH_FOR_RECIPES, SET_CURRENT_RECIPE, SET_CURRENT_RECIPE_WITH_ID } from "./recipesTypes";
-import { fetchRecipeSearchResultsFromSpoonacular, getFullRecipeInfoFromSpoonacular } from "./recipesUtils";
+import { fetchRecipeSearchResultsFromSpoonacular, getFullRecipeInfoFromSpoonacular, addRecipeToFirebase, addCustomRecipeToFirebaseCustomRecipes, getSavedRecipesFromFirebase } from "./recipesUtils";
 
 export const setCurrentRecipe = (recipe) => dispatch => {
     dispatch({
@@ -9,15 +8,17 @@ export const setCurrentRecipe = (recipe) => dispatch => {
     })
 }
 
-export const setCurrentRecipeWithId = (recipeId) => dispatch => {
+export const setCurrentRecipeWithId = (recipeId) => async(dispatch) => {
+    // console.log(recipeId);
+    const [fullRecipeData] = await getFullRecipeInfoFromSpoonacular([{id: recipeId}]);
+    // console.log(fullRecipeData);
     dispatch({
         type: SET_CURRENT_RECIPE_WITH_ID,
-        payload: recipeId
+        payload: fullRecipeData
     })
 }
 
 export const addRecipe = (recipe) => async (dispatch) => {
-    
     //Add to firebase
     await addRecipeToFirebase(recipe);
     // Add to redux
@@ -30,7 +31,6 @@ export const addRecipe = (recipe) => async (dispatch) => {
 export const getSavedRecipes = (savedRecipesIds) => async (dispatch) => {
     console.log({savedRecipesIds});
     const savedRecipes = await getSavedRecipesFromFirebase(savedRecipesIds);
-
     dispatch({
         type: GET_SAVED_RECIPES_FROM_FIREBASE,
         payload: savedRecipes

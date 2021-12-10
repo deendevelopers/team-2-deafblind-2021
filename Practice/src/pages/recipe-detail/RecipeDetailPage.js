@@ -12,10 +12,8 @@ const RecipeDetailPage = () => {
     const { recipeId } = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
-    // const savedRecipes = useSelector(state => state.recipes.savedRecipes);
     const currentUser = useSelector(state => state.user.currentUser);
     const currentRecipe = useSelector(state => state.recipes.currentRecipe);
-    // const recipeInfo = savedRecipes.find(recipe => recipe.id == recipeId)
 
     const handleSaveRecipe = () => {
         console.log("Handle Save Recipe")
@@ -23,15 +21,13 @@ const RecipeDetailPage = () => {
         // Save/add recipe to redux recipe slice 
         dispatch(addRecipe(currentRecipe));
         // Save/add recipe ID to redux saved recipes array in current user slice
-        console.log(recipeId);
         const recipeIdNumber = Number(recipeId)
         dispatch(addRecipeIdToUserSavedRecipesIds({ userId: currentUser.id, recipeId: recipeIdNumber }));
-
     }
 
     return (
         <React.Fragment>
-            <RecipeArticle currentRecipe={currentRecipe} />
+            {currentRecipe ? <RecipeArticle currentRecipe={currentRecipe} /> : <h3>Recipe Details Loading.....</h3>}
             { currentUser ? <SaveRecipeButton savedRecipesIds={currentUser.savedRecipesIds} currentRecipeId={currentRecipe.id} handleSaveRecipe={handleSaveRecipe} /> : <SignInAndSave />}
             <ChakraCustomButton bg="#285E61" color="#fff" onClick={() => history.push("/")}>Search New Recipe</ChakraCustomButton>
         </React.Fragment>

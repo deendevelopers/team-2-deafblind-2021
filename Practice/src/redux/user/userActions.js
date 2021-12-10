@@ -1,11 +1,9 @@
 import { ADD_RECIPE_TO_USER_SAVED_RECIPES, DELETE_RECIPE_FROM_USER_SAVED_RECIPES, SAVE_RECIPE_WITH_SIGN_IN, SET_CURRENT_USER } from "./userTypes";
-import { addRecipeIdToUserSavedRecipesIdsInFirebase, deleteRecipeIdToUserSavedRecipesIdsInFirebase } from "../../firebase/firebaseUtils";
+import { addRecipeIdToUserSavedRecipesIdsInFirebase, deleteRecipeIdToUserSavedRecipesIdsInFirebase } from "./userUtils";
 
 export const setCurrentUser = user => async (dispatch) => {
     // user object includes saved recipes too - therefore this will be set too
     // upon successful login
-    // console.log("setCurrentUser action ran! with user", user)
-    
     dispatch({
         type: SET_CURRENT_USER,
         payload: user
@@ -24,16 +22,13 @@ export const addRecipeIdToUserSavedRecipesIds = ({ userId, recipeId }) => async 
 }
 
 export const saveRecipeWithSignIn = () => (dispatch) => {
-
     return dispatch({
         type: SAVE_RECIPE_WITH_SIGN_IN
     })
 }
 
 export const deleteRecipeIdToUserSavedRecipesIds = ({ userId, recipeId }) => async (dispatch) => {
-
     await deleteRecipeIdToUserSavedRecipesIdsInFirebase(userId, recipeId);
-
     dispatch({
         type: DELETE_RECIPE_FROM_USER_SAVED_RECIPES
     })

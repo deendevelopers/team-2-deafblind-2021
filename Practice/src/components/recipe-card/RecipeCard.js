@@ -16,18 +16,15 @@ import {
 } from "@chakra-ui/react";
 
 export default function RecipeCard({ recipe, isDashboard }) {
+
   const { id, title, image } = recipe;
   const history = useHistory();
-  const currentUser = useSelector((state) => state.user.currentUser);
-  const fullRecipeData = useSelector((state) =>
-    state.recipes.savedRecipes.find((recipe) => recipe.id === id)
-  );
-  console.log({ fullRecipeData });
-
-
   const dispatch = useDispatch();
+
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const fullRecipeData = useSelector((state) => state.recipes.savedRecipes.find((recipe) => recipe.id === id));
+
   const handleDelete = () => {
-    console.log({ recipeIdToDelete: id });
     dispatch(
       deleteRecipeIdToUserSavedRecipesIds({
         userId: currentUser.id,
@@ -57,8 +54,6 @@ export default function RecipeCard({ recipe, isDashboard }) {
           w={"inherit"}
           src={image}
           alt={`The ${title} dish shown on a plate cooked`}
-          // layout={"fill"}
-          // sx={{ objectFit: "none" }}
         />
         <Stack p={4}>
           <Heading

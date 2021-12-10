@@ -14,22 +14,18 @@ const firebaseConfig = {
     measurementId: "G-7BQV5VF63B"
   };
 
+// Creates a user profile document in the /users endpoint for an authorised user in firestore
+// database to store email and username and other data which can then easily be accessed  
 const createUserProfileDocument = async (userAuth, additionalData) => {
     if(!userAuth) return;
 
-    console.log(userAuth.uid)
     const userRef = doc(db, "users", userAuth.uid);
     const userSnap = await getDoc(userRef);
 
+    //Therefore if the snapshot doesnt exist then we will create a new user 
     if (!userSnap.exists()) {
-        // doc.data() will be undefined in this case
-        console.log("No such document! Therefore will make one!");
-
         const { displayName, email } = userAuth
-
         const createdAt = new Date()
-  
-        //Therefore if the snapshot doesnt exist then we will create a new user 
         try {
             await setDoc(userRef, {
                 displayName,
@@ -41,180 +37,13 @@ const createUserProfileDocument = async (userAuth, additionalData) => {
         } catch (error) {
             console.log('error creating user', error.message)
         }
-
     } else {
+        // Authorised user ALREADY has user profile document
         // console.log("Document data:", userSnap.data());
     }
     return userRef;
 }
 
-const addRecipeIdToUserSavedRecipesIdsInFirebase = async (userId, recipeId) => {
-    if(!userId) return;
-
-    const userRef = doc(db, "users", userId);
-    const userSnap = await getDoc(userRef);
-
-    if(userSnap.exists()){
-        // console.log(userSnap.data());
-        const { createdAt, displayName, email, savedRecipesIds, ...remainingData } = userSnap.data();
-        // console.log(createdAt, displayName, email, savedRecipesIds, remainingData);
-
-        if(savedRecipesIds){
-            if (savedRecipesIds.includes(recipeId)) return;
-            
-            try {
-                console.log("adding NEW recipe!");
-                await setDoc(userRef, {
-                    displayName,
-                    email,
-                    createdAt,
-                    savedRecipesIds: [...savedRecipesIds, recipeId],
-                    ...remainingData
-                });
-      
-            } catch (error) {
-                console.log('error adding user recipe', error.message)
-            }
-
-        } else {
-            console.log("Adding FIRST recipe!!!!");
-            try {
-                await setDoc(userRef, {
-                    displayName,
-                    email,
-                    createdAt,
-                    savedRecipesIds: [recipeId],
-                    ...remainingData
-                });
-      
-            } catch (error) {
-                console.log('error adding first user recipe', error.message)
-            }
-        }
-    }
-}
-
-const deleteRecipeIdToUserSavedRecipesIdsInFirebase = async (userId, recipeId) => {
-    if(!userId) return;
-
-    const userRef = doc(db, "users", userId);
-    const userSnap = await getDoc(userRef);
-
-    if(userSnap.exists()){
-        // console.log(userSnap.data());
-        const { savedRecipesIds, ...remainingData } = userSnap.data();
-        // console.log(savedRecipesIds, remainingData);
-
-        // If recipe does not exist in savedRecipesIds in firebase - then nothing to delete 
-        if (!savedRecipesIds.includes(recipeId)) return;
-
-        const updatedSavedRecipesIds = savedRecipesIds.filter(savedRecipeId => savedRecipeId !== recipeId);
-
-        try {
-            console.log("DELETING recipe!");
-            await setDoc(userRef, {
-                savedRecipesIds: updatedSavedRecipesIds,
-                ...remainingData
-            });
-    
-        } catch (error) {
-            console.log('error adding user recipe', error.message)
-        }
-    }
-}
-
-const addRecipeToFirebase = async (recipe) => {
-    console.log("Adding recipe to Firebase", recipe);
-    if(!recipe) return;
-
-    const reciperRef = collection(db, "recipes");
-    
-    // Checking whether recipe already exists on Firebase or not:
-    const recipeQuery = query(reciperRef, where("id", "==", recipe.id));
-    // console.log({ recipeQuery });
-    const recipeQueryDocResults = await getDocs(recipeQuery);
-    console.log({ recipeQueryDocResults });
-    console.log(recipeQueryDocResults.empty);
-
-    // if recipe already stored then just return here
-    if(!recipeQueryDocResults.empty) return;
-    // otherwise add recipe to firebase - use try-catch to catch any errors
-    try {
-        await addDoc(reciperRef, recipe);
-    } catch (error) {
-        console.log("Error adding recipe to Firebase", error.message);
-    }
-}
-
-const getSavedRecipesFromFirebase = async (savedRecipesIds) => {
-    if(!savedRecipesIds) return;
-
-    const reciperRef = collection(db, "recipes");
-    
-    let savedRecipes = [];
-
-    // Firebase has 10 equality clause limit
-    if(savedRecipesIds.length <= 10) {
-        console.log({ savedRecipesIds });
-        const recipeQuery = query(reciperRef, where("id", "in", savedRecipesIds));
-        const recipeQueryDocResults = await getDocs(recipeQuery);
-        console.log({ recipeQueryDocResults });
-
-        recipeQueryDocResults.forEach((doc) => {
-            console.log(doc.data());
-            // What to do?
-            // .........
-            savedRecipes.push(doc.data());
-        })
-    } else {
-        let remainingRecipesIds = [...savedRecipesIds];
-
-        while(remainingRecipesIds.length > 0){
-            // Initialise an empty array to save the recipe Ids to process
-            let recipesIdsToProcess = [];
-
-            // Add a batch of 10 from the total/remaining recipes Ids array
-            recipesIdsToProcess.push(...remainingRecipesIds.splice(0, 10));
-
-
-            const recipeQuery = query(reciperRef, where("id", "in", recipesIdsToProcess));
-            const recipeQueryDocResults = await getDocs(recipeQuery);
-            console.log({ recipeQueryDocResults });
-        
-            recipeQueryDocResults.forEach((doc) => {
-                console.log(doc.data());
-                // What to do?
-                // .........
-                savedRecipes.push(doc.data());
-            })
-        }
-    }
-    console.log({savedRecipes});
-    return savedRecipes;
-}
-
-const addCustomRecipeToFirebaseCustomRecipes = async (recipe) => {
-    console.log("Adding CUSTOM recipe to Firebase", recipe);
-    if(!recipe) return;
-
-    const reciperRef = collection(db, "customRecipes");
-    
-    // Checking whether recipe already exists on Firebase or not:
-    const recipeQuery = query(reciperRef, where("id", "==", recipe.id));
-    // console.log({ recipeQuery });
-    const recipeQueryDocResults = await getDocs(recipeQuery);
-    console.log({ recipeQueryDocResults });
-    console.log(recipeQueryDocResults.empty);
-
-    // if recipe already stored then just return here
-    if(!recipeQueryDocResults.empty) return;
-    // otherwise add recipe to firebase - use try-catch to catch any errors
-    try {
-        await addDoc(reciperRef, recipe);
-    } catch (error) {
-        console.log("Error adding CUSTOM recipe to Firebase", error.message);
-    }
-}
 
 const addImageFileToFirebaseStorage = async (id, imageFile) => {
     const storageRef = ref(storage, `recipes/images/${id}.jpg`);
@@ -261,7 +90,7 @@ const addImageFileToFirebaseStorage = async (id, imageFile) => {
     }
 }
 
-  // Initialise Firebase
+// Initialise Firebase
 initializeApp(firebaseConfig);
 
 // Initialise firestore
@@ -275,4 +104,4 @@ const auth = getAuth();
 
 const analytics = getAnalytics();
 
-export { db, auth, storage, createUserProfileDocument, addRecipeIdToUserSavedRecipesIdsInFirebase, addRecipeToFirebase, getSavedRecipesFromFirebase, deleteRecipeIdToUserSavedRecipesIdsInFirebase, addCustomRecipeToFirebaseCustomRecipes, addImageFileToFirebaseStorage };
+export { db, auth, storage, createUserProfileDocument, addImageFileToFirebaseStorage };
