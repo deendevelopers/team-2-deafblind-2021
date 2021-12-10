@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, FormControl, FormLabel, RadioGroup, Radio } from '@chakra-ui/react';
+import { Flex, FormControl, FormLabel, RadioGroup, Radio } from '@chakra-ui/react';
 
 const RadioInputs = ({ groupLabel, radioLabels, setter, groupLabelState }) => (
     <FormControl as="fieldset">

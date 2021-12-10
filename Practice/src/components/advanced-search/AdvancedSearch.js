@@ -1,6 +1,6 @@
 import React from "react";
 import ChakraCustomButton from "../chakra-custom-button/ChakraCustomButton";
-import { Box, Flex, FormControl, FormLabel, RadioGroup, Radio } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { ArrowUpIcon } from "@chakra-ui/icons";
 import RadioInputs from "./RadioInputs";
 
