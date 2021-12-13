@@ -3,6 +3,7 @@ import { createClient } from 'contentful'
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import RecipeSearch from '../components/RecipeSearch';
 import { useSelector } from 'react-redux';
+import RecipeCard from '../components/RecipeCard';
 
 export const getStaticProps = async() => {
   const client = createClient({
@@ -41,6 +42,7 @@ export default function Home({ recipes }) {
             <RecipeSearch recipes={recipes} />
           </Box>
         </Flex>
+        { searchResults && searchResults.map((recipe) => <RecipeCard key={recipe.sys.id} recipe={recipe} />) }
       </main>
     </div>
   )
