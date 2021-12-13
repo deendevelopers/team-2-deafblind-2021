@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
+import { setSearchResults } from "../redux/recipes/recipesActions";
 
-const RecipeSearch = () => {
+const RecipeSearch = ({ recipes }) => {
+    const dispatch = useDispatch();
     const [searchTerm, setSearchTerm] = useState("");
 
     const handleSearch = () => {
         console.log(searchTerm);
+        const matchedRecipes = recipes.filter(recipe => recipe.fields.title.toLowerCase().includes(searchTerm.toLowerCase()));
+        console.log(matchedRecipes);
+        dispatch(setSearchResults(matchedRecipes));
     }
 
     return (

@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { createClient } from 'contentful'
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import RecipeSearch from '../components/RecipeSearch';
+import { useSelector } from 'react-redux';
 
 export const getStaticProps = async() => {
   const client = createClient({
@@ -22,6 +23,8 @@ export const getStaticProps = async() => {
 
 export default function Home({ recipes }) {
   console.log(recipes);
+  const searchResults = useSelector(state => state.recipes.searchResults);
+  console.log(searchResults);
   return (
     <div >
       <Head>
@@ -35,7 +38,7 @@ export default function Home({ recipes }) {
           <Box p={4} w="100%" >
             <Heading as="h1" size="xl" color="#111">Search it, dish it, plate it</ Heading>
             <Heading as="h2" size="md" fontWeight="normal" color="#111">Everyone needs a Recipe Mate</ Heading>
-            <RecipeSearch />
+            <RecipeSearch recipes={recipes} />
           </Box>
         </Flex>
       </main>
