@@ -1,8 +1,27 @@
 import Head from 'next/head'
+import { createClient } from 'contentful'
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import RecipeSearch from '../components/RecipeSearch';
 
-export default function Home() {
+export const getStaticProps = async() => {
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_KEY,
+  });
+
+  const response = await client.getEntries({
+    content_type: "recipe",
+  });
+
+  return {
+    props: {
+      recipes: response.items,
+    },
+  }
+}
+
+export default function Home({ recipes }) {
+  console.log(recipes);
   return (
     <div >
       <Head>
