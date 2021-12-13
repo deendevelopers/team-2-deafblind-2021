@@ -1,7 +1,9 @@
 import { createClient } from "contentful"
-import { Box, Center, Heading, Text, Stack, Flex, Image, useColorModeValue, UnorderedList, ListItem, ListIcon } from "@chakra-ui/react";
+import { Box, Center, Heading, Text, Stack, Flex, useColorModeValue, UnorderedList, ListItem, ListIcon } from "@chakra-ui/react";
 import { MdCheckCircle } from "react-icons/md"
 import VerticalStepper from "../../components/VerticleStepper";
+import Image from "next/image";
+import Fallback from "../../components/Fallback";
 
 const client = createClient({
     space: process.env.CONTENTFUL_SPACE_ID,
@@ -18,7 +20,7 @@ export const getStaticPaths = async () => {
 
     return {
         paths: recipePaths,
-        fallback: false,
+        fallback: true,
     }
 }
 
@@ -29,35 +31,46 @@ export const getStaticProps = async({ params }) => {
         "fields.slug": params.slug
     });
 
+    if (!items.length) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false
+            }
+        }
+    }
+
     return {
         props: {
             recipe: items[0],
         },
+        revalidate: 5,
     }
 }
 
 const RecipeDetails = ({ recipe }) => {
+    if(!recipe) return <Fallback />
+    
     console.log(recipe);
     const { title, summary, thumbnail, slug, ingredients, dietaryDetails, method } = recipe.fields;
 
     return (
         <Center py={6} px={4}>
             <Box
-            as="article"
-            maxW={{ base: "100vw", md: "50vw" }}
-            bg={useColorModeValue("white", "gray.900")}
-            boxShadow={"2xl"}
-            rounded={"md"}
-            color="#111"
+                as="article"
+                w={{ base: "100vw", md: "50vw" }}
+                bg={useColorModeValue("white", "gray.900")}
+                boxShadow={"2xl"}
+                rounded={"md"}
+                color="#111"
             >
-            <Box overflow={"hidden"}>
+            <Box width={300} overflow={"hidden"}>
                 <Image
                     src={"https:" + thumbnail.fields.file.url}
                     alt={`The ${title} dish shown on a plate cooked`}
                     width={400}
                     height={300}
-                    // layout="fill"
-                    // objectFit="cover"
+                    layout="responsive"
                 />
             </Box>
             <Stack as="section" mt={2} p={5}>
@@ -93,12 +106,12 @@ const RecipeDetails = ({ recipe }) => {
                     ))}
                 </UnorderedList>
             </Stack>
-             <Center> 
+             {/* <Center>  */}
                  <Flex direction={{ base:"column", md: "row"}} justifyContent="space-between" px={10} py={2}> 
                 {/* <Button>Start Cooking</Button> */}
                 <VerticalStepper method={method} /> 
                 </Flex> 
-            </Center> 
+            {/* </Center>  */}
             </Box>
         </Center>
     )
