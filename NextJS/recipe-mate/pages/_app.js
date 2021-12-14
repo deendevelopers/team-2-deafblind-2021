@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "../redux/store";
 import { StepsStyleConfig as Steps } from "chakra-ui-steps";
 
+
 const theme = extendTheme({
   components: {
     Steps,
@@ -12,13 +13,14 @@ const theme = extendTheme({
 });
 
 function MyApp({ Component, pageProps }) {
+
   return (
     <ChakraProvider theme={theme}>
-      <Layout>
-        <Provider store={store}>
+      <Provider store={store}>
+        <Layout>
           <Component {...pageProps} />
-        </Provider>
-      </Layout>
+        </Layout>
+      </Provider>
     </ChakraProvider>
     );
 }
