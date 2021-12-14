@@ -1,7 +1,13 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, Icon, Button } from "@chakra-ui/react";
+import { AiOutlineUser } from "react-icons/ai";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+    const currentUser = useSelector((state) => state.user.currentUser);
+    console.log(currentUser);
+    const UserIcon = (props) => <Icon as={AiOutlineUser} />;
+
     return (
         <Flex as="nav" bg="green.100" w="100%" alignItems={"center"} justifyContent={"space-between"} p={[5, 3]} >
             <Link href="/">
@@ -13,6 +19,19 @@ const Navbar = () => {
                     </Flex>
                 </a>
             </Link>
+            <Link href="/sign-in">
+                <a>
+                    <Button
+                    variant={"solid"}
+                    bg="#fff"
+                    color="#2D3748"
+                    size={"lg"}
+                    rightIcon={<UserIcon />}
+                    >
+                        Sign-In
+                    </Button>
+                </a>
+              </Link>
         </Flex>
     )
 }
