@@ -27,7 +27,6 @@ const Login = () => {
         try {
             const { user } =  await signInWithEmailAndPassword(auth, email, password);
 
-            const { id } = currentRecipe;
             setFormInputs({email: '', password:''})
 
         } catch (error) {
@@ -36,7 +35,7 @@ const Login = () => {
     }
 
     return (
-        <Flex direction="column" p={4}>
+        <Flex as="section" direction="column" p={4}>
             <Center>
                 <Heading as='h2' fontSize="2xl" m={[10, 0]}>
                     Log in
