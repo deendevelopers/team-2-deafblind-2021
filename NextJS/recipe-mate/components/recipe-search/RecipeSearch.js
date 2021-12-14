@@ -20,6 +20,11 @@ const RecipeSearch = ({ recipes }) => {
         const matchedRecipes = filterRecipes({ searchTerm, recipes, dietTerm: advancedSearchQueries.dietTerm, allergiesTerm: advancedSearchQueries.allergiesTerm, mealTypesTerm: advancedSearchQueries.mealTypesTerm });
         console.log(matchedRecipes);
         dispatch(setSearchResults(matchedRecipes));
+        setAdvancedSearchQueries({
+            dietTerm: [],
+            allergiesTerm: [],
+            mealTypesTerm: [],
+        });
     }
 
     const handleAdvancedSearchChange = (event) => {

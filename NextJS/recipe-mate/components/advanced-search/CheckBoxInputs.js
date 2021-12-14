@@ -3,7 +3,7 @@ import { Flex, FormControl, FormLabel, CheckboxGroup, Checkbox } from '@chakra-u
 const CheckBoxInputs = ({ name, groupLabel, checkBoxLabels, handleChange, groupLabelState }) => (
     <FormControl as="fieldset">
         <FormLabel as="legend">{groupLabel}</FormLabel>
-        <CheckboxGroup>
+        <CheckboxGroup value={groupLabelState}>
             <Flex direction="column">
             {checkBoxLabels.map((type) => (
                 <Checkbox 
