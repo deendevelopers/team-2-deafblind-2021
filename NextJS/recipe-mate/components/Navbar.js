@@ -19,19 +19,38 @@ const Navbar = () => {
                     </Flex>
                 </a>
             </Link>
-            <Link href="/sign-in">
-                <a>
-                    <Button
-                    variant={"solid"}
-                    bg="#fff"
-                    color="#2D3748"
-                    size={"lg"}
-                    rightIcon={<UserIcon />}
-                    >
-                        Sign-In
-                    </Button>
-                </a>
-              </Link>
+            <Flex alignItems={"center"}>
+            {currentUser ? (
+                <Link href="/dashboard">
+                    <a>
+                        <Button
+                        variant={"solid"}
+                        bg="#fff"
+                        color="#2D3748"
+                        size={"lg"}
+                        rightIcon={<UserIcon />}
+                        >
+                            Account
+                        </Button>
+                    </a>
+                </Link>
+            ) : (
+                <Link href="/sign-in">
+                    <a>
+                        <Button
+                        variant={"solid"}
+                        bg="#fff"
+                        color="#2D3748"
+                        size={"lg"}
+                        rightIcon={<UserIcon />}
+                        >
+                            Sign-In
+                        </Button>
+                    </a>
+                </Link>
+            )}
+          </Flex>
+
         </Flex>
     )
 }

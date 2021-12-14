@@ -1,11 +1,18 @@
 import { Box, Flex, Center } from "@chakra-ui/react";
+import { useEffect } from "react";
 import ChakraCustomButton from "../../components/ChakraCustomButton";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
 const SignInPage = () => {
+    const currentUser = useSelector(state => state.user.currentUser);
 
     const router = useRouter();
+
+    useEffect(() => {
+        if(currentUser) router.replace("/dashboard");
+    }, [currentUser]);
 
   return (
       <Center as="main">

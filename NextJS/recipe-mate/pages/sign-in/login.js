@@ -1,16 +1,21 @@
 import { signInWithEmailAndPassword } from "@firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth } from "../../firebase/firebaseUtils";
 import { FormControl, FormLabel, Input, Center, Heading, Flex } from "@chakra-ui/react";
 import ChakraCustomButton from "../../components/ChakraCustomButton";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 const Login = () => {
-
+    const currentUser = useSelector(state => state.user.currentUser);
     const router = useRouter();
 
     const [ formInputs, setFormInputs ] = useState({ email: "", password: "" }); 
 
+    useEffect(() => {
+        if(currentUser) router.replace("/dashboard");
+    }, [currentUser]);
+    
     const handleChange = ({ target: { name, value } }) => {
         setFormInputs(prevFormInputState => ({ 
             ...prevFormInputState,

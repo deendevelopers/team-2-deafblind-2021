@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, createUserProfileDocument } from "../../firebase/firebaseUtils";
 import {  Center, Heading,  FormControl, FormLabel, Input, Flex } from '@chakra-ui/react';
 import ChakraCustomButton from "../../components/ChakraCustomButton";
-  
-const Register = () => {
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
+const Register = () => {
+    const currentUser = useSelector(state => state.user.currentUser);
+    const router = useRouter();
     const initialFormInputState = { username: "", email: "", password: "", confirmPassword: "" };
     const [ formInputs, setFormInputs ] = useState(initialFormInputState); 
+
+    useEffect(() => {
+        if(currentUser) router.replace("/dashboard");
+    }, [currentUser]);
 
     const handleChange = ({ target: { name, value } }) => {
         setFormInputs(prevFormInputState => ({ 
