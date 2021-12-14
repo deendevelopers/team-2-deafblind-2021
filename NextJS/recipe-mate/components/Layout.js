@@ -6,6 +6,7 @@ import Navbar from "./Navbar";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
+import { onSnapshot } from "firebase/firestore";
 import { auth, createUserProfileDocument } from "../firebase/firebaseUtils";
 import { setCurrentUser } from "../redux/user/userActions";
 
