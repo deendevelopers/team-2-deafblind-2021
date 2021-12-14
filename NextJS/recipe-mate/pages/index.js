@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { createClient } from 'contentful'
 import { Box, Flex, Heading } from "@chakra-ui/react";
-import RecipeSearch from '../components/RecipeSearch';
+import RecipeSearch from '../components/recipe-search/RecipeSearch';
 import { useSelector } from 'react-redux';
 import RecipeCard from '../components/RecipeCard';
 

@@ -64,7 +64,7 @@ const RecipeDetails = ({ recipe }) => {
                 rounded={"md"}
                 color="#111"
             >
-            <Box width={300} overflow={"hidden"}>
+            {/* <Box width={300} overflow={"hidden"}> */}
                 <Image
                     src={"https:" + thumbnail.fields.file.url}
                     alt={`The ${title} dish shown on a plate cooked`}
@@ -72,7 +72,7 @@ const RecipeDetails = ({ recipe }) => {
                     height={300}
                     layout="responsive"
                 />
-            </Box>
+            {/* </Box> */}
             <Stack as="section" mt={2} p={5}>
                 <Heading
                 as="h2"
