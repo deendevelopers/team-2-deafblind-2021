@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import { createClient } from 'contentful'
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading, Center } from "@chakra-ui/react";
 import RecipeSearch from '../components/recipe-search/RecipeSearch';
 import { useSelector } from 'react-redux';
 import RecipeCard from '../components/RecipeCard';
+import SelectChoicesSearch from '../components/select-choices-search/SelectChoicesSearch';
 
 export const getStaticProps = async() => {
   const client = createClient({
@@ -33,8 +34,7 @@ export default function Home({ recipes }) {
         <meta name="description" content="Search it, dish it, plate it - Everyone needs a Recipe Mate" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main >
+      <main>
         <Flex direction="column" bg="green.100" mb={4}>
           <Box p={4} w="100%" >
             <Heading as="h1" size="xl" color="#111">Search it, dish it, plate it</ Heading>
@@ -42,7 +42,10 @@ export default function Home({ recipes }) {
             <RecipeSearch recipes={recipes} />
           </Box>
         </Flex>
-        { searchResults && searchResults.map((recipe) => <RecipeCard key={recipe.sys.id} recipe={recipe} />) }
+        <SelectChoicesSearch recipes={recipes} />
+        <Center p={4} >
+          { searchResults && searchResults.map((recipe) => <RecipeCard key={recipe.sys.id} recipe={recipe} />) }
+        </Center >
       </main>
     </div>
   )

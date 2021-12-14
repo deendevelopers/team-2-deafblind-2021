@@ -8,7 +8,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.1.1",
     "@chakra-ui/react": "^1.7.3",
+    "@chakra-ui/transition": "^1.4.2",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "chakra-ui-steps": "^1.5.0",
@@ -20,6 +22,7 @@
     "react-icons": "^4.3.1",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
+    "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1"
   },
