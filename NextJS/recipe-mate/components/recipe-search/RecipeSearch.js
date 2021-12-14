@@ -16,8 +16,8 @@ const RecipeSearch = ({ recipes }) => {
     })
 
     const handleSearch = () => {
-        console.log(searchTerm);
-        const matchedRecipes = filterRecipes({ searchTerm, recipes });
+        console.log({ searchTerm, advancedSearchQueries });
+        const matchedRecipes = filterRecipes({ searchTerm, recipes, dietTerm: advancedSearchQueries.dietTerm, allergiesTerm: advancedSearchQueries.allergiesTerm, mealTypesTerm: advancedSearchQueries.mealTypesTerm });
         console.log(matchedRecipes);
         dispatch(setSearchResults(matchedRecipes));
     }

@@ -3,9 +3,9 @@ import { Box } from '@chakra-ui/react';
 import { ArrowUpIcon } from "@chakra-ui/icons";
 import CheckBoxInputs from "./CheckBoxInputs";
 
-const diets = ["vegetarian", "vegan", "gluten free", "ketogenic", "pescetarian",];
-const allergies = ["dairy", "shellfish", "peanut",];
-const mealTypes = [ "main course", "dessert", "appetizer", "salad", "breakfast", "soup", "snack",];
+const diets = ["halal", "kosher", "vegetarian", "vegan", "gluten free", "ketogenic", "pescatarian",];
+const allergies = ["dairy", "shellfish", "nuts",];
+const mealTypes = [ "lunch", "dessert", "appetiser", "salad", "breakfast", "dinner", "snack",];
 
 const AdvancedSearch = ({ dietTerm, allergiesTerm, mealTypesTerm, handleAdvancedSearchChange, setShowAdvancedSearch }) => {
     return (
