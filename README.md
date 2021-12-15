@@ -50,6 +50,6 @@ This version was deployed using [Netlify](https://www.netlify.com/) - visit the 
 
 #### Server-side rendering
 
-2) The second version of the app used [Next.js](https://nextjs.org/) and [Contentful]https://www.contentful.com/) as the data source for the recipes.
+2) The second version of the app used [Next.js](https://nextjs.org/) and [Contentful](https://www.contentful.com/) as the data source for the recipes.
 
 This version was deployed using [Vercel](https://vercel.com/) - visit the app at here [https://recipe-mate.vercel.app/](https://recipe-mate.vercel.app/).
