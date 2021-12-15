@@ -4,7 +4,7 @@ import VerticalStepper from "./VerticleStepper";
 import Image from "next/image";
 
 const RecipeArticle = ({ recipe }) => {
-    const { title, summary, thumbnail, slug, ingredients, dietaryDetails, method } = recipe.fields;
+    const { title, summary, thumbnail, slug, ingredients, dietaryDetails, method, cookingTime } = recipe.fields;
 
     return(
         <Center py={6} px={4} flexDirection="column">
@@ -36,6 +36,7 @@ const RecipeArticle = ({ recipe }) => {
                 {title}
                 </Heading>
                 <Text textAlign={"justify"}>{summary}</Text>
+                <Text>Time to cook (in minutes): {cookingTime}</Text>
             </Stack>
             <Stack as="section" my={2} p={4}>
                 <Heading as="h3" fontSize={"lg"} textAlign="center">

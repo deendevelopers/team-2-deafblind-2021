@@ -5,7 +5,7 @@ import { Flex, Text } from "@chakra-ui/react";
 
 const SaveRecipeButton = ({ handleSaveRecipe, savedRecipesSlugs, currentRecipeSlug, isCard }) => {
     const router = useRouter();
-    const showButton = !savedRecipesSlugs.includes(currentRecipeSlug);
+    const showButton = savedRecipesSlugs && !savedRecipesSlugs.includes(currentRecipeSlug);
 
     return (
         showButton ? <ChakraCustomButton onClick={handleSaveRecipe}>Save Recipe</ChakraCustomButton>

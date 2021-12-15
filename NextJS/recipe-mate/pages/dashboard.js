@@ -33,17 +33,18 @@ const UserDashboardPage = ({ recipes }) => {
 
     const currentUser = useSelector((state) => state.user.currentUser);
 
-    const userSavedRecipes = currentUser && recipes.filter(recipe => currentUser.savedRecipesSlugs.includes(recipe.fields.slug));
-    console.log({userSavedRecipes});
+    const userSavedRecipes = (currentUser && currentUser.savedRecipesSlugs) && recipes.filter(recipe => currentUser.savedRecipesSlugs.includes(recipe.fields.slug));
+    // console.log({userSavedRecipes});
     // const dispatch = useDispatch();
 
     useEffect(() => {
+        "On snapshot ran again"
         const unsubscribeFromAuth = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 // console.log({user});
                 console.log("User is logged in!")
             } else {
-                console.log("App.js, no user is logged in!");
+                console.log("Dashboard.js, no user is logged in!");
                 // use .replace so that unauthenticated user cannot simply use back button to try and get back to dashboard page!
                 router.replace("/sign-in");
             }

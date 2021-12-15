@@ -14,13 +14,12 @@ const Layout = ({ children }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-      console.log("Ran the USEEFFECT in App.js");
+      console.log("Ran the USEEFFECT in Layout.js");
       const unsubscribeFromAuth = onAuthStateChanged(auth, async (user) => {
         if (user) {
           // User is signed in, see docs for a list of available properties
           // https://firebase.google.com/docs/reference/js/firebase.User
-          // const uid = user.uid;
-          // console.log("App.js, user with following uid is logged in", uid);
+          console.log("user is logged in");
           const userRef = await createUserProfileDocument(user);
           onSnapshot(userRef, (snapShot) => {
             // console.log(snapShot.data())
@@ -33,7 +32,7 @@ const Layout = ({ children }) => {
           });
         } else {
           // User is signed out
-          console.log("App.js, no user is logged in!");
+          console.log("Layout.js, no user is logged in!");
           // i.e. setting our redux current user state to null
           dispatch(setCurrentUser(user));
         }

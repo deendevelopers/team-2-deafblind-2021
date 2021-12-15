@@ -1,10 +1,12 @@
 import Head from "next/head"
 import { createClient } from "contentful"
-import { Box, Flex, Heading, Center } from "@chakra-ui/react";
+import { Box, Flex, Heading, Center, Text } from "@chakra-ui/react";
 import RecipeSearch from "../components/recipe-search/RecipeSearch";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import RecipeCard from "../components/RecipeCard";
 import SelectChoicesSearch from "../components/select-choices-search/SelectChoicesSearch";
+import { useEffect } from "react";
+import { resetSearch } from "../redux/recipes/recipesActions";
 
 export const getStaticProps = async() => {
   const client = createClient({
@@ -25,8 +27,15 @@ export const getStaticProps = async() => {
 
 export default function Home({ recipes }) {
   console.log(recipes);
-  const searchResults = useSelector(state => state.recipes.searchResults);
+  const { searchResults, startSearch } = useSelector(state => state.recipes);
   console.log(searchResults);
+  const dispatch = useDispatch();
+
+  // reset redux state tracking whether search started when component mounts
+  useEffect(() => {
+    dispatch(resetSearch());
+  }, [])
+
   return (
     <div >
       <Head>
@@ -44,7 +53,7 @@ export default function Home({ recipes }) {
         </Flex>
         <SelectChoicesSearch recipes={recipes} />
         <Center p={4} >
-          { searchResults && searchResults.map((recipe) => <RecipeCard key={recipe.sys.id} recipe={recipe} />) }
+          { searchResults.length>0 ? searchResults.map((recipe) => <RecipeCard key={recipe.sys.id} recipe={recipe} />) : startSearch && <Text>No recipes match your search - Please try again with another search</Text>}
         </Center >
       </main>
     </div>

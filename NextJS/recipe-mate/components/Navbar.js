@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 const Navbar = () => {
     const currentUser = useSelector((state) => state.user.currentUser);
-    console.log(currentUser);
     const UserIcon = (props) => <Icon as={AiOutlineUser} />;
 
     return (

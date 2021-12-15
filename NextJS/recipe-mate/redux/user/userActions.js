@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, ADD_RECIPE_TO_USER_SAVED_RECIPES, DELETE_RECIPE_FROM_USER_SAVED_RECIPES } from "./userActionTypes";
+import { SET_CURRENT_USER, ADD_RECIPE_TO_USER_SAVED_RECIPES, DELETE_RECIPE_FROM_USER_SAVED_RECIPES, SAVE_RECIPE_WITH_SIGN_IN } from "./userActionTypes";
 import { addRecipeSlugToUserSavedRecipesSlugsInFirebase, deleteRecipeSlugFromUserSavedRecipesSlugsInFirebase } from "./userUtils";
 
 export const setCurrentUser = user => async (dispatch) => {
@@ -24,5 +24,12 @@ export const deleteRecipeSlugFromUserSavedRecipesSlugs = ({ userId, recipeSlug }
     await deleteRecipeSlugFromUserSavedRecipesSlugsInFirebase(userId, recipeSlug);
     dispatch({
         type: DELETE_RECIPE_FROM_USER_SAVED_RECIPES
+    })
+}
+
+export const saveRecipeWithSignIn = (recipeSlug) => (dispatch) => {
+    return dispatch({
+        type: SAVE_RECIPE_WITH_SIGN_IN,
+        payload: recipeSlug
     })
 }

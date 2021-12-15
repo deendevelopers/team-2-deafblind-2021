@@ -1,8 +1,9 @@
-import { SET_CURRENT_USER } from "./userActionTypes";
+import { SET_CURRENT_USER, SAVE_RECIPE_WITH_SIGN_IN } from "./userActionTypes";
 
 const initialState = {
     currentUser: null,
-    saveRecipeWithSignIn: false
+    saveRecipeWithSignIn: false,
+    recipeSlugToSaveWithSignIn: [],
 }
 
 const userReducer = (state = initialState, action) => {
@@ -11,7 +12,13 @@ const userReducer = (state = initialState, action) => {
         case SET_CURRENT_USER:
             return {
                 ...state,
-                currentUser: action.payload
+                currentUser: action.payload,
+            }
+        case SAVE_RECIPE_WITH_SIGN_IN:
+            return {
+                ...state,
+                saveRecipeWithSignIn: true,
+                recipeSlugToSaveWithSignIn: action.payload,
             }
         default:
             return state

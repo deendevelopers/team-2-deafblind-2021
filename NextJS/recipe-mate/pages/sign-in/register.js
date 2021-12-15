@@ -3,12 +3,14 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, createUserProfileDocument } from "../../firebase/firebaseUtils";
 import {  Center, Heading,  FormControl, FormLabel, Input, Flex } from '@chakra-ui/react';
 import ChakraCustomButton from "../../components/ChakraCustomButton";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { addRecipeSlugToUserSavedRecipesSlugs } from "../../redux/user/userActions";
 
 const Register = () => {
-    const currentUser = useSelector(state => state.user.currentUser);
+    const { currentUser, saveRecipeWithSignIn, recipeSlugToSaveWithSignIn } = useSelector(state => state.user);
     const router = useRouter();
+    const dispatch = useDispatch();
     const initialFormInputState = { username: "", email: "", password: "", confirmPassword: "" };
     const [ formInputs, setFormInputs ] = useState(initialFormInputState); 
 
@@ -37,7 +39,10 @@ const Register = () => {
             const { user } = await createUserWithEmailAndPassword(auth, email, password);
             await createUserProfileDocument(user, { displayName: username });
             // console.log(user, { displayName: username });
-            
+            if(saveRecipeWithSignIn){
+                console.log("Save Recipe with Register")
+                dispatch(addRecipeSlugToUserSavedRecipesSlugs({ userId: user.uid, recipeSlug: recipeSlugToSaveWithSignIn }));
+            }
             setFormInputs(initialFormInputState);
         } catch (error) {
             console.log(error);

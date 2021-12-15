@@ -8,6 +8,7 @@ import RecipeArticle from "../../components/RecipeArticle";
 import { useDispatch, useSelector } from "react-redux";
 import SaveRecipeButton from "../../components/SaveRecipeButton";
 import { addRecipeSlugToUserSavedRecipesSlugs } from "../../redux/user/userActions";
+import SignInAndSave from "../../components/SignInAndSave";
 
 const client = createClient({
     space: process.env.CONTENTFUL_SPACE_ID,
@@ -70,7 +71,7 @@ const RecipeDetails = ({ recipe }) => {
     return (
         <React.Fragment>
             <RecipeArticle recipe={recipe} />
-            { currentUser && <SaveRecipeButton savedRecipesSlugs={currentUser.savedRecipesSlugs} currentRecipeSlug={slug} handleSaveRecipe={handleSaveRecipe} /> }
+            { currentUser ? <SaveRecipeButton savedRecipesSlugs={currentUser.savedRecipesSlugs} currentRecipeSlug={slug} handleSaveRecipe={handleSaveRecipe} /> : <SignInAndSave recipeSlug={slug} />}
             <ChakraCustomButton bg="#285E61" color="#fff" onClick={() => router.push("/")}>Search New Recipe</ChakraCustomButton>
         </React.Fragment>
     )

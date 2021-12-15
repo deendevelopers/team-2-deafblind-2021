@@ -1,4 +1,10 @@
-import { SET_SEARCH_RESULTS } from "./recipesActionTypes"
+import { SET_SEARCH_RESULTS, RESET_SEARCH } from "./recipesActionTypes"
+
+export const resetSearch = () => dispatch => {
+    dispatch({
+        type: RESET_SEARCH
+    })
+}
 
 export const setSearchResults = (recipes) => dispatch => {
     dispatch({
