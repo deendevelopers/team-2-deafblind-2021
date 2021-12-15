@@ -10,16 +10,28 @@ import {
     useColorModeValue,
   } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { addRecipeSlugToUserSavedRecipesSlugs } from "../redux/user/userActions";
+import SaveRecipeButton from "./SaveRecipeButton";
 
-const RecipeCard = ({ recipe }) => {
+const RecipeCard = ({ recipe, isDashboard }) => {
     console.log({recipe});
     const router = useRouter();
+    const currentUser = useSelector(state => state.user.currentUser);
+    const dispatch = useDispatch();
 
     const { title, summary, thumbnail, slug } = recipe.fields;
 
     const handleMoreDetailsClick = () => {
         router.push("/recipes/" + slug);
     };
+
+    const handleSaveRecipe = () => {
+        console.log("Handle Save Recipe")
+        // Save/add recipe slug to redux saved recipes array in current user slice
+        dispatch(addRecipeSlugToUserSavedRecipesSlugs({ userId: currentUser.id, recipeSlug: slug }));
+    }
+
     return (
         <Center marginTop={5}>
             <Box
@@ -52,7 +64,12 @@ const RecipeCard = ({ recipe }) => {
                         {summary}
                     </Text>
                 </Stack>
-                <Button onClick={handleMoreDetailsClick}>More Details</Button>
+                <Stack>
+                    <Flex m={2} justifyContent="space-between">
+                        <Button onClick={handleMoreDetailsClick}>More Details</Button>
+                        { (currentUser && !isDashboard) && <SaveRecipeButton isCard savedRecipesSlugs={currentUser.savedRecipesSlugs} currentRecipeSlug={slug} handleSaveRecipe={handleSaveRecipe} /> }
+                    </Flex>
+                </Stack>
             </Box>
         </Center>
     )
