@@ -14,19 +14,17 @@ Team 2's focus statement for the hackthon was:
 
 - Custom recipe adding to firebase - to build own database of recipes
 
-## In Process
-
 - Recipe searching using spoonacular API (In Process)
 
-- Step-by-step instructions and progress bar 
+- Step-by-step instructions 
 
-- Convert to PWA
+- Progressive Web App (PWA)
 
 ## Improvements/Future Work
 
 - Adding Reviews to recipes 
 
-- Communication between users via chap regarding recipes 
+- Communication between users via chat regarding recipes 
 
 - Adding recipes and/or voice recording of step by step instructions
 
@@ -39,3 +37,19 @@ Team 2's focus statement for the hackthon was:
 - Main
 
 - Practice: includes some pre-project work done to get familiar with semantic html, spoonacular API, etc.
+
+## Versions
+
+Both versions use React and also Firebase for authentication.
+
+### Client-side rendering:
+
+1) The first version of the app began with the create react app CRA React implementation along with the Spoonacular API for fetching recipes.
+
+This version was deployed using [Netlify](https://www.netlify.com/) - visit the app at here [https://recipe-mate.netlify.app/](https://recipe-mate.netlify.app/).
+
+#### Server-side rendering
+
+2) The second version of the app used [Next.js](https://nextjs.org/) and [Contentful]https://www.contentful.com/) as the data source for the recipes.
+
+This version was deployed using [Vercel](https://vercel.com/) - visit the app at here [https://recipe-mate.vercel.app/](https://recipe-mate.vercel.app/).
