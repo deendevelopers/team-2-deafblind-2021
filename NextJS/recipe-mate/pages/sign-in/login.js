@@ -4,10 +4,13 @@ import { auth } from "../../firebase/firebaseUtils";
 import { FormControl, FormLabel, Input, Center, Heading, Flex } from "@chakra-ui/react";
 import ChakraCustomButton from "../../components/ChakraCustomButton";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addRecipeSlugToUserSavedRecipesSlugs } from "../../redux/user/userActions";
 
 const Login = () => {
-    const currentUser = useSelector(state => state.user.currentUser);
+    const { currentUser, saveRecipeWithSignIn, recipeSlugToSaveWithSignIn } = useSelector(state => state.user);
+    const dispatch = useDispatch();
+
     const router = useRouter();
 
     const [ formInputs, setFormInputs ] = useState({ email: "", password: "" }); 
@@ -31,7 +34,10 @@ const Login = () => {
 
         try {
             const { user } =  await signInWithEmailAndPassword(auth, email, password);
-
+            if(saveRecipeWithSignIn){
+                console.log("Save Recipe with Register")
+                dispatch(addRecipeSlugToUserSavedRecipesSlugs({ userId: user.uid, recipeSlug: recipeSlugToSaveWithSignIn }));
+            }
             setFormInputs({email: '', password:''})
 
         } catch (error) {
