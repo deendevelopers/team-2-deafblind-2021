@@ -11,8 +11,9 @@ import {
   } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { addRecipeSlugToUserSavedRecipesSlugs } from "../redux/user/userActions";
+import { addRecipeSlugToUserSavedRecipesSlugs, deleteRecipeSlugFromUserSavedRecipesSlugs } from "../redux/user/userActions";
 import SaveRecipeButton from "./SaveRecipeButton";
+import ChakraCustomButton from "./ChakraCustomButton";
 
 const RecipeCard = ({ recipe, isDashboard }) => {
     console.log({recipe});
@@ -31,6 +32,15 @@ const RecipeCard = ({ recipe, isDashboard }) => {
         // Save/add recipe slug to redux saved recipes array in current user slice
         dispatch(addRecipeSlugToUserSavedRecipesSlugs({ userId: currentUser.id, recipeSlug: slug }));
     }
+
+    const handleDelete = () => {
+        dispatch(
+          deleteRecipeSlugFromUserSavedRecipesSlugs({
+            userId: currentUser.id,
+            recipeSlug: slug,
+          })
+        );
+    };
 
     return (
         <Center marginTop={5}>
@@ -66,8 +76,13 @@ const RecipeCard = ({ recipe, isDashboard }) => {
                 </Stack>
                 <Stack>
                     <Flex m={2} justifyContent="space-between">
-                        <Button onClick={handleMoreDetailsClick}>More Details</Button>
+                        <ChakraCustomButton onClick={handleMoreDetailsClick}>More Details</ChakraCustomButton>
                         { (currentUser && !isDashboard) && <SaveRecipeButton isCard savedRecipesSlugs={currentUser.savedRecipesSlugs} currentRecipeSlug={slug} handleSaveRecipe={handleSaveRecipe} /> }
+                        {isDashboard && (
+                            <ChakraCustomButton onClick={handleDelete} style={{ backgroundColor: "red", color: "white" }}>
+                                Delete
+                            </ChakraCustomButton>
+                        )}
                     </Flex>
                 </Stack>
             </Box>

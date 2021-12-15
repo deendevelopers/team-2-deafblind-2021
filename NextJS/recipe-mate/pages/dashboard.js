@@ -52,11 +52,6 @@ const UserDashboardPage = ({ recipes }) => {
         return () => unsubscribeFromAuth();
     }, [currentUser])
 
-    // useEffect(() => {
-    //     const { savedRecipesSlugs } = currentUser;
-    //     dispatch(getSavedRecipes(savedRecipesSlugs));
-    // }, [dispatch, savedRecipesIds, savedRecipesSlugs.length]);
-
     const handleSignOut = async () => {
         try {
         await signOut(auth);
@@ -68,14 +63,14 @@ const UserDashboardPage = ({ recipes }) => {
     if (currentUser){
         return (
             <React.Fragment>
-                <Heading as="h2">Welcome to your dashboard<Text>{currentUser.displayName}</Text></Heading>
+                <Heading as="h2" textAlign="center">Welcome to your dashboard<Text>{currentUser.displayName}</Text></Heading>
             <main className="user-dashboard-page-main">
                 <Center mb={3}>
                     <Button onClick={handleSignOut}>Sign-Out</Button>
                 </Center>
                 <section>
                 <Box px={4}>
-                    <Heading as="h3">Your Saved Recipes</Heading>
+                    <Heading as="h3" textAlign="center">Your Saved Recipes</Heading>
                     <Flex direction="column">
                     {userSavedRecipes &&
                         userSavedRecipes.map((recipe) => (
