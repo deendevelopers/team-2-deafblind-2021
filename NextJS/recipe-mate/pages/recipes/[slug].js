@@ -1,9 +1,13 @@
 import { createClient } from "contentful"
-import { Box, Center, Heading, Text, Stack, Flex, useColorModeValue, UnorderedList, ListItem, ListIcon } from "@chakra-ui/react";
-import { MdCheckCircle } from "react-icons/md"
-import VerticalStepper from "../../components/VerticleStepper";
-import Image from "next/image";
+import { Box, Center, Heading, Flex } from "@chakra-ui/react";
 import Fallback from "../../components/Fallback";
+import ChakraCustomButton from "../../components/ChakraCustomButton";
+import { useRouter } from "next/router";
+import React from "react";
+import RecipeArticle from "../../components/RecipeArticle";
+import { useDispatch, useSelector } from "react-redux";
+import SaveRecipeButton from "../../components/SaveRecipeButton";
+import { addRecipeSlugToUserSavedRecipesSlugs } from "../../redux/user/userActions";
 
 const client = createClient({
     space: process.env.CONTENTFUL_SPACE_ID,
@@ -52,68 +56,23 @@ const RecipeDetails = ({ recipe }) => {
     if(!recipe) return <Fallback />
     
     console.log(recipe);
-    const { title, summary, thumbnail, slug, ingredients, dietaryDetails, method } = recipe.fields;
+    const router = useRouter();
+    const dispatch = useDispatch();
+    const currentUser = useSelector(state => state.user.currentUser);
+    const { slug } = recipe.fields;
+
+    const handleSaveRecipe = () => {
+        console.log("Handle Save Recipe")
+        // Save/add recipe slug to redux saved recipes array in current user slice
+        dispatch(addRecipeSlugToUserSavedRecipesSlugs({ userId: currentUser.id, recipeSlug: slug }));
+    }
 
     return (
-        <Center py={6} px={4}>
-            <Box
-                as="article"
-                w={{ base: "100vw", md: "50vw" }}
-                bg={useColorModeValue("white", "gray.900")}
-                boxShadow={"2xl"}
-                rounded={"md"}
-                color="#111"
-            >
-            {/* <Box width={300} overflow={"hidden"}> */}
-                <Image
-                    src={"https:" + thumbnail.fields.file.url}
-                    alt={`The ${title} dish shown on a plate cooked`}
-                    width={400}
-                    height={300}
-                    layout="responsive"
-                />
-            {/* </Box> */}
-            <Stack as="section" mt={2} p={5}>
-                <Heading
-                as="h2"
-                color={useColorModeValue("gray.700", "white")}
-                fontSize={"2xl"}
-                fontFamily={"body"}
-                textAlign={"center"}
-                >
-                {title}
-                </Heading>
-                <Text textAlign={"justify"}>{summary}</Text>
-            </Stack>
-            <Stack as="section" my={2} p={4}>
-                <Heading as="h3" fontSize={"lg"} textAlign="center">
-                    Dietary details:
-                </Heading>
-                <Flex justifyContent="space-between">
-                    <UnorderedList>
-                    {dietaryDetails.map((dietMetric) => <ListItem key={dietMetric} listStyleType="none"><ListIcon as={MdCheckCircle} color='green.500' />{dietMetric}</ListItem>)}
-                    </UnorderedList>
-                </Flex>
-            </Stack>
-            <Stack as="section" my={2} p={2}>
-                <Heading as="h3" fontSize={"lg"} textAlign="center">
-                List of ingredients:
-                </Heading>
-                <UnorderedList stylePosition="inside">
-                {ingredients &&
-                    ingredients.map((ingredient) => (
-                    <ListItem pl={10} py={2} key={ingredient}>{ingredient}</ListItem>
-                    ))}
-                </UnorderedList>
-            </Stack>
-             {/* <Center>  */}
-                 <Flex direction={{ base:"column", md: "row"}} justifyContent="space-between" px={10} py={2}> 
-                {/* <Button>Start Cooking</Button> */}
-                <VerticalStepper method={method} /> 
-                </Flex> 
-            {/* </Center>  */}
-            </Box>
-        </Center>
+        <React.Fragment>
+            <RecipeArticle recipe={recipe} />
+            { currentUser && <SaveRecipeButton savedRecipesIds={currentUser.savedRecipesIds} recipeSlug={slug} handleSaveRecipe={handleSaveRecipe} /> }
+            <ChakraCustomButton bg="#285E61" color="#fff" onClick={() => router.push("/")}>Search New Recipe</ChakraCustomButton>
+        </React.Fragment>
     )
 }
 

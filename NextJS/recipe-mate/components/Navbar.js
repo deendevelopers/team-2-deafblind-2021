@@ -13,7 +13,7 @@ const Navbar = () => {
             <Link href="/">
                 <a>
                     <Flex justifyContent={"space-between"} alignItems={"center"}>
-                        <Text fontSize="2xl" fontWeight="bold" color="green.900">
+                        <Text fontSize={{ base: "1.4rem", md: "2xl"}} fontWeight="bold" color="green.900">
                             Recipe Mate
                         </Text>
                     </Flex>
