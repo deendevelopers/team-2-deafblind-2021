@@ -1,41 +1,38 @@
-# Team 2 Deaf Blind 2021
+# Recipe Mate
 
-This is the group repo for Team 2 of the Deaf-Blind Deen Developers hackathon of 2021.
+Next.js implementation of the recipe mate project with Contentful.
 
-Team 2's focus statement for the hackthon was:
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-`A huge majority of people with sensory loss and those that care for them do not know what places and activities are accessible for their needs, this includes restaurants, stores and gyms.`
+## Getting Started
 
-## Main Features
+First, run the development server:
 
-- Random (and custom random search) recipe generation using spoonacular API
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-- Users can save and delete desired recipes when logged in 
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- Custom recipe adding to firebase - to build own database of recipes
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-## In Process
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-- Recipe searching using spoonacular API (In Process)
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-- Step-by-step instructions and progress bar 
+## Learn More
 
-- Convert to PWA
+To learn more about Next.js, take a look at the following resources:
 
-## Improvements/Future Work
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- Adding Reviews to recipes 
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-- Communication between users via chap regarding recipes 
+## Deploy on Vercel
 
-- Adding recipes and/or voice recording of step by step instructions
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-- Chat feature 
-
-- Build native app with React Native or other tools 
-
-## Branches
-
-- Main
-
-- Practice: includes some pre-project work done to get familiar with semantic html, spoonacular API, etc.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
