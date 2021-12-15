@@ -32,7 +32,7 @@ export default function Home({ recipes }) {
   // reset redux state tracking whether search started when component mounts
   useEffect(() => {
     dispatch(resetSearch());
-  }, [])
+  }, [dispatch])
 
   return (
     <div >

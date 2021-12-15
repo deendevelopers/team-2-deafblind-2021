@@ -12,7 +12,7 @@ const SignInPage = () => {
 
     useEffect(() => {
         if(currentUser) router.replace("/dashboard");
-    }, [currentUser]);
+    }, [currentUser, router]);
 
   return (
       <Center as="main">

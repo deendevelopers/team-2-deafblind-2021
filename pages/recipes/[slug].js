@@ -54,12 +54,16 @@ export const getStaticProps = async({ params }) => {
 }
 
 const RecipeDetails = ({ recipe }) => {
-    if(!recipe) return <Fallback />
+    // move this down due to ...https://github.com/Gelio/tslint-react-hooks/issues/1
+    // if(!recipe) return <Fallback />
     
     console.log(recipe);
     const router = useRouter();
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.user.currentUser);
+
+    if(!recipe) return <Fallback />
+
     const { slug } = recipe.fields;
 
     const handleSaveRecipe = () => {
