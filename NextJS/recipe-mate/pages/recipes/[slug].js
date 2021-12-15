@@ -70,7 +70,7 @@ const RecipeDetails = ({ recipe }) => {
     return (
         <React.Fragment>
             <RecipeArticle recipe={recipe} />
-            { currentUser && <SaveRecipeButton savedRecipesIds={currentUser.savedRecipesIds} recipeSlug={slug} handleSaveRecipe={handleSaveRecipe} /> }
+            { currentUser && <SaveRecipeButton savedRecipesSlugs={currentUser.savedRecipesSlugs} currentRecipeSlug={slug} handleSaveRecipe={handleSaveRecipe} /> }
             <ChakraCustomButton bg="#285E61" color="#fff" onClick={() => router.push("/")}>Search New Recipe</ChakraCustomButton>
         </React.Fragment>
     )

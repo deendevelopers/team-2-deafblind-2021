@@ -1,10 +1,10 @@
-import Head from 'next/head'
-import { createClient } from 'contentful'
+import Head from "next/head"
+import { createClient } from "contentful"
 import { Box, Flex, Heading, Center } from "@chakra-ui/react";
-import RecipeSearch from '../components/recipe-search/RecipeSearch';
-import { useSelector } from 'react-redux';
-import RecipeCard from '../components/RecipeCard';
-import SelectChoicesSearch from '../components/select-choices-search/SelectChoicesSearch';
+import RecipeSearch from "../components/recipe-search/RecipeSearch";
+import { useSelector } from "react-redux";
+import RecipeCard from "../components/RecipeCard";
+import SelectChoicesSearch from "../components/select-choices-search/SelectChoicesSearch";
 
 export const getStaticProps = async() => {
   const client = createClient({

@@ -7,15 +7,34 @@ import { auth } from "../firebase/firebaseUtils";
 import { Heading, Box, Flex, Button, Center, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { onAuthStateChanged } from "firebase/auth";
+import { getSavedRecipes } from "../redux/recipes/recipesActions";
+import { createClient } from "contentful";
+import RecipeCard from "../components/RecipeCard";
 
+export const getStaticProps = async() => {
+    const client = createClient({
+      space: process.env.CONTENTFUL_SPACE_ID,
+      accessToken: process.env.CONTENTFUL_ACCESS_KEY,
+    });
+  
+    const response = await client.getEntries({
+      content_type: "recipe",
+    });
+  
+    return {
+      props: {
+        recipes: response.items,
+      },
+    }
+  }
 
-
-const UserDashboardPage = () => {
+const UserDashboardPage = ({ recipes }) => {
     const router = useRouter();
 
     const currentUser = useSelector((state) => state.user.currentUser);
 
-    // const savedRecipesData = useSelector((state) => state.recipes.savedRecipes);
+    const userSavedRecipes = currentUser && recipes.filter(recipe => currentUser.savedRecipesSlugs.includes(recipe.fields.slug));
+    console.log({userSavedRecipes});
     // const dispatch = useDispatch();
 
     useEffect(() => {
@@ -33,9 +52,10 @@ const UserDashboardPage = () => {
         return () => unsubscribeFromAuth();
     }, [currentUser])
 
-//   useEffect(() => {
-//     dispatch(getSavedRecipes(savedRecipesIds));
-//   }, [dispatch, savedRecipesIds, savedRecipesIds.length]);
+    // useEffect(() => {
+    //     const { savedRecipesSlugs } = currentUser;
+    //     dispatch(getSavedRecipes(savedRecipesSlugs));
+    // }, [dispatch, savedRecipesIds, savedRecipesSlugs.length]);
 
     const handleSignOut = async () => {
         try {
@@ -53,17 +73,17 @@ const UserDashboardPage = () => {
                 <Center mb={3}>
                     <Button onClick={handleSignOut}>Sign-Out</Button>
                 </Center>
-                {/* <section>
+                <section>
                 <Box px={4}>
                     <Heading as="h3">Your Saved Recipes</Heading>
                     <Flex direction="column">
-                    {savedRecipesData &&
-                        savedRecipesData.map((recipe) => (
-                        <RecipeCard key={recipe.id} recipe={recipe} isDashboard />
+                    {userSavedRecipes &&
+                        userSavedRecipes.map((recipe) => (
+                        <RecipeCard key={recipe.sys.id} recipe={recipe} isDashboard />
                         ))}
                     </Flex>
                 </Box>
-                </section> */}
+                </section>
             </main>
             </React.Fragment>
         );
