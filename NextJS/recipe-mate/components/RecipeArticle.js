@@ -44,7 +44,7 @@ const RecipeArticle = ({ recipe }) => {
                 </Heading>
                 <Flex justifyContent="space-between">
                     <UnorderedList>
-                    {dietaryDetails.map((dietMetric) => <ListItem key={dietMetric} listStyleType="none"><ListIcon as={MdCheckCircle} color='green.500' />{dietMetric}</ListItem>)}
+                        { dietaryDetails?.map((dietMetric) => <ListItem key={dietMetric} listStyleType="none"><ListIcon as={MdCheckCircle} color='green.500' />{dietMetric}</ListItem>) }
                     </UnorderedList>
                 </Flex>
             </Stack>
@@ -53,10 +53,7 @@ const RecipeArticle = ({ recipe }) => {
                 List of ingredients:
                 </Heading>
                 <UnorderedList stylePosition="inside">
-                {ingredients &&
-                    ingredients.map((ingredient) => (
-                    <ListItem pl={10} py={2} key={ingredient}>{ingredient}</ListItem>
-                    ))}
+                    { ingredients?.map((ingredient) => <ListItem pl={10} py={2} key={ingredient}>{ingredient}</ListItem>) }
                 </UnorderedList>
             </Stack>
             {/* <Center>  */}

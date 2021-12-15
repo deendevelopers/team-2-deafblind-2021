@@ -78,14 +78,15 @@ const RecipeSearch = ({ recipes }) => {
                     </Button>
                 </InputRightElement>
             </InputGroup>
-            {!showAdvancedSearch && (
+            {!showAdvancedSearch ? (
                 <Center my={3}>
                 <Button onClick={() => setShowAdvancedSearch(true)}>
                     Advanced Search
                 </Button>
                 </Center>
-            )}
-            {showAdvancedSearch && <AdvancedSearch dietTerm={advancedSearchQueries.dietTerm} allergiesTerm={advancedSearchQueries.allergiesTerm} mealTypesTerm={advancedSearchQueries.mealTypesTerm} handleAdvancedSearchChange={handleAdvancedSearchChange} setShowAdvancedSearch={setShowAdvancedSearch} /> }
+                ) :
+                <AdvancedSearch dietTerm={advancedSearchQueries.dietTerm} allergiesTerm={advancedSearchQueries.allergiesTerm} mealTypesTerm={advancedSearchQueries.mealTypesTerm} handleAdvancedSearchChange={handleAdvancedSearchChange} setShowAdvancedSearch={setShowAdvancedSearch} /> 
+            }
         </ React.Fragment>
     )
 }

@@ -33,7 +33,9 @@ const UserDashboardPage = ({ recipes }) => {
 
     const currentUser = useSelector((state) => state.user.currentUser);
 
-    const userSavedRecipes = (currentUser && currentUser.savedRecipesSlugs) && recipes.filter(recipe => currentUser.savedRecipesSlugs.includes(recipe.fields.slug));
+    // Using "?" instead of "&&" to take care of null/undefined states of values
+    const userSavedRecipes = recipes.filter(recipe => currentUser?.savedRecipesSlugs.includes(recipe.fields.slug));
+    // const userSavedRecipes = (currentUser && currentUser.savedRecipesSlugs) && recipes.filter(recipe => currentUser.savedRecipesSlugs.includes(recipe.fields.slug));
     // console.log({userSavedRecipes});
     // const dispatch = useDispatch();
 

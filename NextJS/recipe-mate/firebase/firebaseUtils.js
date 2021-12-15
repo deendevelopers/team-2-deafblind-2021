@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
@@ -45,7 +45,7 @@ const createUserProfileDocument = async (userAuth, additionalData) => {
 }
 
 // Initialise Firebase
-initializeApp(firebaseConfig);
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp() ;
 
 // Initialise firestore
 const db = getFirestore();
