@@ -1,5 +1,7 @@
 # Recipe Mate
 
+Visit the deployed version of the app at [here](https://recipe-mate.vercel.app/).
+
 Next.js implementation of the recipe mate project with Contentful.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
