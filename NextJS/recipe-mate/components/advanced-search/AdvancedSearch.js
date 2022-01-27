@@ -9,7 +9,7 @@ const mealTypes = [ "lunch", "dessert", "appetiser", "salad", "breakfast", "dinn
 
 const AdvancedSearch = ({ dietTerm, allergiesTerm, mealTypesTerm, handleAdvancedSearchChange, setShowAdvancedSearch }) => {
     return (
-        <Box bg="white" marginTop={2} p={3}>
+        <Box bg="white" display="flex" flexDirection="column" marginTop={2} p={3}>
             <Flex as="form" direction={{ base: "column", md: "row" }} justifyContent="space-evenly" alignItems={{base: "center", md: "flex-start"}} mb={5}>
                 <CheckBoxInputs name="dietTerm" handleChange={handleAdvancedSearchChange} groupLabelState={dietTerm} groupLabel="Diet" checkBoxLabels={diets} />
 
