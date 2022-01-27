@@ -1,7 +1,7 @@
-import { Flex, FormControl, FormLabel, CheckboxGroup, Checkbox } from '@chakra-ui/react';
+import { Flex, FormControl, FormLabel, CheckboxGroup, Checkbox, Text } from '@chakra-ui/react';
 
 const CheckBoxInputs = ({ name, groupLabel, checkBoxLabels, handleChange, groupLabelState }) => (
-    <FormControl as="fieldset">
+    <FormControl as="fieldset" width="fit-content">
         <FormLabel as="legend">{groupLabel}</FormLabel>
         <CheckboxGroup value={groupLabelState}>
             <Flex direction="column">
@@ -14,7 +14,7 @@ const CheckBoxInputs = ({ name, groupLabel, checkBoxLabels, handleChange, groupL
                     isChecked={groupLabelState.includes(type)}
                     onChange={handleChange}
                 >
-                    {type}
+                    <Text as="span" textTransform="capitalize">{type}</Text>
                 </Checkbox>
             ))}
             </Flex>

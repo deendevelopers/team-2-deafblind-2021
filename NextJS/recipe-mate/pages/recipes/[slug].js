@@ -67,7 +67,7 @@ const RecipeDetails = ({ recipe }) => {
         dispatch(addRecipeSlugToUserSavedRecipesSlugs({ userId: currentUser.id, recipeSlug: slug }));
     }
     return (
-        <React.Fragment>
+        <Flex as="main" direction="column" alignItems="center">
             <Head>
                 <title>{recipe.fields.title}</title>
                 <meta name="description" content={recipe.fields.summary} />
@@ -75,7 +75,7 @@ const RecipeDetails = ({ recipe }) => {
             <RecipeArticle recipe={recipe} />
             { currentUser ? <SaveRecipeButton savedRecipesSlugs={currentUser.savedRecipesSlugs} currentRecipeSlug={slug} handleSaveRecipe={handleSaveRecipe} /> : <SignInAndSave recipeSlug={slug} />}
             <ChakraCustomButton bg="#285E61" color="#fff" onClick={() => router.push("/")}>Search New Recipe</ChakraCustomButton>
-        </React.Fragment>
+        </Flex>
     )
 }
 

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import ChakraCustomButton from "./ChakraCustomButton";
 import { CheckIcon } from "@chakra-ui/icons";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Text, Center } from "@chakra-ui/react";
 
 const SaveRecipeButton = ({ handleSaveRecipe, savedRecipesSlugs, currentRecipeSlug, isCard }) => {
     const router = useRouter();
@@ -14,10 +14,10 @@ const SaveRecipeButton = ({ handleSaveRecipe, savedRecipesSlugs, currentRecipeSl
             :
         (isCard ? <Flex alignItems="center"><CheckIcon color="green" /><Text color="green">Already saved</Text></Flex>
             : (
-            <aside className="save-recipe-button-container">
-                <Text fontSize={"md"} textAlign={"center"}>This recipe has been saved - please go to your dashboard to view</Text>
+            <Center as="aside" gap={3} mb={{base: 4, md: 0}}>
+                <Text color="green.800" fontWeight="bold" fontSize={"md"} textAlign={"center"}>Recipe already saved</Text>
                 <ChakraCustomButton onClick={() => router.push("/dashboard")}>Dashboard</ChakraCustomButton>
-            </aside>
+            </Center>
             )
         )    
     )

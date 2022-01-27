@@ -1,5 +1,5 @@
 import { createClient } from "contentful"
-import { Box, Flex, Heading, Center} from "@chakra-ui/react";
+import { Flex, Heading } from "@chakra-ui/react";
 import RecipeSearch from "../components/recipe-search/RecipeSearch";
 import { useDispatch } from "react-redux";
 import SelectChoicesSearch from "../components/select-choices-search/SelectChoicesSearch";

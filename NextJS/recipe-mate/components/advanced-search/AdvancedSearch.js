@@ -1,5 +1,5 @@
 import ChakraCustomButton from "../ChakraCustomButton";
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { ArrowUpIcon } from "@chakra-ui/icons";
 import CheckBoxInputs from "./CheckBoxInputs";
 
@@ -10,13 +10,13 @@ const mealTypes = [ "lunch", "dessert", "appetiser", "salad", "breakfast", "dinn
 const AdvancedSearch = ({ dietTerm, allergiesTerm, mealTypesTerm, handleAdvancedSearchChange, setShowAdvancedSearch }) => {
     return (
         <Box bg="white" marginTop={2} p={3}>
-            <form>
+            <Flex as="form" direction={{ base: "column", md: "row" }} justifyContent="space-evenly" alignItems={{base: "center", md: "flex-start"}} mb={5}>
                 <CheckBoxInputs name="dietTerm" handleChange={handleAdvancedSearchChange} groupLabelState={dietTerm} groupLabel="Diet" checkBoxLabels={diets} />
 
                 <CheckBoxInputs name="allergiesTerm" handleChange={handleAdvancedSearchChange} groupLabelState={allergiesTerm} groupLabel="Allergies" checkBoxLabels={allergies} />
 
                 <CheckBoxInputs name="mealTypesTerm" handleChange={handleAdvancedSearchChange} groupLabelState={mealTypesTerm} groupLabel="Meal Types" checkBoxLabels={mealTypes} />
-            </form>
+            </Flex>
             <ChakraCustomButton onClick={() => setShowAdvancedSearch(false)}>
                 Back to top <ArrowUpIcon marginLeft={2} border="2px" borderRadius={50} name="arrow-up" />
             </ChakraCustomButton>
