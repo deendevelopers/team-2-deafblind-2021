@@ -1,13 +1,10 @@
 import { signOut } from "@firebase/auth";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { auth } from "../firebase/firebaseUtils";
-// import { getSavedRecipes } from "../../redux/recipes/recipesActions";
-// import RecipeCard from "../../components/recipe-card/RecipeCard";
 import { Heading, Box, Flex, Button, Center, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { onAuthStateChanged } from "firebase/auth";
-import { getSavedRecipes } from "../redux/recipes/recipesActions";
 import { createClient } from "contentful";
 import RecipeCard from "../components/RecipeCard";
 
@@ -65,15 +62,13 @@ const UserDashboardPage = ({ recipes }) => {
 
     if (currentUser){
         return (
-            <React.Fragment>
-                <Heading as="h2" textAlign="center">Welcome to your dashboard<Text>{currentUser.displayName}</Text></Heading>
-            <main className="user-dashboard-page-main">
-                <Center mb={3}>
+            <Flex as="main" direction="column" p={3} alignItems="center">
+                <Flex as="section" wrap="wrap" justifyContent="center" gap={{ base: "1rem", md: "3rem"}} mb={6}>
+                    <Heading as="h1" textAlign="center" textTransform="capitalize">Welcome to your dashboard <Text as="span">{currentUser.displayName}</Text> </Heading>
                     <Button onClick={handleSignOut}>Sign-Out</Button>
-                </Center>
-                <section>
-                <Box px={4}>
-                    <Heading as="h3" textAlign="center">Your Saved Recipes</Heading>
+                </Flex>
+                <Box as="section" px={4}>
+                    <Heading as="h2" textAlign="center">Your Saved Recipes</Heading>
                     <Flex direction="column">
                     {userSavedRecipes &&
                         userSavedRecipes.map((recipe) => (
@@ -81,9 +76,7 @@ const UserDashboardPage = ({ recipes }) => {
                         ))}
                     </Flex>
                 </Box>
-                </section>
-            </main>
-            </React.Fragment>
+            </Flex>
         );
     }
     return <Heading as="h3">Please wait while we authenticate you.</Heading>
