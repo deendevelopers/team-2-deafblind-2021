@@ -50,14 +50,11 @@ const Register = () => {
     }
 
     return (
-        <Flex as="section" direction="column" p={4}>
-            <Center>
-                <Heading as='h2' fontSize="2xl" m={[6, 0]}>
-                    Register
-                </Heading>
-            </Center>
-            <form className="register-form" onSubmit={handleSubmit}>
-
+        <Flex as="main" direction="column" alignItems="center" p={4} minH={"90vh"}>
+            <Heading as='h1' fontSize="2xl" my={4}>
+                Register
+            </Heading>
+            <Flex as="form" direction="column" onSubmit={handleSubmit} w={{base: "90vw", md: "70vw", lg: "50vw"}}>
                 <FormControl id='username'>
                     <FormLabel>Choose a username</FormLabel>
                     <Input name="username" id="usernameForRegister" type="text" value={formInputs.username} onChange={handleChange}/>
@@ -73,7 +70,7 @@ const Register = () => {
                     <Input name="password" id="passwordForRegister" type="password" value={formInputs.password} onChange={handleChange}/>
                 </FormControl>
  
-                <FormControl id='confirmPassword'>
+                <FormControl id='confirmPassword' mb={4}>
                     <FormLabel>Confirm password</FormLabel>
                     <Input name="confirmPassword" id="confirmPasswordForRegister" type="password" value={formInputs.confirmPassword} onChange={handleChange}/>
                 </FormControl>
@@ -81,8 +78,7 @@ const Register = () => {
                 <ChakraCustomButton type="submit" bg="#285E61" color="#fff">
                     Register
                 </ChakraCustomButton>
-
-            </form>
+            </Flex>
         </Flex>
     )
 }

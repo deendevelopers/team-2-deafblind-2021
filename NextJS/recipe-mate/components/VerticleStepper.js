@@ -13,7 +13,7 @@ const VerticalStepper = ({ method }) => {
     return { number, step: instruction }
   })
   
-  console.log(steps);
+  // console.log(steps);
 
   const allSteps = steps.map((methodStep) => {
     const { number, step } = methodStep;
@@ -22,8 +22,8 @@ const VerticalStepper = ({ method }) => {
       content: step,
     };
   });
-  console.log(allSteps[0]);
-  console.log(steps);
+  // console.log(allSteps[0]);
+  // console.log(steps);
   return (
     <>
       <Box>

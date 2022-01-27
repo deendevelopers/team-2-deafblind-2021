@@ -25,7 +25,7 @@ export const getStaticProps = async() => {
 }
 
 export default function Home({ recipes }) {
-  console.log(recipes);
+  // console.log(recipes);
   const dispatch = useDispatch();
 
   // reset redux state tracking whether search started when component mounts

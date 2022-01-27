@@ -13,7 +13,7 @@ import SaveRecipeButton from "./SaveRecipeButton";
 import ChakraCustomButton from "./ChakraCustomButton";
 
 const RecipeCard = ({ recipe, isDashboard }) => {
-    console.log({recipe});
+    // console.log({recipe});
     const router = useRouter();
     const currentUser = useSelector(state => state.user.currentUser);
     
@@ -26,7 +26,7 @@ const RecipeCard = ({ recipe, isDashboard }) => {
     };
 
     const handleSaveRecipe = () => {
-        console.log("Handle Save Recipe")
+        // console.log("Handle Save Recipe")
         // Save/add recipe slug to redux saved recipes array in current user slice
         dispatch(addRecipeSlugToUserSavedRecipesSlugs({ userId: currentUser.id, recipeSlug: slug }));
     }

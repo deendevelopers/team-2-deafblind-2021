@@ -9,7 +9,7 @@ const SelectChoicesSearch = ({ recipes }) => {
 
     const handleClick = ({ target: { name } }) => {
         const filteredRecipes = filterRecipesBySelection({ recipes, selection: name });
-        console.log(filteredRecipes)
+        // console.log(filteredRecipes)
         dispatch(setSearchResults(filteredRecipes));
     }
 

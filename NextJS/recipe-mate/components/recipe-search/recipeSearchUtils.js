@@ -8,23 +8,23 @@ export const filterRecipes = ({ searchTerm, recipes, dietTerm, allergiesTerm, me
 
     // Advanced Search
     if(matchedRecipes.length>0){
-        console.log("Advanced Search");
-        console.log(dietTerm)
+        // console.log("Advanced Search");
+        // console.log(dietTerm)
         if(dietTerm.length>0){
-            console.log("diet Term advanced search")
+            // console.log("diet Term advanced search")
             matchedRecipes = matchedRecipes.filter(recipe => {
                 const { dietaryDetails } = recipe.fields;
                 const dishDietaryDetails = dietaryDetails.map(term => term.toLowerCase());
                 //dishTerm is the user's diets
                 const includesDiets = dietTerm.every(diet => dishDietaryDetails.includes(diet.toLowerCase()))
-                console.log(includesDiets);
+                // console.log(includesDiets);
                 return includesDiets;
             })
-            console.log("Recipes after diet check", matchedRecipes);
+            // console.log("Recipes after diet check", matchedRecipes);
         }
-        console.log(allergiesTerm)
+        // console.log(allergiesTerm)
         if(allergiesTerm.length>0){
-            console.log("allergies Term advanced search")
+            // console.log("allergies Term advanced search")
             matchedRecipes = matchedRecipes.filter(recipe => {
                 const { allergies } = recipe.fields;
                 const dishAllergies = allergies.map(term => term.toLowerCase());
@@ -33,9 +33,9 @@ export const filterRecipes = ({ searchTerm, recipes, dietTerm, allergiesTerm, me
                 return isAllergyFree;
             })
         }
-        console.log(mealTypesTerm)
+        // console.log(mealTypesTerm)
         if(mealTypesTerm.length>0){
-            console.log("meal Types advanced search")
+            // console.log("meal Types advanced search")
             matchedRecipes = matchedRecipes.filter(recipe => {
                 const { mealType } = recipe.fields;
                 const dishMealTypes = mealType.map(term => term.toLowerCase());
@@ -47,6 +47,6 @@ export const filterRecipes = ({ searchTerm, recipes, dietTerm, allergiesTerm, me
         }
     }
 
-    console.log(matchedRecipes);
+    // console.log(matchedRecipes);
     return matchedRecipes;
 }

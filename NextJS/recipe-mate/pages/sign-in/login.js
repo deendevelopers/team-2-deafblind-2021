@@ -10,9 +10,7 @@ import { addRecipeSlugToUserSavedRecipesSlugs } from "../../redux/user/userActio
 const Login = () => {
     const { currentUser, saveRecipeWithSignIn, recipeSlugToSaveWithSignIn } = useSelector(state => state.user);
     const dispatch = useDispatch();
-
     const router = useRouter();
-
     const [ formInputs, setFormInputs ] = useState({ email: "", password: "" }); 
 
     useEffect(() => {
@@ -28,8 +26,6 @@ const Login = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        // console.log(formInputs);
         const { email,  password } = formInputs;
 
         try {
@@ -46,31 +42,26 @@ const Login = () => {
     }
 
     return (
-        <Flex as="section" direction="column" p={4}>
-            <Center>
-                <Heading as='h2' fontSize="2xl" m={[10, 0]}>
-                    Log in
-                </Heading>
-            </Center>            
+        <Flex as="main" direction="column" alignItems="center" p={4} minH={"95vh"}>
+            <Heading as='h1' fontSize="2xl" my={4}>
+                Log in
+            </Heading>
             
-            <form className="login-form" onSubmit={handleSubmit}>
-
+            <Flex as="form" direction="column" onSubmit={handleSubmit} w={{base: "90vw", md: "70vw", lg: "50vw"}}>
                 <FormControl id='email'>
                     <FormLabel>Email address</FormLabel>
                     <Input name="email" id="emailForLogin" type="email" value={formInputs.email} onChange={handleChange}/>
                 </FormControl>
 
-                <FormControl id='password'>
+                <FormControl id='password' mb={4}>
                     <FormLabel>Password</FormLabel>
                     <Input name="password" id="passwordForLogin" type="password" value={formInputs.password} onChange={handleChange}/>
                 </FormControl>
 
-    
                 <ChakraCustomButton type="submit" bg="#285E61" color="#fff">
                     Log-In
                 </ChakraCustomButton>
-            
-            </ form>
+            </ Flex>
         </ Flex>
     )
 }

@@ -16,9 +16,9 @@ const RecipeSearch = ({ recipes }) => {
     })
 
     const handleSearch = () => {
-        console.log({ searchTerm, advancedSearchQueries });
+        // console.log({ searchTerm, advancedSearchQueries });
         const matchedRecipes = filterRecipes({ searchTerm, recipes, dietTerm: advancedSearchQueries.dietTerm, allergiesTerm: advancedSearchQueries.allergiesTerm, mealTypesTerm: advancedSearchQueries.mealTypesTerm });
-        console.log(matchedRecipes);
+        // console.log(matchedRecipes);
         dispatch(setSearchResults(matchedRecipes));
         setAdvancedSearchQueries({
             dietTerm: [],
@@ -29,7 +29,7 @@ const RecipeSearch = ({ recipes }) => {
 
     const handleAdvancedSearchChange = (event) => {
         const { name, value } = event.target;
-        console.log({ name, value });
+        // console.log({ name, value });
         setAdvancedSearchQueries(exisitingState => {
             if(exisitingState[name].includes(value)){
                 return {

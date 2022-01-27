@@ -1,7 +1,7 @@
 
 export const filterRecipesBySelection = ({ recipes, selection }) => {
-    console.log(selection);
-    console.log(recipes);
+    // console.log(selection);
+    // console.log(recipes);
     let filteredRecipes = [...recipes];
     switch (selection) {
         case "indian":
@@ -27,8 +27,8 @@ export const filterRecipesBySelection = ({ recipes, selection }) => {
             })        
             break;
         case "easy":
-            console.log("ran Easy");
-            console.log(filteredRecipes);
+            // console.log("ran Easy");
+            // console.log(filteredRecipes);
             filteredRecipes = filteredRecipes.filter(recipe => {
                 const dishCookingTime = recipe.fields.cookingTime;
                 return dishCookingTime<=20;

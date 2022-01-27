@@ -5,7 +5,7 @@ import { Flex, Text, Center } from "@chakra-ui/react";
 
 const SaveRecipeButton = ({ handleSaveRecipe, savedRecipesSlugs, currentRecipeSlug, isCard }) => {
     const router = useRouter();
-    console.log({savedRecipesSlugs});
+    // console.log({savedRecipesSlugs});
     const showButton = savedRecipesSlugs && !savedRecipesSlugs.includes(currentRecipeSlug);
 
     if (showButton === undefined) return <></>;
