@@ -1,12 +1,9 @@
 import Image from "next/image";
 import {
-    Box,
-    Center,
     Heading,
     Flex,
     Text,
     Stack,
-    Button,
     useColorModeValue,
   } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -19,6 +16,7 @@ const RecipeCard = ({ recipe, isDashboard }) => {
     console.log({recipe});
     const router = useRouter();
     const currentUser = useSelector(state => state.user.currentUser);
+    
     const dispatch = useDispatch();
 
     const { title, summary, thumbnail, slug } = recipe.fields;
@@ -43,50 +41,38 @@ const RecipeCard = ({ recipe, isDashboard }) => {
     };
 
     return (
-        <Center marginTop={5}>
-            <Box
-                maxW={"400px"}
-                w={"fit-content"}
-                bg={useColorModeValue("white", "gray.900")}
-                boxShadow={"2xl"}
-                rounded={"md"}
-                // p={6}
-                overflow={"hidden"}
-            >
-                <Image
-                    src={"https:" + thumbnail.fields.file.url}
-                    alt={`The ${title} dish shown on a plate cooked`}
-                    width={400}
-                    height={300}
-                    // layout="fill"
-                    // objectFit="cover"
-                />
-                <Stack p={4}>
-                    <Heading
-                        color={useColorModeValue("gray.700", "white")}
-                        fontSize={"xl"}
-                        fontFamily={"body"}
-                        noOfLines={1}
-                    >
-                        {title}
-                    </Heading>
-                    <Text color={"gray.500"} noOfLines={2}>
-                        {summary}
-                    </Text>
-                </Stack>
-                <Stack>
-                    <Flex m={2} justifyContent="space-between">
-                        <ChakraCustomButton onClick={handleMoreDetailsClick}>More Details</ChakraCustomButton>
-                        { (currentUser && !isDashboard) && <SaveRecipeButton isCard savedRecipesSlugs={currentUser.savedRecipesSlugs} currentRecipeSlug={slug} handleSaveRecipe={handleSaveRecipe} /> }
-                        {isDashboard && (
-                            <ChakraCustomButton onClick={handleDelete} style={{ backgroundColor: "red", color: "white" }}>
-                                Delete
-                            </ChakraCustomButton>
-                        )}
-                    </Flex>
-                </Stack>
-            </Box>
-        </Center>
+        <Flex as="article" marginTop={5} direction="column" maxW={"400px"} w={"fit-content"} bg={useColorModeValue("white", "gray.900")} boxShadow={"2xl"} rounded={"md"} overflow={"hidden"}>
+            <Image
+                src={"https:" + thumbnail.fields.file.url}
+                alt={`The ${title} dish shown on a plate cooked`}
+                width={400}
+                height={300}
+                // layout="fill"
+                // objectFit="cover"
+            />
+            <Stack as="section" p={4}>
+                <Heading
+                    color={useColorModeValue("gray.700", "white")}
+                    fontSize={"xl"}
+                    fontFamily={"body"}
+                    noOfLines={1}
+                >
+                    {title}
+                </Heading>
+                <Text color={"gray.500"} noOfLines={2}>
+                    {summary}
+                </Text>
+            </Stack>
+            <Stack as="section" flex direction="row" justifyContent="space-between" m={2}>
+                <ChakraCustomButton onClick={handleMoreDetailsClick}>More Details</ChakraCustomButton>
+                { (currentUser && !isDashboard) && <SaveRecipeButton isCard savedRecipesSlugs={currentUser.savedRecipesSlugs} currentRecipeSlug={slug} handleSaveRecipe={handleSaveRecipe} /> }
+                {isDashboard && (
+                    <ChakraCustomButton onClick={handleDelete} style={{ backgroundColor: "red", color: "white" }}>
+                        Delete
+                    </ChakraCustomButton>
+                )}
+            </Stack>
+        </Flex>
     )
 }
 

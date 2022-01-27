@@ -1,12 +1,10 @@
-import React from "react";
-import Footer from "./Footer";
-import Navbar from "./Navbar";
-
-
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import Head from "next/head"
 import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { onSnapshot } from "firebase/firestore";
+import Footer from "./Footer";
+import Navbar from "./Navbar";
 import { auth, createUserProfileDocument } from "../firebase/firebaseUtils";
 import { setCurrentUser } from "../redux/user/userActions";
 
@@ -46,11 +44,16 @@ const Layout = ({ children }) => {
     }, [dispatch]);
 
     return (
-        <React.Fragment>
-            <Navbar />
-            { children }
-            <Footer />
-        </React.Fragment>
+      <React.Fragment>
+        <Head>
+          <title>Recipe Mate</title>
+          <meta name="description" content="Search it, dish it, plate it - Everyone needs a Recipe Mate" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <Navbar />
+        { children }
+        <Footer />
+      </React.Fragment>
     )
 }
 

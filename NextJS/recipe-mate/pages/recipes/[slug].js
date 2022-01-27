@@ -1,5 +1,6 @@
 import { createClient } from "contentful"
 import { Box, Center, Heading, Flex } from "@chakra-ui/react";
+import Head from "next/head";
 import Fallback from "../../components/Fallback";
 import ChakraCustomButton from "../../components/ChakraCustomButton";
 import { useRouter } from "next/router";
@@ -56,20 +57,21 @@ export const getStaticProps = async({ params }) => {
 const RecipeDetails = ({ recipe }) => {
     if(!recipe) return <Fallback />
     
-    console.log(recipe);
     const router = useRouter();
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.user.currentUser);
     const { slug } = recipe.fields;
 
     const handleSaveRecipe = () => {
-        console.log("Handle Save Recipe")
         // Save/add recipe slug to redux saved recipes array in current user slice
         dispatch(addRecipeSlugToUserSavedRecipesSlugs({ userId: currentUser.id, recipeSlug: slug }));
     }
-
     return (
         <React.Fragment>
+            <Head>
+                <title>{recipe.fields.title}</title>
+                <meta name="description" content={recipe.fields.summary} />
+            </Head>
             <RecipeArticle recipe={recipe} />
             { currentUser ? <SaveRecipeButton savedRecipesSlugs={currentUser.savedRecipesSlugs} currentRecipeSlug={slug} handleSaveRecipe={handleSaveRecipe} /> : <SignInAndSave recipeSlug={slug} />}
             <ChakraCustomButton bg="#285E61" color="#fff" onClick={() => router.push("/")}>Search New Recipe</ChakraCustomButton>

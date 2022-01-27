@@ -46,10 +46,10 @@ const RecipeSearch = ({ recipes }) => {
 
     return (
         <React.Fragment>
-            <InputGroup mt={4} bg="#fffgit">
+            <InputGroup as="form" mt={4} bg="#fffgit">
                 <Input
                     size="lg"
-                    type="text"
+                    type="search"
                     bg="#fff"
                     placeholder="Find a recipe"
                     value={searchTerm}

@@ -31,6 +31,7 @@ const createUserProfileDocument = async (userAuth, additionalData) => {
                 displayName,
                 email,
                 createdAt,
+                savedRecipesSlugs: [],
                 ...additionalData
             });
   

@@ -11,7 +11,7 @@ const ChakraCustomButton = ({ children, ...otherProps }) => (
                 { ...otherProps }
                 size="md"
                 fontSize="xl"
-                m={4}
+                m={{ base: 0, md: 4 }}
                 p={3}
                 h="100%"
                 _active={{

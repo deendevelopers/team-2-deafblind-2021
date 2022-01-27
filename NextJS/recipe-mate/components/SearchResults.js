@@ -6,11 +6,11 @@ import React from "react";
 const SearchResults = () => {
     const { searchResults, startSearch } = useSelector(state => state.recipes);
     return (
-      <Box as="section">
+      <Box as="section" p={4}>
         {startSearch && <Heading as="h3" textAlign="center" fontSize={"2xl"}>Search Results</Heading>}
         {searchResults.length>0 ? (
           <React.Fragment>
-            <Flex direction={{ base: 'column', md: 'row' }} flexWrap={"wrap"} justifyContent={"space-evenly"}>
+            <Flex direction={{ base: 'column', md: 'row' }} flexWrap={"wrap"} justifyContent={"space-evenly"} alignItems="center">
               {searchResults.map((recipe) => (
                 <RecipeCard key={recipe.sys.id} recipe={recipe} />
               ))}

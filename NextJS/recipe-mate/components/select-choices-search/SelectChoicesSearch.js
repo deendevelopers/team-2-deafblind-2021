@@ -14,7 +14,7 @@ const SelectChoicesSearch = ({ recipes }) => {
     }
 
     return (
-        <Grid templateColumns='repeat(3, 1fr)' gap={3} marginTop={5} p={8}>
+        <Grid as="section" templateColumns='repeat(3, 1fr)' gap={3} marginTop={5} p={8}>
             <SelectChoicesButtonContainer 
                 name={"indian"} title={"Indian"} boxBg={"orange.200"} handleClick={handleClick}
                 imageUrl={`/select-choices-images/IndianCuisineOption.svg`} 

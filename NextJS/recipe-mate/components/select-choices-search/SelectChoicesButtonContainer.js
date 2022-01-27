@@ -2,7 +2,7 @@ import { Center, Box, Button } from '@chakra-ui/react';
 import Image from 'next/image';
 
 const SelectButtonContainer = ({ name, title, imageUrl, imageAlt, boxBg, handleClick }) => (
-    <Box bg={boxBg} p={1} borderRadius={15} display={"flex"} flexDirection={"column"} justifyContent={"flex-end"}>
+    <Box as="article" bg={boxBg} p={1} borderRadius={15} display={"flex"} flexDirection={"column"} justifyContent={"flex-end"}>
         <Center>
             <Image
                 src={imageUrl}
