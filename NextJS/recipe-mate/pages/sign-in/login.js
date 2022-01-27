@@ -15,7 +15,7 @@ const Login = () => {
 
     useEffect(() => {
         if(currentUser) router.replace("/dashboard");
-    }, [currentUser]);
+    }, [currentUser, router]);
     
     const handleChange = ({ target: { name, value } }) => {
         setFormInputs(prevFormInputState => ({ 

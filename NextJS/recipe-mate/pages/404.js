@@ -10,7 +10,7 @@ const NotFound = () => {
         setTimeout(() => {
             router.push("/");
         }, 5000);
-    }, []);
+    }, [router]);
 
     return (
         <section className="not-found-page">

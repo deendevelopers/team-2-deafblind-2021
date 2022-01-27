@@ -54,12 +54,13 @@ export const getStaticProps = async({ params }) => {
     }
 }
 
-const RecipeDetails = ({ recipe }) => {
-    if(!recipe) return <Fallback />
-    
+const RecipeDetails = ({ recipe }) => {    
     const router = useRouter();
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.user.currentUser);
+
+    if(!recipe) return <Fallback />
+
     const { slug } = recipe.fields;
 
     const handleSaveRecipe = () => {

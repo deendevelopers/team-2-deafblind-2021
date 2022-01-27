@@ -50,7 +50,7 @@ const UserDashboardPage = ({ recipes }) => {
           });
           
         return () => unsubscribeFromAuth();
-    }, [currentUser])
+    }, [currentUser, router])
 
     const handleSignOut = async () => {
         try {

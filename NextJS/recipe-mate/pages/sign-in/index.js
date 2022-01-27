@@ -12,7 +12,7 @@ const SignInPage = () => {
 
     useEffect(() => {
         if(currentUser) router.replace("/dashboard");
-    }, [currentUser]);
+    }, [currentUser, router]);
 
   return (
     <Flex as="main" direction="column" my={5} maxW="fit-content" mx={{ base: 5 , md: "auto"}} borderWidth="1px" borderRadius="lg" overflow="hidden" pb={4}>
